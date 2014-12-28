@@ -1,6 +1,6 @@
 # event-emitter-enhancer
 
-[![NPM Version](http://img.shields.io/npm/v/event-emitter-enhancer.svg?style=flat)](https://www.npmjs.org/package/event-emitter-enhancer) [![Build Status](https://img.shields.io/travis/sagiegurari/event-emitter-enhancer.svg?style=flat)](http://travis-ci.org/sagiegurari/event-emitter-enhancer) [![Dependencies](http://img.shields.io/david/sagiegurari/event-emitter-enhancer.svg?style=flat)](https://david-dm.org/sagiegurari/event-emitter-enhancer) [![Coverage Status](https://img.shields.io/coveralls/sagiegurari/event-emitter-enhancer.svg?style=flat)](https://coveralls.io/r/sagiegurari/event-emitter-enhancer)
+[![NPM Version](http://img.shields.io/npm/v/event-emitter-enhancer.svg?style=flat)](https://www.npmjs.org/package/event-emitter-enhancer) [![Build Status](https://img.shields.io/travis/sagiegurari/event-emitter-enhancer.svg?style=flat)](http://travis-ci.org/sagiegurari/event-emitter-enhancer) [![Coverage Status](https://img.shields.io/coveralls/sagiegurari/event-emitter-enhancer.svg?style=flat)](https://coveralls.io/r/sagiegurari/event-emitter-enhancer)
 
 > Extends the Node.js events.EventEmitter to provide additional functionality.
 
@@ -68,7 +68,7 @@ emitter.emit('test');
 
 ## Release History
 
- * 2014-12-28   v0.0.1   Initial release.
+ * 2014-12-28   v0.0.2   Initial release.
 
 ## License
 Developed by Sagie Gur-Ari and licensed under the Apache 2 open source license.
