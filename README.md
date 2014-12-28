@@ -92,11 +92,14 @@ var emitter = new EventEmitter();
 emitter.on('test', function onEventSync() {
     //sync handle function logic
 });
-emitter.onAsync('test', function onEventAsync() {
+var removeListener = emitter.onAsync('test', function onEventAsync() {
     //async handle function logic
 });
 
 emitter.emit('test', 1, 2);
+
+//remove the async listener
+removeListener();
 ```
 
 ## Release History
