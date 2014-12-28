@@ -1,0 +1,57 @@
+{
+  "name": "event-emitter-enhancer",
+  "version": "0.0.1",
+  "description": "Enhances the Node.js EventEmitter with extra capabilities.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test/spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sagiegurari/event-emitter-enhancer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sagiegurari/event-emitter-enhancer/issues"
+  },
+  "keywords": [
+    "events",
+    "EventEmitter"
+  ],
+  "dependencies": {
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "blanket": "*",
+    "mocha-lcov-reporter": "*",
+    "chai": "*",
+    "grunt": "*",
+    "grunt-cli": "*",
+    "load-grunt-tasks": "*",
+    "time-grunt": "*",
+    "grunt-contrib-clean": "*",
+    "grunt-contrib-copy": "*",
+    "grunt-jsonlint": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-jslint": "*",
+    "grunt-eslint": "*",
+    "grunt-todos": "*",
+    "grunt-mocha-test": "*",
+    "grunt-blanket": "*",
+    "grunt-coveralls": "*",
+    "grunt-jsdoc": "*"
+  },
+  "author": {
+    "name": "Sagie Gur-Ari",
+    "email": "sgurari@yahoo.com"
+  },
+  "license": "Apache 2",
+  "scripts": {
+    "test": "grunt coverage"
+  },
+  "config": {
+    "blanket": {
+      "pattern": "test/spec/*-spec.js"
+    }
+  }
+}
