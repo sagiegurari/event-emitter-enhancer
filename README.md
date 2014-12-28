@@ -16,7 +16,7 @@ require('event-emitter-enhancer');
 
 Now you can use the extended capabilities in all EventEmitter instances.
 
-## 'else'
+## 'emitter.else(listener)'
 'else' enables you to attach listeners to all events that do not have any active listeners (apart of the special 'error' event).
 
 ```js
@@ -31,7 +31,7 @@ emitter.else(function onNonHandledEvent(event, arg1, arg2) {
 emitter.emit('test', 1, 2);
 ```
 
-## 'suspend'
+## 'emitter.suspend(event)'
 'suspend' enables you to suspend specific or all events until unsuspend is called.
 
 For suspended events, the emit function will simply do nothing ('else' listeners won't be invoked either).
@@ -49,7 +49,7 @@ emitter.suspend('test');   //suspend only 'test' event (to unsuspend use emitter
 emitter.emit('test');
 ```
 
-## 'elseError'
+## 'emitter.elseError(event)'
 In case an event with the provided name is emitted but no listener is attached to it, an error event will emitted by this emitter instance instead.
 
 ```js
@@ -66,7 +66,7 @@ emitter.elseError('test');
 emitter.emit('test');
 ```
 
-## 'emitAsync'
+## 'emitter.emitAsync(event, [...params])'
 Invokes the emit after a timeout to enable calling flow to continue and not block due to event listeners.
 
 ```js
@@ -80,7 +80,7 @@ emitter.emitAsync('test', 1, 2, function onEmitDone(event, num1, num2, emitted) 
 });
 ```
 
-## 'onAsync'
+## 'emitter.onAsync(event, listener)'
 Adds a listener that will be triggered after a timeout during an emit.
 
 This ensures that the provided listener is invoked after all other listeners and that it will not block the emit caller flow.
@@ -102,7 +102,7 @@ emitter.emit('test', 1, 2);
 removeListener();
 ```
 
-## 'filter'
+## 'emitter.filter([event], callback)'
 Adds a filter that will be triggered before every emit for the provided event type (if no event is provided, than the filter is invoked for all events).
 
 The filter enables to prevent events from reaching the listeners in case some criteria is met.
