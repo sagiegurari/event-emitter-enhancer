@@ -82,7 +82,7 @@ emitter.emitAsync('test', 1, 2, function onEmitDone(event, num1, num2, emitted) 
 
 ## Release History
 
- * 2014-12-28   v0.0.3   Added 'emitAsync'
+ * 2014-12-28   v0.0.4   Added 'emitAsync'
  * 2014-12-28   v0.0.2   Initial release.
 
 ## License
