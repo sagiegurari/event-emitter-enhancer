@@ -33,7 +33,6 @@ emitter.emit('test', 1, 2);
 
 ## 'suspend'
 'suspend' enables you to suspend specific or all events until unsuspend is called.
-
 For suspended events, the emit function will simply do nothing ('else' listeners won't be invoked either).
 
 ```js
@@ -80,8 +79,26 @@ emitter.emitAsync('test', 1, 2, function onEmitDone(event, num1, num2, emitted) 
 });
 ```
 
+## 'onAsync'
+Adds a listener that will be triggered after a timeout during an emit.
+This ensures that the provided listener is invoked after all other listeners and that it will not block the emit caller flow.
+To remove the listener, the returned function must be called instead of doing emitter.removeListener(...)
+
+```js
+var emitter = new EventEmitter();
+emitter.on('test', function onEventSync() {
+    //sync handle function logic
+});
+emitter.onAsync('test', function onEventAsync() {
+    //async handle function logic
+});
+
+emitter.emit('test', 1, 2);
+```
+
 ## Release History
 
+ * 2014-12-28   v0.0.5   Added 'onAsync'
  * 2014-12-28   v0.0.4   Added 'emitAsync'
  * 2014-12-28   v0.0.2   Initial release.
 

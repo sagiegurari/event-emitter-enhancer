@@ -378,4 +378,70 @@ describe('event-emitter-enhancer Tests', function () {
             }
         });
     });
+
+    describe('async on Tests', function () {
+        it('async on test', function (done) {
+            var eventDone = false;
+            var emitter = new EventEmitter();
+            emitter.on('test', function () {
+                if (eventDone) {
+                    assert.fail();
+                }
+            });
+            emitter.onAsync('test', function (arg1, arg2) {
+                eventDone = true;
+
+                assert.equal(arg1, 1);
+                assert.equal(arg2, 2);
+
+                done();
+            });
+            emitter.on('test', function () {
+                if (eventDone) {
+                    assert.fail();
+                }
+            });
+
+            assert.equal(3, emitter.listeners('test').length);
+
+            emitter.emit('test', 1, 2);
+
+            if (eventDone) {
+                assert.fail();
+            }
+        });
+
+        it('async on missing callback test', function () {
+            var eventDone = false;
+            var emitter = new EventEmitter();
+            try {
+                emitter.onAsync('test');
+                assert.fail();
+            } catch (error) {
+            }
+        });
+
+        it('async on not a callback test', function () {
+            var eventDone = false;
+            var emitter = new EventEmitter();
+            try {
+                emitter.onAsync('test', 'something');
+                assert.fail();
+            } catch (error) {
+            }
+        });
+
+        it('async on remove callback test', function () {
+            var eventDone = false;
+            var emitter = new EventEmitter();
+            var remove = emitter.onAsync('test', function () {});
+            emitter.on('test', function () {});
+
+            assert.equal(2, emitter.listeners('test').length);
+
+            remove();
+
+            assert.equal(1, emitter.listeners('test').length);
+        });
+    });
 });
