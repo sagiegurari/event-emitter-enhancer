@@ -320,4 +320,62 @@ describe('event-emitter-enhancer Tests', function () {
             emitter.emit('test');
         });
     });
+
+    describe('async emit Tests', function () {
+        it('async emit test', function (done) {
+            var eventDone = false;
+            var emitter = new EventEmitter();
+            emitter.on('test', function (arg1, arg2) {
+                eventDone = true;
+
+                assert.equal(arg1, 1);
+                assert.equal(arg2, 2);
+            });
+
+            emitter.emitAsync('test', 1, 2, function onEmitDone(event, arg1, arg2, emitted) {
+                assert.equal(event, 'test');
+                assert.equal(arg1, 1);
+                assert.equal(arg2, 2);
+                assert.isTrue(emitted);
+
+                done();
+            });
+
+            if (eventDone) {
+                assert.fail();
+            }
+        });
+
+        it('async emit noemit test', function (done) {
+            var emitter = new EventEmitter();
+            emitter.emitAsync('test', 1, 2, function onEmitDone(event, arg1, arg2, emitted) {
+                assert.equal(event, 'test');
+                assert.equal(arg1, 1);
+                assert.equal(arg2, 2);
+                assert.isFalse(emitted);
+
+                done();
+            });
+        });
+
+        it('async emit missing callback with args test', function () {
+            var eventDone = false;
+            var emitter = new EventEmitter();
+            try {
+                emitter.emitAsync('test', 1, 2);
+                assert.fail();
+            } catch (error) {
+            }
+        });
+
+        it('async emit missing callback without args test', function () {
+            var eventDone = false;
+            var emitter = new EventEmitter();
+            try {
+                emitter.emitAsync('test');
+                assert.fail();
+            } catch (error) {
+            }
+        });
+    });
 });

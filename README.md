@@ -66,8 +66,23 @@ emitter.elseError('test');
 emitter.emit('test');
 ```
 
+## 'emitAsync'
+Invokes the emit after a timeout to enable calling flow to continue and not block due to event listeners.
+
+```js
+var emitter = new EventEmitter();
+emitter.on('test', function onTestEvent(num1, num2) {
+    //event logic here
+});
+
+emitter.emitAsync('test', 1, 2, function onEmitDone(event, num1, num2, emitted) {
+    //emit callback logic
+});
+```
+
 ## Release History
 
+ * 2014-12-28   v0.0.3   Added 'emitAsync'
  * 2014-12-28   v0.0.2   Initial release.
 
 ## License
