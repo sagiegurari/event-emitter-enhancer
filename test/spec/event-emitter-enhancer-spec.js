@@ -447,6 +447,33 @@ describe('event-emitter-enhancer Tests', function () {
 
 
     describe('filter Tests', function () {
+        it('no filter + event test', function () {
+            var emitter = new EventEmitter();
+            try {
+                emitter.filter();
+                assert.fail();
+            } catch (error) {
+            }
+        });
+
+        it('no filter test', function () {
+            var emitter = new EventEmitter();
+            try {
+                emitter.filter('test');
+                assert.fail();
+            } catch (error) {
+            }
+        });
+
+        it('too many args test', function () {
+            var emitter = new EventEmitter();
+            try {
+                emitter.filter('test', 'test', function () {});
+                assert.fail();
+            } catch (error) {
+            }
+        });
+
         it('single global filter test', function (done) {
             var emitter = new EventEmitter();
             var filterAdded = false;
