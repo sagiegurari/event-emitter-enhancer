@@ -444,4 +444,291 @@ describe('event-emitter-enhancer Tests', function () {
             assert.equal(1, emitter.listeners('test').length);
         });
     });
+
+
+    describe('filter Tests', function () {
+        it('single global filter test', function (done) {
+            var emitter = new EventEmitter();
+            var filterAdded = false;
+            emitter.on('test', function () {
+                if (filterAdded) {
+                    assert.fail();
+                } else {
+                    emitter.filter(function (event, arg1, arg2) {
+                        assert.equal(event, 'test');
+                        assert.equal(arg1, 10);
+                        assert.equal(arg2, 20);
+
+                        return false;
+                    });
+                    filterAdded = true;
+
+                    emitter.emit('test', 10, 20);
+
+                    done();
+                }
+            });
+            emitter.emit('test', 1, 2);
+        });
+
+        it('single specific filter test', function (done) {
+            var emitter = new EventEmitter();
+            var filterAdded = false;
+            emitter.on('test', function () {
+                if (filterAdded) {
+                    assert.fail();
+                } else {
+                    emitter.filter('test', function (event, arg1, arg2) {
+                        assert.equal(event, 'test');
+                        assert.equal(arg1, 10);
+                        assert.equal(arg2, 20);
+
+                        return false;
+                    });
+                    filterAdded = true;
+
+                    emitter.emit('test', 10, 20);
+
+                    done();
+                }
+            });
+            emitter.emit('test', 1, 2);
+        });
+
+        it('single specific different event filter test', function (done) {
+            var emitter = new EventEmitter();
+            var filterAdded = false;
+            emitter.on('test', function () {
+                if (filterAdded) {
+                    done();
+                } else {
+                    emitter.filter('test2', function (event, arg1, arg2) {
+                        assert.fail();
+                    });
+                    filterAdded = true;
+
+                    emitter.emit('test', 10, 20);
+                }
+            });
+            emitter.emit('test', 1, 2);
+        });
+
+        it('multiple global filter test', function (done) {
+            var emitter = new EventEmitter();
+            var filterAdded = false;
+            emitter.on('test', function () {
+                if (filterAdded) {
+                    assert.fail();
+                } else {
+                    var filtersCalled = 0;
+                    emitter.filter(function (event, arg1, arg2) {
+                        filtersCalled++;
+                        assert.equal(event, 'test');
+                        assert.equal(arg1, 10);
+                        assert.equal(arg2, 20);
+
+                        return true;
+                    });
+                    emitter.filter(function (event, arg1, arg2) {
+                        filtersCalled++;
+                        assert.equal(event, 'test');
+                        assert.equal(arg1, 10);
+                        assert.equal(arg2, 20);
+
+                        return true;
+                    });
+                    emitter.filter(function (event, arg1, arg2) {
+                        filtersCalled++;
+                        assert.equal(event, 'test');
+                        assert.equal(arg1, 10);
+                        assert.equal(arg2, 20);
+
+                        assert.equal(filtersCalled, 3);
+
+                        return false;
+                    });
+                    emitter.filter(function () {
+                        assert.fail();
+                    });
+                    filterAdded = true;
+
+                    emitter.emit('test', 10, 20);
+
+                    done();
+                }
+            });
+            emitter.emit('test', 1, 2);
+        });
+
+        it('multiple specific filter test', function (done) {
+            var emitter = new EventEmitter();
+            var filterAdded = false;
+            emitter.on('test', function () {
+                if (filterAdded) {
+                    assert.fail();
+                } else {
+                    var filtersCalled = 0;
+                    emitter.filter('test', function (event, arg1, arg2) {
+                        filtersCalled++;
+                        assert.equal(event, 'test');
+                        assert.equal(arg1, 10);
+                        assert.equal(arg2, 20);
+
+                        return true;
+                    });
+                    emitter.filter('test', function (event, arg1, arg2) {
+                        filtersCalled++;
+                        assert.equal(event, 'test');
+                        assert.equal(arg1, 10);
+                        assert.equal(arg2, 20);
+
+                        return true;
+                    });
+                    emitter.filter('test', function (event, arg1, arg2) {
+                        filtersCalled++;
+                        assert.equal(event, 'test');
+                        assert.equal(arg1, 10);
+                        assert.equal(arg2, 20);
+
+                        assert.equal(filtersCalled, 3);
+
+                        return false;
+                    });
+                    emitter.filter('test', function () {
+                        assert.fail();
+                    });
+                    filterAdded = true;
+
+                    emitter.emit('test', 10, 20);
+
+                    done();
+                }
+            });
+            emitter.emit('test', 1, 2);
+        });
+
+        it('remove global filter test', function (done) {
+            var emitter = new EventEmitter();
+            var filterAdded = false;
+            emitter.on('test', function () {
+                if (filterAdded) {
+                    assert.fail();
+                } else {
+                    var filtersCalled = 0;
+                    emitter.filter(function (event, arg1, arg2) {
+                        filtersCalled++;
+                        assert.equal(arg1, 10);
+                        assert.equal(arg2, 20);
+
+                        return true;
+                    });
+                    emitter.filter(function (event, arg1, arg2) {
+                        filtersCalled++;
+                        assert.equal(arg1, 10);
+                        assert.equal(arg2, 20);
+
+                        return true;
+                    });
+                    var remove1 = emitter.filter(function (event, arg1, arg2) {
+                        filtersCalled++;
+                        assert.equal(event, 'test');
+                        assert.equal(arg1, 10);
+                        assert.equal(arg2, 20);
+
+                        assert.equal(filtersCalled, 3);
+
+                        return false;
+                    });
+                    var remove2 = emitter.filter(function () {
+                        assert.fail();
+                    });
+                    filterAdded = true;
+
+                    emitter.emit('test', 10, 20);
+
+                    remove1();
+                    remove2();
+
+                    emitter.filter(function (event, arg1, arg2) {
+                        filtersCalled++;
+                        assert.equal(event, 'test2');
+                        assert.equal(arg1, 10);
+                        assert.equal(arg2, 20);
+
+                        assert.equal(filtersCalled, 6);
+
+                        return true;
+                    });
+
+                    emitter.emit('test2', 10, 20);
+
+                    done();
+                }
+            });
+            emitter.emit('test', 1, 2);
+        });
+
+        it('remove specific filter test', function (done) {
+            var emitter = new EventEmitter();
+            var filterAdded = false;
+            emitter.on('test', function () {
+                if (filterAdded) {
+                    assert.fail();
+                } else {
+                    var filtersCalled = 0;
+                    emitter.filter('test', function (event, arg1, arg2) {
+                        filtersCalled++;
+                        assert.equal(event, 'test');
+                        assert.equal(arg1, 10);
+                        assert.equal(arg2, 20);
+
+                        return true;
+                    });
+                    emitter.filter('test', function (event, arg1, arg2) {
+                        filtersCalled++;
+                        assert.equal(event, 'test');
+                        assert.equal(arg1, 10);
+                        assert.equal(arg2, 20);
+
+                        return true;
+                    });
+                    var remove1 = emitter.filter('test', function (event, arg1, arg2) {
+                        filtersCalled++;
+                        assert.equal(event, 'test');
+                        assert.equal(arg1, 10);
+                        assert.equal(arg2, 20);
+
+                        assert.equal(filtersCalled, 3);
+
+                        return false;
+                    });
+                    var remove2 = emitter.filter('test', function () {
+                        assert.fail();
+                    });
+                    filterAdded = true;
+
+                    emitter.emit('test', 10, 20);
+
+                    remove1();
+                    remove2();
+
+                    emitter.filter('test2', function (event, arg1, arg2) {
+                        filtersCalled++;
+                        assert.equal(event, 'test2');
+                        assert.equal(arg1, 10);
+                        assert.equal(arg2, 20);
+
+                        assert.equal(filtersCalled, 4);
+
+                        return true;
+                    });
+
+                    emitter.emit('test2', 10, 20);
+
+                    done();
+                }
+            });
+            emitter.emit('test', 1, 2);
+        });
+    });
 });

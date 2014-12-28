@@ -102,8 +102,60 @@ emitter.emit('test', 1, 2);
 removeListener();
 ```
 
+## 'filter'
+Adds a filter that will be triggered before every emit for the provided event type (if no event is provided, than the filter is invoked for all events).
+
+The filter enables to prevent events from reaching the listeners in case some criteria is met.
+
+```js
+var emitter = new EventEmitter();
+
+//add filters for test event only
+var removeTestEventFilter = emitter.filter('test', function (event, arg1, arg2) {
+    if (arg1 && (arg1 > 3)) {
+        return true;
+    }
+
+    return false;
+});
+emitter.filter('test', function (event, arg1, arg2) {
+    if (arg2 && (arg2 < 20)) {
+        return true;
+    }
+
+    return false;
+});
+
+//add global filter for all events
+emitter.filter(function (event, arg1, arg2) {
+    if (arg1 && (arg1 > 5)) {
+        return true;
+    }
+
+    return false;
+});
+var removeGlobalArg2Filter = emitter.filter(function (event, arg1, arg2) {
+    if (arg2 && (arg2 < 18)) {
+        return true;
+    }
+
+    return false;
+});
+
+emitter.on('test', function onTestEvent(arg1, arg2) {
+    //event logic here...
+});
+
+emitter.emit('test', 10, 15);
+
+//remove some filters
+removeTestEventFilter();
+removeGlobalArg2Filter();
+```
+
 ## Release History
 
+ * 2014-12-29   v0.0.6   Added 'filter'
  * 2014-12-28   v0.0.5   Added 'onAsync'
  * 2014-12-28   v0.0.4   Added 'emitAsync'
  * 2014-12-28   v0.0.2   Initial release.
