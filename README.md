@@ -153,8 +153,29 @@ removeTestEventFilter();
 removeGlobalArg2Filter();
 ```
 
+## 'enhancer.enhance(EmitterType)'
+Modified the provided object prototype with the extended emitter capabilities.
+
+The provided object type must have an Node.js events.EventEmitter compatible interface.
+
+```js
+var EventEmitterEnhancer = require('event-emitter-enhancer');
+
+var EventEmitter2 = require('eventemitter2').EventEmitter2;
+EventEmitterEnhancer.enhance(EventEmitter2);    //now EventEmitter2 also has the extended capabilities
+
+var emitter = new EventEmitter2({
+    wildcard: false,
+    newListener: false,
+    maxListeners: 20
+});
+
+emitter.else(....); //can start using the enhanced emitter capabilities
+```
+
 ## Release History
 
+ * 2014-12-30   v0.0.9   Added ability to enhance compatible EventEmitter types
  * 2014-12-30   v0.0.8   Doc changes
  * 2014-12-29   v0.0.7   Added additional tests
  * 2014-12-29   v0.0.6   Added 'filter'
