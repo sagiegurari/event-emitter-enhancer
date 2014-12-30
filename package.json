@@ -1,6 +1,6 @@
 {
   "name": "event-emitter-enhancer",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Enhances the Node.js EventEmitter with extra capabilities.",
   "main": "index.js",
   "directories": {
@@ -39,7 +39,8 @@
     "grunt-mocha-test": "*",
     "grunt-blanket": "*",
     "grunt-coveralls": "*",
-    "grunt-jsdoc": "*"
+    "grunt-jsdoc": "*",
+    "eventemitter2": "*"
   },
   "author": {
     "name": "Sagie Gur-Ari",

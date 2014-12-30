@@ -4,7 +4,7 @@
 var chai = require('chai');
 var assert = chai.assert;
 var EventEmitter = require('events').EventEmitter;
-require('../../lib/event-emitter-enhancer');
+var EventEmitterEnhancer = require('../../lib/event-emitter-enhancer');
 
 describe('event-emitter-enhancer Tests', function () {
     this.timeout(100);
@@ -755,6 +755,51 @@ describe('event-emitter-enhancer Tests', function () {
                     done();
                 }
             });
+            emitter.emit('test', 1, 2);
+        });
+    });
+
+    describe('enhance Tests', function () {
+        it('enhance EventEmitter2 test', function (done) {
+            var EventEmitter2 = require('eventemitter2').EventEmitter2;
+            EventEmitterEnhancer.enhance(EventEmitter2);
+
+            var emitter = new EventEmitter2({
+                wildcard: false,
+                newListener: false,
+                maxListeners: 20
+            });
+
+            emitter.else(function (type, arg1, arg2) {
+                assert.equal(type, 'test');
+                assert.equal(arg1, 1);
+                assert.equal(arg2, 2);
+                assert.equal(arguments.length, 3);
+
+                emitter.unelse(this);
+
+                var eventDone = false;
+                emitter.on('test', function (arg1, arg2) {
+                    eventDone = true;
+
+                    assert.equal(arg1, 1);
+                    assert.equal(arg2, 2);
+                });
+
+                emitter.emitAsync('test', 1, 2, function onEmitDone(event, arg1, arg2, emitted) {
+                    assert.equal(event, 'test');
+                    assert.equal(arg1, 1);
+                    assert.equal(arg2, 2);
+                    assert.isTrue(emitted);
+
+                    done();
+                });
+
+                if (eventDone) {
+                    assert.fail();
+                }
+            });
+
             emitter.emit('test', 1, 2);
         });
     });

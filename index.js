@@ -1,3 +1,3 @@
 'use strict';
 
-require('./lib/event-emitter-enhancer');
+module.exports = require('./lib/event-emitter-enhancer');
