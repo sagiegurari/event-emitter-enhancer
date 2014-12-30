@@ -155,6 +155,7 @@ removeGlobalArg2Filter();
 
 ## Release History
 
+ * 2014-12-30   v0.0.8   Doc changes
  * 2014-12-29   v0.0.7   Added additional tests
  * 2014-12-29   v0.0.6   Added 'filter'
  * 2014-12-28   v0.0.5   Added 'onAsync'
