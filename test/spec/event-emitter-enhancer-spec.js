@@ -760,7 +760,6 @@ describe('event-emitter-enhancer Tests', function () {
         });
 
         it('remove specific filter test', function (done) {
-            done();return;//TODO REMOVE
             var emitter = createEventEmitter();
             var filterAdded = false;
             emitter.on('test', function () {
