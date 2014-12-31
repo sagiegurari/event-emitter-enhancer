@@ -87,7 +87,7 @@ emitter.elseError('test');
 emitter.emit('test');
 ```
 
-## 'emitter.emitAsync(event, [...params])'
+## 'emitter.emitAsync(event, [...params], callback)'
 Invokes the emit after a timeout to enable calling flow to continue and not block due to event listeners.
 
 ```js
@@ -179,6 +179,7 @@ removeGlobalArg2Filter();
 
 ## Release History
 
+ * 2014-12-31   v0.0.11  Doc fix.
  * 2014-12-31   v0.0.10  EventEmitter is no longer automatically modified, instead there are 2 ways to extend/modify prototype/modify instance functions exposed by this library.
  * 2014-12-30   v0.0.9   Added ability to enhance compatible EventEmitter types
  * 2014-12-30   v0.0.8   Doc changes
