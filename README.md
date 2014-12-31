@@ -38,7 +38,8 @@ EventEmitterEnhancer.modifyInstance(emitter);   //modify the specific instance a
 'else' enables you to attach listeners to all events that do not have any active listeners (apart of the special 'error' event).
 
 ```js
-var emitter = new EventEmitter();
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
 emitter.else(function onNonHandledEvent(event, arg1, arg2) {
     //logic here....
     
@@ -55,7 +56,8 @@ emitter.emit('test', 1, 2);
 For suspended events, the emit function will simply do nothing ('else' listeners won't be invoked either).
 
 ```js
-var emitter11 = new EventEmitter();
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
 emitter.on('test', function () {
     //will never be called
 });
@@ -71,7 +73,8 @@ emitter.emit('test');
 In case an event with the provided name is emitted but no listener is attached to it, an error event will emitted by this emitter instance instead.
 
 ```js
-var emitter = new EventEmitter();
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
 emitter.on('error', function (error) {
     //logic here...
     
@@ -88,7 +91,8 @@ emitter.emit('test');
 Invokes the emit after a timeout to enable calling flow to continue and not block due to event listeners.
 
 ```js
-var emitter = new EventEmitter();
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
 emitter.on('test', function onTestEvent(num1, num2) {
     //event logic here
 });
@@ -106,7 +110,8 @@ This ensures that the provided listener is invoked after all other listeners and
 To remove the listener, the returned function must be called instead of doing emitter.removeListener(...)
 
 ```js
-var emitter = new EventEmitter();
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
 emitter.on('test', function onEventSync() {
     //sync handle function logic
 });
@@ -126,38 +131,39 @@ Adds a filter that will be triggered before every emit for the provided event ty
 The filter enables to prevent events from reaching the listeners in case some criteria is met.
 
 ```js
-var emitter = new EventEmitter();
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
 
 //add filters for test event only
 var removeTestEventFilter = emitter.filter('test', function (event, arg1, arg2) {
     if (arg1 && (arg1 > 3)) {
-        return true;
+        return true;    //continue with emit
     }
 
-    return false;
+    return false;   //prevent emit
 });
 emitter.filter('test', function (event, arg1, arg2) {
     if (arg2 && (arg2 < 20)) {
-        return true;
+        return true;    //continue with emit
     }
 
-    return false;
+    return false;   //prevent emit
 });
 
 //add global filter for all events
 emitter.filter(function (event, arg1, arg2) {
     if (arg1 && (arg1 > 5)) {
-        return true;
+        return true;    //continue with emit
     }
 
-    return false;
+    return false;   //prevent emit
 });
 var removeGlobalArg2Filter = emitter.filter(function (event, arg1, arg2) {
     if (arg2 && (arg2 < 18)) {
-        return true;
+        return true;    //continue with emit
     }
 
-    return false;
+    return false;   //prevent emit
 });
 
 emitter.on('test', function onTestEvent(arg1, arg2) {
