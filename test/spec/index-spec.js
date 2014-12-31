@@ -7,9 +7,15 @@ var EventEmitterEnhancer = require('../../');
 
 describe('Index Tests', function () {
     it('EventEmitter setup', function () {
+        assert.isFunction(EventEmitterEnhancer.extend);
+        assert.isFunction(EventEmitterEnhancer.modify);
+
         var EventEmitter = require('events').EventEmitter;
-        var emitter = new EventEmitter();
+        var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+        var emitter = new EnhancedEventEmitter();
+
         assert.isFunction(emitter.else);
-        assert.isFunction(EventEmitterEnhancer.enhance);
+        assert.isFunction(EventEmitterEnhancer.modify);
+        assert.isFunction(EventEmitterEnhancer.extend);
     });
 });
