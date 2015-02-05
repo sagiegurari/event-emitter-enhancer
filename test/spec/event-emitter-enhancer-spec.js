@@ -37,7 +37,6 @@ describe('event-emitter-enhancer Tests', function () {
                 EventEmitter.call(this);
             };
             CustomEventEmitter.prototype = Object.create(EventEmitter.prototype);
-            CustomEventEmitter.prototype.constructor = CustomEventEmitter;
 
             EventEmitterEnhancer.modify(CustomEventEmitter);
             var emitter = new CustomEventEmitter();
@@ -423,7 +422,6 @@ describe('event-emitter-enhancer Tests', function () {
         });
 
         it('async emit missing callback with args test', function () {
-            var eventDone = false;
             var emitter = createEventEmitter();
             try {
                 emitter.emitAsync('test', 1, 2);
@@ -433,7 +431,6 @@ describe('event-emitter-enhancer Tests', function () {
         });
 
         it('async emit missing callback without args test', function () {
-            var eventDone = false;
             var emitter = createEventEmitter();
             try {
                 emitter.emitAsync('test');
@@ -476,7 +473,6 @@ describe('event-emitter-enhancer Tests', function () {
         });
 
         it('async on missing callback test', function () {
-            var eventDone = false;
             var emitter = createEventEmitter();
             try {
                 emitter.onAsync('test');
@@ -486,17 +482,16 @@ describe('event-emitter-enhancer Tests', function () {
         });
 
         it('async on not a callback test', function () {
-            var eventDone = false;
             var emitter = createEventEmitter();
             try {
-                emitter.onAsync('test', 'something');
+                var notFunction = 'something';
+                emitter.onAsync('test', notFunction);
                 assert.fail();
             } catch (error) {
             }
         });
 
         it('async on remove callback test', function () {
-            var eventDone = false;
             var emitter = createEventEmitter();
             var remove = emitter.onAsync('test', function () {});
             emitter.on('test', function () {});
@@ -593,7 +588,7 @@ describe('event-emitter-enhancer Tests', function () {
                 if (filterAdded) {
                     done();
                 } else {
-                    emitter.filter('test2', function (event, arg1, arg2) {
+                    emitter.filter('test2', function () {
                         assert.fail();
                     });
                     filterAdded = true;
@@ -826,9 +821,9 @@ describe('event-emitter-enhancer Tests', function () {
     describe('enhance Tests', function () {
         it('enhance EventEmitter2 test', function (done) {
             var EventEmitter2 = require('eventemitter2').EventEmitter2;
-            EventEmitter2 = EventEmitterEnhancer.extend(EventEmitter2);
+            var EnhancedEventEmitter2 = EventEmitterEnhancer.extend(EventEmitter2);
 
-            var emitter = new EventEmitter2({
+            var emitter = new EnhancedEventEmitter2({
                 wildcard: false,
                 newListener: false,
                 maxListeners: 20
