@@ -506,7 +506,7 @@ describe('event-emitter-enhancer Tests', function () {
 
 
     describe('filter Tests', function () {
-        it('no filter + event test', function () {
+        it('no filter + event test', function noFilterOrEventTest() {
             var emitter = createEventEmitter();
             try {
                 emitter.filter();
@@ -515,7 +515,7 @@ describe('event-emitter-enhancer Tests', function () {
             }
         });
 
-        it('no filter test', function () {
+        it('no filter test', function noFilterFuncTest() {
             var emitter = createEventEmitter();
             try {
                 emitter.filter('test');
@@ -524,7 +524,7 @@ describe('event-emitter-enhancer Tests', function () {
             }
         });
 
-        it('too many args test', function () {
+        it('too many args test', function tooManyArgsTest() {
             var emitter = createEventEmitter();
             try {
                 emitter.filter('test', 'test', function () {});
