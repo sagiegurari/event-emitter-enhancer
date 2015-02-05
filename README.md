@@ -179,7 +179,7 @@ removeGlobalArg2Filter();
 
 ## Release History
 
- * 2015-02-06   v0.0.12  Internal quality changes.
+ * 2015-02-06   v0.0.13  Internal quality changes.
  * 2014-12-31   v0.0.11  Doc fix.
  * 2014-12-31   v0.0.10  EventEmitter is no longer automatically modified, instead there are 2 ways to extend/modify prototype/modify instance functions exposed by this library.
  * 2014-12-30   v0.0.9   Added ability to enhance compatible EventEmitter types
