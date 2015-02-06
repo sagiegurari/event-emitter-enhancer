@@ -102,7 +102,18 @@ Adds an 'else' listener which will be triggered by all events that do not have a
 - listener <code>[ElseCallback](#ElseCallback)</code> - The listener that will catch all 'else' events  
 
 **Example**  
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);var emitter = new EnhancedEventEmitter();emitter.else(function onNonHandledEvent(event, arg1, arg2) { //logic here.... //to remove 'else' listeners, simply use the unelse function emitter.unelse(this);});emitter.emit('test', 1, 2);
+`
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
+emitter.else(function onNonHandledEvent(event, arg1, arg2) {
+ //logic here....
+
+ //to remove 'else' listeners, simply use the unelse function
+ emitter.unelse(this);
+});
+
+emitter.emit('test', 1, 2);
+`
 
 <a name="EnhancedEventEmitter#removeElseListener"></a>
 ##EnhancedEventEmitter#removeElseListener(listener)
