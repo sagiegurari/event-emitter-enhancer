@@ -102,7 +102,7 @@ Adds an 'else' listener which will be triggered by all events that do not have a
 - listener <code>[ElseCallback](#ElseCallback)</code> - The listener that will catch all 'else' events  
 
 **Example**  
-`
+```js
 var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
 var emitter = new EnhancedEventEmitter();
 emitter.else(function onNonHandledEvent(event, arg1, arg2) {
@@ -113,7 +113,7 @@ emitter.else(function onNonHandledEvent(event, arg1, arg2) {
 });
 
 emitter.emit('test', 1, 2);
-`
+```
 
 <a name="EnhancedEventEmitter#removeElseListener"></a>
 ##EnhancedEventEmitter#removeElseListener(listener)
