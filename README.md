@@ -182,7 +182,7 @@ See full docs at: [API Docs](docs/api.md)
 
 ## Release History
 
- * 2015-02-06   v0.0.15  Doc changes.
+ * 2015-02-06   v0.0.16  Doc changes.
  * 2015-02-06   v0.0.14  Internal quality changes.
  * 2014-12-31   v0.0.11  Doc fix.
  * 2014-12-31   v0.0.10  EventEmitter is no longer automatically modified, instead there are 2 ways to extend/modify prototype/modify instance functions exposed by this library.
