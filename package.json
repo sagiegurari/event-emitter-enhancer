@@ -1,6 +1,6 @@
 {
   "name": "event-emitter-enhancer",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Enhances the Node.js EventEmitter with extra capabilities.",
   "main": "index.js",
   "directories": {
@@ -32,7 +32,7 @@
     "grunt-coveralls": "*",
     "grunt-eslint": "*",
     "grunt-jsdoc": "*",
-    "grunt-jsdoc-to-markdown": "^0.4.2",
+    "grunt-jsdoc-to-markdown": "*",
     "grunt-jslint": "*",
     "grunt-jsonlint": "*",
     "grunt-mocha-test": "*",
