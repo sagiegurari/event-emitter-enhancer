@@ -542,14 +542,14 @@ describe('event-emitter-enhancer Tests', function () {
                 } else {
                     emitter.filter(function (event, arg1, arg2) {
                         assert.equal(event, 'test');
-                        assert.equal(arg1, 10);
-                        assert.equal(arg2, 20);
+                        assert.equal(arg1, 101);
+                        assert.equal(arg2, 201);
 
                         return false;
                     });
                     filterAdded = true;
 
-                    emitter.emit('test', 10, 20);
+                    emitter.emit('test', 101, 201);
 
                     done();
                 }
@@ -566,14 +566,14 @@ describe('event-emitter-enhancer Tests', function () {
                 } else {
                     emitter.filter('test', function (event, arg1, arg2) {
                         assert.equal(event, 'test');
-                        assert.equal(arg1, 10);
-                        assert.equal(arg2, 20);
+                        assert.equal(arg1, 210);
+                        assert.equal(arg2, 220);
 
                         return false;
                     });
                     filterAdded = true;
 
-                    emitter.emit('test', 10, 20);
+                    emitter.emit('test', 210, 220);
 
                     done();
                 }
@@ -607,29 +607,20 @@ describe('event-emitter-enhancer Tests', function () {
                     assert.fail();
                 } else {
                     var filtersCalled = 0;
+                    var i;
+                    for (i = 0; i < 5; i++) {
+                        emitter.filter(function (event, arg1, arg2) {
+                            filtersCalled++;
+                            assert.equal(event, 'test');
+                            assert.equal(arg1, 10);
+                            assert.equal(arg2, 20);
+
+                            return true;
+                        });
+                    }
                     emitter.filter(function (event, arg1, arg2) {
                         filtersCalled++;
-                        assert.equal(event, 'test');
-                        assert.equal(arg1, 10);
-                        assert.equal(arg2, 20);
-
-                        return true;
-                    });
-                    emitter.filter(function (event, arg1, arg2) {
-                        filtersCalled++;
-                        assert.equal(event, 'test');
-                        assert.equal(arg1, 10);
-                        assert.equal(arg2, 20);
-
-                        return true;
-                    });
-                    emitter.filter(function (event, arg1, arg2) {
-                        filtersCalled++;
-                        assert.equal(event, 'test');
-                        assert.equal(arg1, 10);
-                        assert.equal(arg2, 20);
-
-                        assert.equal(filtersCalled, 3);
+                        assert.equal(filtersCalled, 6);
 
                         return false;
                     });
@@ -654,29 +645,21 @@ describe('event-emitter-enhancer Tests', function () {
                     assert.fail();
                 } else {
                     var filtersCalled = 0;
+                    var i;
+                    for (i = 0; i < 5; i++) {
+                        emitter.filter('test', function (event, arg1, arg2) {
+                            filtersCalled++;
+                            assert.equal(event, 'test');
+                            assert.equal(arg1, 10);
+                            assert.equal(arg2, 20);
+
+                            return true;
+                        });
+                    }
                     emitter.filter('test', function (event, arg1, arg2) {
                         filtersCalled++;
-                        assert.equal(event, 'test');
-                        assert.equal(arg1, 10);
-                        assert.equal(arg2, 20);
 
-                        return true;
-                    });
-                    emitter.filter('test', function (event, arg1, arg2) {
-                        filtersCalled++;
-                        assert.equal(event, 'test');
-                        assert.equal(arg1, 10);
-                        assert.equal(arg2, 20);
-
-                        return true;
-                    });
-                    emitter.filter('test', function (event, arg1, arg2) {
-                        filtersCalled++;
-                        assert.equal(event, 'test');
-                        assert.equal(arg1, 10);
-                        assert.equal(arg2, 20);
-
-                        assert.equal(filtersCalled, 3);
+                        assert.equal(filtersCalled, 6);
 
                         return false;
                     });
@@ -701,27 +684,19 @@ describe('event-emitter-enhancer Tests', function () {
                     assert.fail();
                 } else {
                     var filtersCalled = 0;
-                    emitter.filter(function (event, arg1, arg2) {
-                        filtersCalled++;
-                        assert.equal(arg1, 10);
-                        assert.equal(arg2, 20);
+                    var i;
+                    for (i = 0; i < 5; i++) {
+                        emitter.filter(function (event, arg1, arg2) {
+                            filtersCalled++;
+                            assert.equal(arg1, 10);
+                            assert.equal(arg2, 20);
 
-                        return true;
-                    });
-                    emitter.filter(function (event, arg1, arg2) {
-                        filtersCalled++;
-                        assert.equal(arg1, 10);
-                        assert.equal(arg2, 20);
-
-                        return true;
-                    });
+                            return true;
+                        });
+                    }
                     var remove1 = emitter.filter(function (event, arg1, arg2) {
                         filtersCalled++;
-                        assert.equal(event, 'test');
-                        assert.equal(arg1, 10);
-                        assert.equal(arg2, 20);
-
-                        assert.equal(filtersCalled, 3);
+                        assert.equal(filtersCalled, 6);
 
                         return false;
                     });
@@ -737,11 +712,7 @@ describe('event-emitter-enhancer Tests', function () {
 
                     emitter.filter(function (event, arg1, arg2) {
                         filtersCalled++;
-                        assert.equal(event, 'test2');
-                        assert.equal(arg1, 10);
-                        assert.equal(arg2, 20);
-
-                        assert.equal(filtersCalled, 6);
+                        assert.equal(filtersCalled, 12);
 
                         return true;
                     });
@@ -762,29 +733,21 @@ describe('event-emitter-enhancer Tests', function () {
                     assert.fail();
                 } else {
                     var filtersCalled = 0;
-                    emitter.filter('test', function (event, arg1, arg2) {
-                        filtersCalled++;
-                        assert.equal(event, 'test');
-                        assert.equal(arg1, 10);
-                        assert.equal(arg2, 20);
+                    var i;
+                    for (i = 0; i < 5; i++) {
+                        emitter.filter('test', function (event, arg1, arg2) {
+                            filtersCalled++;
+                            assert.equal(event, 'test');
+                            assert.equal(arg1, 10);
+                            assert.equal(arg2, 20);
 
-                        return true;
-                    });
-                    emitter.filter('test', function (event, arg1, arg2) {
-                        filtersCalled++;
-                        assert.equal(event, 'test');
-                        assert.equal(arg1, 10);
-                        assert.equal(arg2, 20);
-
-                        return true;
-                    });
+                            return true;
+                        });
+                    }
                     var remove1 = emitter.filter('test', function (event, arg1, arg2) {
                         filtersCalled++;
-                        assert.equal(event, 'test');
-                        assert.equal(arg1, 10);
-                        assert.equal(arg2, 20);
 
-                        assert.equal(filtersCalled, 3);
+                        assert.equal(filtersCalled, 6);
 
                         return false;
                     });
@@ -801,15 +764,15 @@ describe('event-emitter-enhancer Tests', function () {
                     emitter.filter('test2', function (event, arg1, arg2) {
                         filtersCalled++;
                         assert.equal(event, 'test2');
-                        assert.equal(arg1, 10);
-                        assert.equal(arg2, 20);
+                        assert.equal(arg1, 101);
+                        assert.equal(arg2, 210);
 
-                        assert.equal(filtersCalled, 4);
+                        assert.equal(filtersCalled, 7);
 
                         return true;
                     });
 
-                    emitter.emit('test2', 10, 20);
+                    emitter.emit('test2', 101, 210);
 
                     done();
                 }
