@@ -713,7 +713,7 @@ describe('event-emitter-enhancer Tests', function () {
                     remove1();
                     remove2();
 
-                    emitter.filter(function (event, arg1, arg2) {
+                    emitter.filter(function () {
                         filtersCalled++;
                         assert.equal(filtersCalled, 12);
 
