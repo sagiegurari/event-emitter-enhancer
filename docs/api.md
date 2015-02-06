@@ -200,7 +200,17 @@ Invokes the emit after a timeout to enable calling flow to continue and notbloc
 - callback <code>[AsyncEmitCallback](#AsyncEmitCallback)</code> - The async callback  
 
 **Example**  
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);var emitter = new EnhancedEventEmitter();emitter.on('test', function onTestEvent(num1, num2) { //event logic here});emitter.emitAsync('test', 1, 2, function onEmitDone(event, num1, num2, emitted) { //emit callback logic});
+```js
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
+emitter.on('test', function onTestEvent(num1, num2) {
+   //event logic here
+});
+
+emitter.emitAsync('test', 1, 2, function onEmitDone(event, num1, num2, emitted) {
+   //emit callback logic
+});
+```
 
 <a name="EnhancedEventEmitter#onAsync"></a>
 ##EnhancedEventEmitter#onAsync(event, listener)
@@ -223,7 +233,52 @@ Adds a filter that will be triggered before every emit for the provided event ty
 
 **Returns**: `function` - The remove filter function  
 **Example**  
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);var emitter = new EnhancedEventEmitter();//add filters for test event onlyvar removeTestEventFilter = emitter.filter('test', function (event, arg1, arg2) { if (arg1 && (arg1 > 3)) {     return true;    //continue with emit } return false;   //prevent emit});emitter.filter('test', function (event, arg1, arg2) { if (arg2 && (arg2 < 20)) {     return true;    //continue with emit } return false;   //prevent emit});//add global filter for all eventsemitter.filter(function (event, arg1, arg2) { if (arg1 && (arg1 > 5)) {     return true;    //continue with emit } return false;   //prevent emit});var removeGlobalArg2Filter = emitter.filter(function (event, arg1, arg2) { if (arg2 && (arg2 < 18)) {     return true;    //continue with emit } return false;   //prevent emit});emitter.on('test', function onTestEvent(arg1, arg2) { //event logic here...});emitter.emit('test', 10, 15);//remove some filtersremoveTestEventFilter();removeGlobalArg2Filter();
+```js
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
+
+//add filters for test event only
+var removeTestEventFilter = emitter.filter('test', function (event, arg1, arg2) {
+   if (arg1 && (arg1 > 3)) {
+       return true;    //continue with emit
+   }
+
+   return false;   //prevent emit
+});
+emitter.filter('test', function (event, arg1, arg2) {
+   if (arg2 && (arg2 < 20)) {
+       return true;    //continue with emit
+   }
+
+   return false;   //prevent emit
+});
+
+//add global filter for all events
+emitter.filter(function (event, arg1, arg2) {
+   if (arg1 && (arg1 > 5)) {
+       return true;    //continue with emit
+   }
+
+   return false;   //prevent emit
+});
+var removeGlobalArg2Filter = emitter.filter(function (event, arg1, arg2) {
+   if (arg2 && (arg2 < 18)) {
+       return true;    //continue with emit
+   }
+
+   return false;   //prevent emit
+});
+
+emitter.on('test', function onTestEvent(arg1, arg2) {
+   //event logic here...
+});
+
+emitter.emit('test', 10, 15);
+
+//remove some filters
+removeTestEventFilter();
+removeGlobalArg2Filter();
+```
 
 <a name="EnhancedEventEmitter#addEventFilter"></a>
 ##EnhancedEventEmitter#addEventFilter(event, filter)
@@ -306,10 +361,12 @@ The provided object type must have an Node.js events.EventEmitter compatible int
 
 **Returns**: `object` - The modified object type  
 **Example**  
+```js
 //extend events.EventEmitter class (or any class that has the same interface)
 //now you can create instances of the new EnhancedEventEmitter type while events.EventEmitter is not modified/impacted in any way
 var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);   //extend the event emitter class (can be Node.js of some custom event emitter). original base class is not affected.
 var emitter = new EnhancedEventEmitter();   //create a new instance using the new extended class type.
+```
 
 <a name="EventEmitterEnhancer.modify"></a>
 ##EventEmitterEnhancer.modify(EmitterType)
@@ -321,10 +378,12 @@ The provided object type must have an Node.js events.EventEmitter compatible int
 - EmitterType `object` - The object type  
 
 **Example**  
+```js
 //modify the proto of an events.EventEmitter class (or any class that has the same interface)
 //now all existing and future instances of the original class are modified to include the new extended capabilities.
 EventEmitterEnhancer.modify(EventEmitter); //modify the event emitter class prototype (can be Node.js of some custom event emitter). existing instances are impacted.
 var emitter = new EventEmitter();   //create an instance of the original class and automatically get the new extended capabilities.
+```
 
 <a name="EventEmitterEnhancer.modifyInstance"></a>
 ##EventEmitterEnhancer.modifyInstance(emitterInstance)
@@ -336,9 +395,11 @@ The provided object type must have an Node.js events.EventEmitter compatible int
 - emitterInstance `object` - The emitter instance  
 
 **Example**  
+```js
 //modify specific instance to include the extended capabilities (other existing/future instances of that class type are not modified/impacted in any way).
 var emitter = new EventEmitter();   //create an instance of an event emitter (can be Node.js of some custom event emitter)
 EventEmitterEnhancer.modifyInstance(emitter);   //modify the specific instance and add the extended capabilities. the original prototype is not affected.
+```
 
 <a name="FilterCallback"></a>
 #callback: FilterCallback
