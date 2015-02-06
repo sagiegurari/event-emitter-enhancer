@@ -608,17 +608,18 @@ describe('event-emitter-enhancer Tests', function () {
                 } else {
                     var filtersCalled = 0;
                     var i;
-                    for (i = 0; i < 5; i++) {
-                        emitter.filter(function (event, arg1, arg2) {
-                            filtersCalled++;
-                            assert.equal(event, 'test');
-                            assert.equal(arg1, 10);
-                            assert.equal(arg2, 20);
+                    var onEvent = function (event, arg1, arg2) {
+                        filtersCalled++;
+                        assert.equal(event, 'test');
+                        assert.equal(arg1, 10);
+                        assert.equal(arg2, 20);
 
-                            return true;
-                        });
+                        return true;
+                    };
+                    for (i = 0; i < 5; i++) {
+                        emitter.filter(onEvent);
                     }
-                    emitter.filter(function (event, arg1, arg2) {
+                    emitter.filter(function () {
                         filtersCalled++;
                         assert.equal(filtersCalled, 6);
 
@@ -646,17 +647,18 @@ describe('event-emitter-enhancer Tests', function () {
                 } else {
                     var filtersCalled = 0;
                     var i;
-                    for (i = 0; i < 5; i++) {
-                        emitter.filter('test', function (event, arg1, arg2) {
-                            filtersCalled++;
-                            assert.equal(event, 'test');
-                            assert.equal(arg1, 10);
-                            assert.equal(arg2, 20);
+                    var onEvent = function (event, arg1, arg2) {
+                        filtersCalled++;
+                        assert.equal(event, 'test');
+                        assert.equal(arg1, 10);
+                        assert.equal(arg2, 20);
 
-                            return true;
-                        });
+                        return true;
+                    };
+                    for (i = 0; i < 5; i++) {
+                        emitter.filter('test', onEvent);
                     }
-                    emitter.filter('test', function (event, arg1, arg2) {
+                    emitter.filter('test', function () {
                         filtersCalled++;
 
                         assert.equal(filtersCalled, 6);
@@ -685,16 +687,17 @@ describe('event-emitter-enhancer Tests', function () {
                 } else {
                     var filtersCalled = 0;
                     var i;
-                    for (i = 0; i < 5; i++) {
-                        emitter.filter(function (event, arg1, arg2) {
-                            filtersCalled++;
-                            assert.equal(arg1, 10);
-                            assert.equal(arg2, 20);
+                    var onEvent = function (event, arg1, arg2) {
+                        filtersCalled++;
+                        assert.equal(arg1, 10);
+                        assert.equal(arg2, 20);
 
-                            return true;
-                        });
+                        return true;
+                    };
+                    for (i = 0; i < 5; i++) {
+                        emitter.filter(onEvent);
                     }
-                    var remove1 = emitter.filter(function (event, arg1, arg2) {
+                    var remove1 = emitter.filter(function () {
                         filtersCalled++;
                         assert.equal(filtersCalled, 6);
 
@@ -734,17 +737,18 @@ describe('event-emitter-enhancer Tests', function () {
                 } else {
                     var filtersCalled = 0;
                     var i;
-                    for (i = 0; i < 5; i++) {
-                        emitter.filter('test', function (event, arg1, arg2) {
-                            filtersCalled++;
-                            assert.equal(event, 'test');
-                            assert.equal(arg1, 10);
-                            assert.equal(arg2, 20);
+                    var onEvent = function (event, arg1, arg2) {
+                        filtersCalled++;
+                        assert.equal(event, 'test');
+                        assert.equal(arg1, 10);
+                        assert.equal(arg2, 20);
 
-                            return true;
-                        });
+                        return true;
+                    };
+                    for (i = 0; i < 5; i++) {
+                        emitter.filter('test', onEvent);
                     }
-                    var remove1 = emitter.filter('test', function (event, arg1, arg2) {
+                    var remove1 = emitter.filter('test', function () {
                         filtersCalled++;
 
                         assert.equal(filtersCalled, 6);
