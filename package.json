@@ -1,6 +1,6 @@
 {
   "name": "event-emitter-enhancer",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "Enhances the Node.js EventEmitter with extra capabilities.",
   "main": "index.js",
   "directories": {
@@ -18,29 +18,29 @@
     "events",
     "EventEmitter"
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "mocha": "*",
     "blanket": "*",
-    "mocha-lcov-reporter": "*",
     "chai": "*",
+    "eventemitter2": "*",
     "grunt": "*",
+    "grunt-blanket": "*",
     "grunt-cli": "*",
-    "load-grunt-tasks": "*",
-    "time-grunt": "*",
     "grunt-contrib-clean": "*",
     "grunt-contrib-copy": "*",
-    "grunt-jsonlint": "*",
     "grunt-contrib-jshint": "*",
-    "grunt-jslint": "*",
-    "grunt-eslint": "*",
-    "grunt-todos": "*",
-    "grunt-mocha-test": "*",
-    "grunt-blanket": "*",
     "grunt-coveralls": "*",
+    "grunt-eslint": "*",
     "grunt-jsdoc": "*",
-    "eventemitter2": "*"
+    "grunt-jsdoc-to-markdown": "^0.4.2",
+    "grunt-jslint": "*",
+    "grunt-jsonlint": "*",
+    "grunt-mocha-test": "*",
+    "grunt-todos": "*",
+    "load-grunt-tasks": "*",
+    "mocha": "*",
+    "mocha-lcov-reporter": "*",
+    "time-grunt": "*"
   },
   "author": {
     "name": "Sagie Gur-Ari",
@@ -48,7 +48,7 @@
   },
   "license": "Apache 2",
   "scripts": {
-    "test": "grunt coverage"
+    "test": "grunt continuesIntegration"
   },
   "config": {
     "blanket": {
