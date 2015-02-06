@@ -178,7 +178,7 @@ removeGlobalArg2Filter();
 ```
 
 ## API Documentation
-See full docs at: [API Docs!](docs/api.md)
+See full docs at: [API Docs](docs/api.md)
 
 ## Release History
 

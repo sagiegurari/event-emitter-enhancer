@@ -24,28 +24,6 @@
   * [EnhancedEventEmitter#addGlobalFilter(filter)](#EnhancedEventEmitter#addGlobalFilter)
   * [EnhancedEventEmitter#filter([event], filter)](#EnhancedEventEmitter#filter)
   * [EnhancedEventEmitter#runFilterChain(emitArguments)](#EnhancedEventEmitter#runFilterChain)
-* [class: EnhancedEventEmitter](#EnhancedEventEmitter)
-  * [new EnhancedEventEmitter()](#new_EnhancedEventEmitter)
-  * [EnhancedEventEmitter..suspended](#EnhancedEventEmitter.suspended)
-  * [EnhancedEventEmitter#suspend(event)](#EnhancedEventEmitter#suspend)
-  * [EnhancedEventEmitter#unsuspend(event)](#EnhancedEventEmitter#unsuspend)
-  * [EnhancedEventEmitter#else(listener)](#EnhancedEventEmitter#else)
-  * [EnhancedEventEmitter#removeElseListener(listener)](#EnhancedEventEmitter#removeElseListener)
-  * [EnhancedEventEmitter#unelse(listener)](#EnhancedEventEmitter#unelse)
-  * [EnhancedEventEmitter#removeAllElseListeners()](#EnhancedEventEmitter#removeAllElseListeners)
-  * [EnhancedEventEmitter#elseError(event)](#EnhancedEventEmitter#elseError)
-  * [EnhancedEventEmitter#removeElseError(event)](#EnhancedEventEmitter#removeElseError)
-  * [EnhancedEventEmitter#unelseError(event)](#EnhancedEventEmitter#unelseError)
-  * [EnhancedEventEmitter#emit(event, [params])](#EnhancedEventEmitter#emit)
-  * [EnhancedEventEmitter#handleNoEmit(event, eventArguments)](#EnhancedEventEmitter#handleNoEmit)
-  * [EnhancedEventEmitter#invokeElseListener(eventArguments)](#EnhancedEventEmitter#invokeElseListener)
-  * [EnhancedEventEmitter#emitAsync(event, [params], callback)](#EnhancedEventEmitter#emitAsync)
-  * [EnhancedEventEmitter#onAsync(event, listener)](#EnhancedEventEmitter#onAsync)
-  * [EnhancedEventEmitter#addFilter([event], filter)](#EnhancedEventEmitter#addFilter)
-  * [EnhancedEventEmitter#addEventFilter(event, filter)](#EnhancedEventEmitter#addEventFilter)
-  * [EnhancedEventEmitter#addGlobalFilter(filter)](#EnhancedEventEmitter#addGlobalFilter)
-  * [EnhancedEventEmitter#filter([event], filter)](#EnhancedEventEmitter#filter)
-  * [EnhancedEventEmitter#runFilterChain(emitArguments)](#EnhancedEventEmitter#runFilterChain)
 
 **Namespaces**
 
@@ -92,219 +70,6 @@
 <a name="new_EnhancedEventEmitter"></a>
 ##new EnhancedEventEmitter()
 This class holds all the extended capabilities added to any emitter.
-
-**Author**: Sagie Gur-Ari  
-<a name="EnhancedEventEmitter.suspended"></a>
-##EnhancedEventEmitter..suspended
-If true, all events will not trigger any listener (or 'else' listener).<br>The emit function will simply do nothing.
-
-**Type**: `boolean`  
-<a name="EnhancedEventEmitter#suspend"></a>
-##EnhancedEventEmitter#suspend(event)
-Suspends all emit calls for the provided event name (including 'else' listeners).<br>The emit function will simply do nothing for the specific event.
-
-**Params**
-
-- event `string` - The event to suspend  
-
-<a name="EnhancedEventEmitter#unsuspend"></a>
-##EnhancedEventEmitter#unsuspend(event)
-Unsuspends the emit calls for the provided event name.
-
-**Params**
-
-- event `string` - The event to unsuspend  
-
-<a name="EnhancedEventEmitter#else"></a>
-##EnhancedEventEmitter#else(listener)
-Adds an 'else' listener which will be triggered by all events that do not have alistener currently for them (apart of the special 'error' event).
-
-**Params**
-
-- listener <code>[ElseCallback](#ElseCallback)</code> - The listener that will catch all 'else' events  
-
-**Example**  
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);var emitter = new EnhancedEventEmitter();emitter.else(function onNonHandledEvent(event, arg1, arg2) { //logic here.... //to remove 'else' listeners, simply use the unelse function emitter.unelse(this);});emitter.emit('test', 1, 2);
-
-<a name="EnhancedEventEmitter#removeElseListener"></a>
-##EnhancedEventEmitter#removeElseListener(listener)
-Removes the provided 'else' listener.<br>Same as 'unelse' function.
-
-**Params**
-
-- listener <code>[ElseCallback](#ElseCallback)</code> - The listener to remove  
-
-<a name="EnhancedEventEmitter#unelse"></a>
-##EnhancedEventEmitter#unelse(listener)
-See 'removeElseListener' documentation.
-
-**Params**
-
-- listener <code>[ElseCallback](#ElseCallback)</code> - The listener to remove  
-
-<a name="EnhancedEventEmitter#removeAllElseListeners"></a>
-##EnhancedEventEmitter#removeAllElseListeners()
-Removes all 'else' listeners.
-
-<a name="EnhancedEventEmitter#elseError"></a>
-##EnhancedEventEmitter#elseError(event)
-In case an event with the provided name is emitted but no listener is attached to it,an error event will emitted by this emitter instance instead.
-
-**Params**
-
-- event `string` - The event name  
-
-<a name="EnhancedEventEmitter#removeElseError"></a>
-##EnhancedEventEmitter#removeElseError(event)
-Removes the else-error handler for the provided event.<br>Same as 'unelseError' function.
-
-**Params**
-
-- event `string` - The event name  
-
-<a name="EnhancedEventEmitter#unelseError"></a>
-##EnhancedEventEmitter#unelseError(event)
-See 'removeElseError' documentation.
-
-**Params**
-
-- event `string` - The event name  
-
-<a name="EnhancedEventEmitter#emit"></a>
-##EnhancedEventEmitter#emit(event, [params])
-See Node.js events.EventEmitter documentation.
-
-**Params**
-
-- event `string` - The event name  
-- \[params\] `*` - The event parameters  
-
-**Returns**: `boolean` - True if a listener or an 'else' listener handled the event  
-<a name="EnhancedEventEmitter#handleNoEmit"></a>
-##EnhancedEventEmitter#handleNoEmit(event, eventArguments)
-Handles events which had no listeners.
-
-**Params**
-
-- event `string` - The event name  
-- eventArguments `array` - All the arguments to send the else callbacks  
-
-**Returns**: `boolean` - True if a listener or an 'else' listener handled the event  
-**Access**: private  
-<a name="EnhancedEventEmitter#invokeElseListener"></a>
-##EnhancedEventEmitter#invokeElseListener(eventArguments)
-Invokes all of the 'else' listeners.
-
-**Params**
-
-- eventArguments `array` - All the arguments to send the else callbacks  
-
-**Access**: private  
-<a name="EnhancedEventEmitter#emitAsync"></a>
-##EnhancedEventEmitter#emitAsync(event, [params], callback)
-Invokes the emit after a timeout to enable calling flow to continue and notblock due to event listeners.
-
-**Params**
-
-- event `string` - The event name  
-- \[params\] `*` - The event parameters  
-- callback <code>[AsyncEmitCallback](#AsyncEmitCallback)</code> - The async callback  
-
-**Example**  
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);var emitter = new EnhancedEventEmitter();emitter.on('test', function onTestEvent(num1, num2) { //event logic here});emitter.emitAsync('test', 1, 2, function onEmitDone(event, num1, num2, emitted) { //emit callback logic});
-
-<a name="EnhancedEventEmitter#onAsync"></a>
-##EnhancedEventEmitter#onAsync(event, listener)
-Adds a listener that will be triggered after a timeout during an emit.<br>This ensures that the provided listener is invoked after all other listeners and thatit will not block the emit caller flow.<br>To remove the listener, the returned function must be called instead of doing emitter.removeListener(...)
-
-**Params**
-
-- event `string` - The event name  
-- listener `function` - The listener function  
-
-**Returns**: `function` - The remove listener function  
-<a name="EnhancedEventEmitter#addFilter"></a>
-##EnhancedEventEmitter#addFilter([event], filter)
-Adds a filter that will be triggered before every emit for the provided event type (ifno event is provided, than the filter is invoked for all events).<br>The filter enables to prevent events from reaching the listeners in case some criteria is met.
-
-**Params**
-
-- \[event\] `string` - The event name. If not provided, the filter is relevant for all events.  
-- filter <code>[FilterCallback](#FilterCallback)</code> - The filter function  
-
-**Returns**: `function` - The remove filter function  
-**Example**  
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);var emitter = new EnhancedEventEmitter();//add filters for test event onlyvar removeTestEventFilter = emitter.filter('test', function (event, arg1, arg2) { if (arg1 && (arg1 > 3)) {     return true;    //continue with emit } return false;   //prevent emit});emitter.filter('test', function (event, arg1, arg2) { if (arg2 && (arg2 < 20)) {     return true;    //continue with emit } return false;   //prevent emit});//add global filter for all eventsemitter.filter(function (event, arg1, arg2) { if (arg1 && (arg1 > 5)) {     return true;    //continue with emit } return false;   //prevent emit});var removeGlobalArg2Filter = emitter.filter(function (event, arg1, arg2) { if (arg2 && (arg2 < 18)) {     return true;    //continue with emit } return false;   //prevent emit});emitter.on('test', function onTestEvent(arg1, arg2) { //event logic here...});emitter.emit('test', 10, 15);//remove some filtersremoveTestEventFilter();removeGlobalArg2Filter();
-
-<a name="EnhancedEventEmitter#addEventFilter"></a>
-##EnhancedEventEmitter#addEventFilter(event, filter)
-Adds an event filter (See addFilter)
-
-**Params**
-
-- event `string` - The event name.  
-- filter <code>[FilterCallback](#FilterCallback)</code> - The filter function  
-
-**Returns**: `function` - The remove filter function  
-<a name="EnhancedEventEmitter#addGlobalFilter"></a>
-##EnhancedEventEmitter#addGlobalFilter(filter)
-Adds a global filter (See addFilter)
-
-**Params**
-
-- filter <code>[FilterCallback](#FilterCallback)</code> - The filter function  
-
-**Returns**: `function` - The remove filter function  
-<a name="EnhancedEventEmitter#filter"></a>
-##EnhancedEventEmitter#filter([event], filter)
-See 'addFilter' documentation.
-
-**Params**
-
-- \[event\] `string` - The event name. If not provided, the filter is relevant for all events.  
-- filter <code>[FilterCallback](#FilterCallback)</code> - The filter function  
-
-**Returns**: `function` - The remove filter function  
-<a name="EnhancedEventEmitter#runFilterChain"></a>
-##EnhancedEventEmitter#runFilterChain(emitArguments)
-Returns true if to allow to emit the event based on the currently setup filters.
-
-**Params**
-
-- emitArguments `array` - All emit function arguments array  
-
-**Returns**: `boolean` - True to continue with the emit, false to prevent it  
-**Access**: private  
-<a name="EnhancedEventEmitter"></a>
-#class: EnhancedEventEmitter
-**Members**
-
-* [class: EnhancedEventEmitter](#EnhancedEventEmitter)
-  * [new EnhancedEventEmitter()](#new_EnhancedEventEmitter)
-  * [EnhancedEventEmitter..suspended](#EnhancedEventEmitter.suspended)
-  * [EnhancedEventEmitter#suspend(event)](#EnhancedEventEmitter#suspend)
-  * [EnhancedEventEmitter#unsuspend(event)](#EnhancedEventEmitter#unsuspend)
-  * [EnhancedEventEmitter#else(listener)](#EnhancedEventEmitter#else)
-  * [EnhancedEventEmitter#removeElseListener(listener)](#EnhancedEventEmitter#removeElseListener)
-  * [EnhancedEventEmitter#unelse(listener)](#EnhancedEventEmitter#unelse)
-  * [EnhancedEventEmitter#removeAllElseListeners()](#EnhancedEventEmitter#removeAllElseListeners)
-  * [EnhancedEventEmitter#elseError(event)](#EnhancedEventEmitter#elseError)
-  * [EnhancedEventEmitter#removeElseError(event)](#EnhancedEventEmitter#removeElseError)
-  * [EnhancedEventEmitter#unelseError(event)](#EnhancedEventEmitter#unelseError)
-  * [EnhancedEventEmitter#emit(event, [params])](#EnhancedEventEmitter#emit)
-  * [EnhancedEventEmitter#handleNoEmit(event, eventArguments)](#EnhancedEventEmitter#handleNoEmit)
-  * [EnhancedEventEmitter#invokeElseListener(eventArguments)](#EnhancedEventEmitter#invokeElseListener)
-  * [EnhancedEventEmitter#emitAsync(event, [params], callback)](#EnhancedEventEmitter#emitAsync)
-  * [EnhancedEventEmitter#onAsync(event, listener)](#EnhancedEventEmitter#onAsync)
-  * [EnhancedEventEmitter#addFilter([event], filter)](#EnhancedEventEmitter#addFilter)
-  * [EnhancedEventEmitter#addEventFilter(event, filter)](#EnhancedEventEmitter#addEventFilter)
-  * [EnhancedEventEmitter#addGlobalFilter(filter)](#EnhancedEventEmitter#addGlobalFilter)
-  * [EnhancedEventEmitter#filter([event], filter)](#EnhancedEventEmitter#filter)
-  * [EnhancedEventEmitter#runFilterChain(emitArguments)](#EnhancedEventEmitter#runFilterChain)
-
-<a name="new_EnhancedEventEmitter"></a>
-##new EnhancedEventEmitter()
-Extended version of the Node.js events.EventEmitter with extra capabilities.
 
 **Author**: Sagie Gur-Ari  
 <a name="EnhancedEventEmitter.suspended"></a>
