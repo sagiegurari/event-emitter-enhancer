@@ -4,7 +4,7 @@
 
 * [class: EnhancedEventEmitter](#EnhancedEventEmitter)
   * [new EnhancedEventEmitter()](#new_EnhancedEventEmitter)
-  * [EnhancedEventEmitter..suspended](#EnhancedEventEmitter.suspended)
+  * [EnhancedEventEmitter.suspended](#EnhancedEventEmitter.suspended)
   * [EnhancedEventEmitter#suspend(event)](#EnhancedEventEmitter#suspend)
   * [EnhancedEventEmitter#unsuspend(event)](#EnhancedEventEmitter#unsuspend)
   * [EnhancedEventEmitter#else(listener)](#EnhancedEventEmitter#else)
@@ -46,7 +46,7 @@
 
 * [class: EnhancedEventEmitter](#EnhancedEventEmitter)
   * [new EnhancedEventEmitter()](#new_EnhancedEventEmitter)
-  * [EnhancedEventEmitter..suspended](#EnhancedEventEmitter.suspended)
+  * [EnhancedEventEmitter.suspended](#EnhancedEventEmitter.suspended)
   * [EnhancedEventEmitter#suspend(event)](#EnhancedEventEmitter#suspend)
   * [EnhancedEventEmitter#unsuspend(event)](#EnhancedEventEmitter#unsuspend)
   * [EnhancedEventEmitter#else(listener)](#EnhancedEventEmitter#else)
@@ -73,7 +73,7 @@ This class holds all the extended capabilities added to any emitter.
 
 **Author**: Sagie Gur-Ari  
 <a name="EnhancedEventEmitter.suspended"></a>
-##EnhancedEventEmitter..suspended
+##EnhancedEventEmitter.suspended
 If true, all events will not trigger any listener (or 'else' listener).<br>The emit function will simply do nothing.
 
 **Type**: `boolean`  

@@ -151,20 +151,6 @@ module.exports = function (grunt) {
             }
         },
 
-        jsdoc: {
-            full: {
-                src: [
-                    '<%=BuildConfig.libDirectory%>/**/*.js',
-                    'index.js',
-                    'README.md'
-                ],
-                options: {
-                    destination: '<%=BuildConfig.targetDirectory%>/docs',
-                    'private': true
-                }
-            }
-        },
-
         jsdoc2md: {
             api: {
                 options: {
@@ -184,7 +170,6 @@ module.exports = function (grunt) {
         'jslint:full',
         'eslint:full',
         'todos:full',
-        'jsdoc:full',
         'jsdoc2md:api',
         'copy:coverage',
         'blanket:full',
