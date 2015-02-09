@@ -28,7 +28,7 @@
 **Namespaces**
 
 * [EventEmitterEnhancer](#EventEmitterEnhancer)
-  * [EventEmitterEnhancer..EnhancedEventEmitter](#EventEmitterEnhancer.EnhancedEventEmitter)
+  * [EventEmitterEnhancer.EnhancedEventEmitter](#EventEmitterEnhancer.EnhancedEventEmitter)
   * [EventEmitterEnhancer.enhance(EmitterType, modifyType)](#EventEmitterEnhancer.enhance)
   * [EventEmitterEnhancer.extend(EmitterType)](#EventEmitterEnhancer.extend)
   * [EventEmitterEnhancer.modify(EmitterType)](#EventEmitterEnhancer.modify)
@@ -327,14 +327,14 @@ Extends the Node.js events.EventEmitter with extra capabilities.
 **Members**
 
 * [EventEmitterEnhancer](#EventEmitterEnhancer)
-  * [EventEmitterEnhancer..EnhancedEventEmitter](#EventEmitterEnhancer.EnhancedEventEmitter)
+  * [EventEmitterEnhancer.EnhancedEventEmitter](#EventEmitterEnhancer.EnhancedEventEmitter)
   * [EventEmitterEnhancer.enhance(EmitterType, modifyType)](#EventEmitterEnhancer.enhance)
   * [EventEmitterEnhancer.extend(EmitterType)](#EventEmitterEnhancer.extend)
   * [EventEmitterEnhancer.modify(EmitterType)](#EventEmitterEnhancer.modify)
   * [EventEmitterEnhancer.modifyInstance(emitterInstance)](#EventEmitterEnhancer.modifyInstance)
 
 <a name="EventEmitterEnhancer.EnhancedEventEmitter"></a>
-##EventEmitterEnhancer..EnhancedEventEmitter
+##EventEmitterEnhancer.EnhancedEventEmitter
 The node.js event emitter prototype extended with the extra capabilities.
 
 **Type**: `EventEmitter`  
