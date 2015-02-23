@@ -10,6 +10,9 @@ function createEventEmitter() {
     var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
     return new EnhancedEventEmitter();
 }
+function emptyFunction() {
+    return undefined;
+}
 
 describe('event-emitter-enhancer Tests', function () {
     this.timeout(100);
@@ -427,6 +430,7 @@ describe('event-emitter-enhancer Tests', function () {
                 emitter.emitAsync('test', 1, 2);
                 assert.fail();
             } catch (error) {
+                assert.isObject(error);
             }
         });
 
@@ -436,6 +440,7 @@ describe('event-emitter-enhancer Tests', function () {
                 emitter.emitAsync('test');
                 assert.fail();
             } catch (error) {
+                assert.isObject(error);
             }
         });
     });
@@ -478,6 +483,7 @@ describe('event-emitter-enhancer Tests', function () {
                 emitter.onAsync('test');
                 assert.fail();
             } catch (error) {
+                assert.isObject(error);
             }
         });
 
@@ -488,13 +494,14 @@ describe('event-emitter-enhancer Tests', function () {
                 emitter.onAsync('test', notFunction);
                 assert.fail();
             } catch (error) {
+                assert.isObject(error);
             }
         });
 
         it('async on remove callback test', function () {
             var emitter = createEventEmitter();
-            var remove = emitter.onAsync('test', function () {});
-            emitter.on('test', function () {});
+            var remove = emitter.onAsync('test', emptyFunction);
+            emitter.on('test', emptyFunction);
 
             assert.equal(2, emitter.listeners('test').length);
 
@@ -512,6 +519,7 @@ describe('event-emitter-enhancer Tests', function () {
                 emitter.filter();
                 assert.fail();
             } catch (error) {
+                assert.isObject(error);
             }
         });
 
@@ -521,15 +529,17 @@ describe('event-emitter-enhancer Tests', function () {
                 emitter.filter('test');
                 assert.fail();
             } catch (error) {
+                assert.isObject(error);
             }
         });
 
         it('too many args test', function tooManyArgsTest() {
             var emitter = createEventEmitter();
             try {
-                emitter.filter('test', 'test', function () {});
+                emitter.filter('test', 'test', emptyFunction);
                 assert.fail();
             } catch (error) {
+                assert.isObject(error);
             }
         });
 
@@ -688,12 +698,15 @@ describe('event-emitter-enhancer Tests', function () {
                 } else {
                     var filtersCalled = 0;
                     var i;
+                    /*jslint unparam: true */
                     var onEvent = function (event, arg1) {
                         filtersCalled++;
                         assert.isFalse(arg1);
 
                         return true;
                     };
+                    /*jslint unparam: false */
+
                     for (i = 0; i < 5; i++) {
                         emitter.filter(onEvent);
                     }

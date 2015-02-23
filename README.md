@@ -1,6 +1,7 @@
 # event-emitter-enhancer
 
-[![NPM Version](http://img.shields.io/npm/v/event-emitter-enhancer.svg?style=flat)](https://www.npmjs.org/package/event-emitter-enhancer) [![Build Status](https://img.shields.io/travis/sagiegurari/event-emitter-enhancer.svg?style=flat)](http://travis-ci.org/sagiegurari/event-emitter-enhancer) [![Coverage Status](https://img.shields.io/coveralls/sagiegurari/event-emitter-enhancer.svg?style=flat)](https://coveralls.io/r/sagiegurari/event-emitter-enhancer) [![bitHound Score](https://www.bithound.io/sagiegurari/event-emitter-enhancer/badges/score.svg)](https://www.bithound.io/sagiegurari/event-emitter-enhancer) [![License](https://img.shields.io/npm/l/event-emitter-enhancer.svg?style=flat)](https://github.com/sagiegurari/event-emitter-enhancer/blob/master/LICENSE)
+[![NPM Version](http://img.shields.io/npm/v/event-emitter-enhancer.svg?style=flat)](https://www.npmjs.org/package/event-emitter-enhancer) [![Build Status](https://img.shields.io/travis/sagiegurari/event-emitter-enhancer.svg?style=flat)](http://travis-ci.org/sagiegurari/event-emitter-enhancer) [![Coverage Status](https://img.shields.io/coveralls/sagiegurari/event-emitter-enhancer.svg?style=flat)](https://coveralls.io/r/sagiegurari/event-emitter-enhancer) [![bitHound Score](https://www.bithound.io/sagiegurari/event-emitter-enhancer/badges/score.svg)](https://www.bithound.io/sagiegurari/event-emitter-enhancer) [![License](https://img.shields.io/npm/l/event-emitter-enhancer.svg?style=flat)](https://github.com/sagiegurari/event-emitter-enhancer/blob/master/LICENSE)<br>
+[![Dependencies](http://img.shields.io/david/dev/sagiegurari/event-emitter-enhancer.svg?style=flat)](https://david-dm.org/sagiegurari/event-emitter-enhancer#info=devDependencies)
 
 > Extends the Node.js events.EventEmitter to provide additional functionality.
 
@@ -184,7 +185,7 @@ See full docs at: [API Docs](docs/api.md)
 
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
-| 2015-02-21  | v0.0.20  | Maintenance |
+| 2015-02-23  | v0.0.21  | Maintenance |
 | 2015-02-09  | v0.0.19  | Doc fix. |
 | 2015-02-09  | v0.0.18  | Grunt cleanups |
 | 2015-02-06  | v0.0.14  | Internal quality changes. |
