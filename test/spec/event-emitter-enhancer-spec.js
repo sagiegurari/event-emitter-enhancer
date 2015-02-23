@@ -13,6 +13,13 @@ function createEventEmitter() {
 function emptyFunction() {
     return undefined;
 }
+function removeValidation(removed, done) {
+    if (removed) {
+        done();
+    } else {
+        assert.fail();
+    }
+}
 
 describe('event-emitter-enhancer Tests', function () {
     this.timeout(100);
@@ -344,11 +351,7 @@ describe('event-emitter-enhancer Tests', function () {
             var emitter = createEventEmitter();
             var removed = false;
             emitter.else(function () {
-                if (removed) {
-                    done();
-                } else {
-                    assert.fail();
-                }
+                removeValidation(removed, done);
             });
             emitter.on('error', function (error) {
                 assert.isObject(error);
@@ -367,11 +370,7 @@ describe('event-emitter-enhancer Tests', function () {
             var emitter = createEventEmitter();
             var removed = false;
             emitter.else(function () {
-                if (removed) {
-                    done();
-                } else {
-                    assert.fail();
-                }
+                removeValidation(removed, done);
             });
             emitter.on('error', function (error) {
                 assert.isObject(error);
@@ -394,13 +393,13 @@ describe('event-emitter-enhancer Tests', function () {
             emitter.on('testAsync', function (arg1, arg2) {
                 eventDone = true;
 
-                assert.equal(arg1, 1);
+                assert.equal(arg1, 'test arg 1');
                 assert.equal(arg2, 2);
             });
 
-            emitter.emitAsync('testAsync', 1, 2, function onEmitDone(event, arg1, arg2, emitted) {
+            emitter.emitAsync('testAsync', 'test arg 1', 2, function onEmitDone(event, arg1, arg2, emitted) {
                 assert.equal(event, 'testAsync');
-                assert.equal(arg1, 1);
+                assert.equal(arg1, 'test arg 1');
                 assert.equal(arg2, 2);
                 assert.isTrue(emitted);
 
@@ -448,12 +447,13 @@ describe('event-emitter-enhancer Tests', function () {
     describe('async on Tests', function () {
         it('async on test', function (done) {
             var eventDone = false;
-            var emitter = createEventEmitter();
-            emitter.on('test', function () {
+            var eventDoneValidation = function () {
                 if (eventDone) {
                     assert.fail();
                 }
-            });
+            };
+            var emitter = createEventEmitter();
+            emitter.on('test', eventDoneValidation);
             emitter.onAsync('test', function (arg1, arg2) {
                 eventDone = true;
 
@@ -462,11 +462,7 @@ describe('event-emitter-enhancer Tests', function () {
 
                 done();
             });
-            emitter.on('test', function () {
-                if (eventDone) {
-                    assert.fail();
-                }
-            });
+            emitter.on('test', eventDoneValidation);
 
             assert.equal(3, emitter.listeners('test').length);
 
