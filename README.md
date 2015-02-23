@@ -185,7 +185,7 @@ See full docs at: [API Docs](docs/api.md)
 
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
-| 2015-02-23  | v0.0.21  | Maintenance |
+| 2015-02-23  | v0.0.22  | Maintenance |
 | 2015-02-09  | v0.0.19  | Doc fix. |
 | 2015-02-09  | v0.0.18  | Grunt cleanups |
 | 2015-02-06  | v0.0.14  | Internal quality changes. |
