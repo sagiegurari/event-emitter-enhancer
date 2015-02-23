@@ -25,20 +25,5 @@
   "maxparams": 5,
   "maxstatements": 50,
   "globalstrict": true,
-  "globals": {
-    "arguments": true,
-    "console": true,
-    "setTimeout": true,
-    "clearTimeout": true,
-    "setInterval": true,
-    "clearInterval": true,
-    "root": true,
-    "__filename": true,
-    "__dirname": true,
-    "global": true,
-    "process": true,
-    "module": true,
-    "require": true,
-    "Buffer": true
-  }
+  "node": true
 }

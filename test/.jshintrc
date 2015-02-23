@@ -15,7 +15,7 @@
   "nonbsp": true,
   "nonew": true,
   "quotmark": "single",
-  "singleGroups": true,
+  "singleGroups": false,
   "undef": true,
   "unused": true,
   "maxcomplexity": 10,
@@ -25,22 +25,6 @@
   "maxparams": 5,
   "maxstatements": 50,
   "globalstrict": true,
-  "globals": {
-    "arguments": true,
-    "console": true,
-    "setTimeout": true,
-    "clearTimeout": true,
-    "setInterval": true,
-    "clearInterval": true,
-    "root": true,
-    "__filename": true,
-    "__dirname": true,
-    "global": true,
-    "process": true,
-    "module": true,
-    "require": true,
-    "Buffer": true,
-    "describe": true,
-    "it": true
-  }
+  "node": true,
+  "mocha": true
 }
