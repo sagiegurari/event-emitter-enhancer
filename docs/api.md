@@ -74,12 +74,14 @@ This class holds all the extended capabilities added to any emitter.
 **Author**: Sagie Gur-Ari  
 <a name="EnhancedEventEmitter.suspended"></a>
 ##EnhancedEventEmitter.suspended
-If true, all events will not trigger any listener (or 'else' listener).<br>The emit function will simply do nothing.
+If true, all events will not trigger any listener (or 'else' listener).<br>
+The emit function will simply do nothing.
 
 **Type**: `boolean`  
 <a name="EnhancedEventEmitter#suspend"></a>
 ##EnhancedEventEmitter#suspend(event)
-Suspends all emit calls for the provided event name (including 'else' listeners).<br>The emit function will simply do nothing for the specific event.
+Suspends all emit calls for the provided event name (including 'else' listeners).<br>
+The emit function will simply do nothing for the specific event.
 
 **Params**
 
@@ -95,7 +97,8 @@ Unsuspends the emit calls for the provided event name.
 
 <a name="EnhancedEventEmitter#else"></a>
 ##EnhancedEventEmitter#else(listener)
-Adds an 'else' listener which will be triggered by all events that do not have alistener currently for them (apart of the special 'error' event).
+Adds an 'else' listener which will be triggered by all events that do not have a
+listener currently for them (apart of the special 'error' event).
 
 **Params**
 
@@ -117,7 +120,8 @@ emitter.emit('test', 1, 2);
 
 <a name="EnhancedEventEmitter#removeElseListener"></a>
 ##EnhancedEventEmitter#removeElseListener(listener)
-Removes the provided 'else' listener.<br>Same as 'unelse' function.
+Removes the provided 'else' listener.<br>
+Same as 'unelse' function.
 
 **Params**
 
@@ -137,7 +141,8 @@ Removes all 'else' listeners.
 
 <a name="EnhancedEventEmitter#elseError"></a>
 ##EnhancedEventEmitter#elseError(event)
-In case an event with the provided name is emitted but no listener is attached to it,an error event will emitted by this emitter instance instead.
+In case an event with the provided name is emitted but no listener is attached to it,
+an error event will emitted by this emitter instance instead.
 
 **Params**
 
@@ -145,7 +150,8 @@ In case an event with the provided name is emitted but no listener is attached t
 
 <a name="EnhancedEventEmitter#removeElseError"></a>
 ##EnhancedEventEmitter#removeElseError(event)
-Removes the else-error handler for the provided event.<br>Same as 'unelseError' function.
+Removes the else-error handler for the provided event.<br>
+Same as 'unelseError' function.
 
 **Params**
 
@@ -191,7 +197,8 @@ Invokes all of the 'else' listeners.
 **Access**: private  
 <a name="EnhancedEventEmitter#emitAsync"></a>
 ##EnhancedEventEmitter#emitAsync(event, [params], callback)
-Invokes the emit after a timeout to enable calling flow to continue and notblock due to event listeners.
+Invokes the emit after a timeout to enable calling flow to continue and not
+block due to event listeners.
 
 **Params**
 
@@ -214,7 +221,10 @@ emitter.emitAsync('test', 1, 2, function onEmitDone(event, num1, num2, emitted) 
 
 <a name="EnhancedEventEmitter#onAsync"></a>
 ##EnhancedEventEmitter#onAsync(event, listener)
-Adds a listener that will be triggered after a timeout during an emit.<br>This ensures that the provided listener is invoked after all other listeners and thatit will not block the emit caller flow.<br>To remove the listener, the returned function must be called instead of doing emitter.removeListener(...)
+Adds a listener that will be triggered after a timeout during an emit.<br>
+This ensures that the provided listener is invoked after all other listeners and that
+it will not block the emit caller flow.<br>
+To remove the listener, the returned function must be called instead of doing emitter.removeListener(...)
 
 **Params**
 
@@ -224,7 +234,9 @@ Adds a listener that will be triggered after a timeout during an emit.<br>This 
 **Returns**: `function` - The remove listener function  
 <a name="EnhancedEventEmitter#addFilter"></a>
 ##EnhancedEventEmitter#addFilter([event], filter)
-Adds a filter that will be triggered before every emit for the provided event type (ifno event is provided, than the filter is invoked for all events).<br>The filter enables to prevent events from reaching the listeners in case some criteria is met.
+Adds a filter that will be triggered before every emit for the provided event type (if
+no event is provided, than the filter is invoked for all events).<br>
+The filter enables to prevent events from reaching the listeners in case some criteria is met.
 
 **Params**
 
