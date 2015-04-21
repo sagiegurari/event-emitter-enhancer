@@ -20,6 +20,9 @@ Next you can either modify the proto of an EventEmiter type class, or extend it 
 ```js
 var EventEmitter = require('events').EventEmitter;
 
+//Get predefined extended version of the events.EventEmitter class (original EventEmitter is not impacted)
+var emitter = new EventEmitterEnhancer.EnhancedEventEmitter();   //create a new instance using the new extended class type.
+
 //extend events.EventEmitter class (or any class that has the same interface)
 //now you can create instances of the new EnhancedEventEmitter type while events.EventEmitter is not modified/impacted in any way
 var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);   //extend the event emitter class (can be Node.js of some custom event emitter). original base class is not affected.
@@ -185,6 +188,7 @@ See full docs at: [API Docs](docs/api.md)
 
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
+| 2015-04-22  | v0.0.31  | Prevent from multiple enhance of same prototype/instance |
 | 2015-04-05  | v0.0.30  | Maintenance |
 | 2015-02-09  | v0.0.19  | Doc fix. |
 | 2015-02-09  | v0.0.18  | Grunt cleanups |

@@ -25,6 +25,23 @@ describe('event-emitter-enhancer Tests', function () {
     this.timeout(100);
 
     describe('extend Tests', function () {
+        it('predefined extended events.EventEmitter test', function () {
+            var EnhancedEventEmitter = EventEmitterEnhancer.EnhancedEventEmitter;
+            var emitter = new EnhancedEventEmitter();
+
+            assert.isFunction(emitter.onAsync);
+            assert.isFunction(emitter.elseError);
+            assert.isFunction(emitter.else);
+            assert.isFunction(emitter.filter);
+
+            emitter = new EventEmitter();
+
+            assert.isUndefined(emitter.onAsync);
+            assert.isUndefined(emitter.elseError);
+            assert.isUndefined(emitter.else);
+            assert.isUndefined(emitter.filter);
+        });
+
         it('extend events.EventEmitter test', function () {
             var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
             var emitter = new EnhancedEventEmitter();
@@ -40,6 +57,23 @@ describe('event-emitter-enhancer Tests', function () {
             assert.isUndefined(emitter.elseError);
             assert.isUndefined(emitter.else);
             assert.isUndefined(emitter.filter);
+        });
+
+        it('extend events.EventEmitter multi prevent test', function () {
+            assert.isUndefined(EventEmitter.prototype.enhancedEmitterType);
+            var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+
+            assert.isUndefined(EventEmitter.prototype.enhancedEmitterType);
+            assert.isTrue(EnhancedEventEmitter.prototype.enhancedEmitterType);
+            var emitter = new EnhancedEventEmitter();
+            assert.isTrue(emitter.enhancedEmitterType);
+
+            try {
+                EventEmitterEnhancer.extend(EnhancedEventEmitter);
+                assert.fail();
+            } catch (error) {
+                assert.isObject(error);
+            }
         });
 
         it('modify custom events.EventEmitter test', function () {
@@ -64,6 +98,28 @@ describe('event-emitter-enhancer Tests', function () {
             assert.isUndefined(emitter.filter);
         });
 
+        it('modify custom events.EventEmitter multi prevent test', function () {
+            assert.isUndefined(EventEmitter.prototype.enhancedEmitterType);
+            var CustomMultiEventEmitter = function () {
+                EventEmitter.call(this);
+            };
+            CustomMultiEventEmitter.prototype = Object.create(EventEmitter.prototype);
+
+            EventEmitterEnhancer.modify(CustomMultiEventEmitter);
+
+            assert.isUndefined(EventEmitter.prototype.enhancedEmitterType);
+            assert.isTrue(CustomMultiEventEmitter.prototype.enhancedEmitterType);
+            var emitter = new CustomMultiEventEmitter();
+            assert.isTrue(emitter.enhancedEmitterType);
+
+            try {
+                EventEmitterEnhancer.modify(CustomMultiEventEmitter);
+                assert.fail();
+            } catch (error) {
+                assert.isObject(error);
+            }
+        });
+
         it('modifyInstance custom events.EventEmitter test', function () {
             var emitter = new EventEmitter();
             EventEmitterEnhancer.modifyInstance(emitter);
@@ -79,6 +135,21 @@ describe('event-emitter-enhancer Tests', function () {
             assert.isUndefined(emitter.elseError);
             assert.isUndefined(emitter.else);
             assert.isUndefined(emitter.filter);
+        });
+
+        it('modifyInstance custom events.EventEmitter multi prevent test', function () {
+            var emitter = new EventEmitter();
+            EventEmitterEnhancer.modifyInstance(emitter);
+
+            assert.isUndefined(EventEmitter.prototype.enhancedEmitterType);
+            assert.isTrue(emitter.enhancedEmitterType);
+
+            try {
+                EventEmitterEnhancer.modifyInstance(emitter);
+                assert.fail();
+            } catch (error) {
+                assert.isObject(error);
+            }
         });
     });
 

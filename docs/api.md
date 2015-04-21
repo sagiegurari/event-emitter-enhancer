@@ -4,6 +4,7 @@
 
 * [class: EnhancedEventEmitter](#EnhancedEventEmitter)
   * [new EnhancedEventEmitter()](#new_EnhancedEventEmitter)
+  * [EnhancedEventEmitter.enhancedEmitterType](#EnhancedEventEmitter.enhancedEmitterType)
   * [EnhancedEventEmitter.suspended](#EnhancedEventEmitter.suspended)
   * [EnhancedEventEmitter#suspend(event)](#EnhancedEventEmitter#suspend)
   * [EnhancedEventEmitter#unsuspend(event)](#EnhancedEventEmitter#unsuspend)
@@ -24,11 +25,13 @@
   * [EnhancedEventEmitter#addGlobalFilter(filter)](#EnhancedEventEmitter#addGlobalFilter)
   * [EnhancedEventEmitter#filter([event], filter)](#EnhancedEventEmitter#filter)
   * [EnhancedEventEmitter#runFilterChain(emitArguments)](#EnhancedEventEmitter#runFilterChain)
+  * [EnhancedEventEmitter#markEvent(event, [events])](#EnhancedEventEmitter#markEvent)
 
 **Namespaces**
 
 * [EventEmitterEnhancer](#EventEmitterEnhancer)
   * [EventEmitterEnhancer.EnhancedEventEmitter](#EventEmitterEnhancer.EnhancedEventEmitter)
+  * [EventEmitterEnhancer.validateDoubleEnhancement(type)](#EventEmitterEnhancer.validateDoubleEnhancement)
   * [EventEmitterEnhancer.enhance(EmitterType, modifyType)](#EventEmitterEnhancer.enhance)
   * [EventEmitterEnhancer.extend(EmitterType)](#EventEmitterEnhancer.extend)
   * [EventEmitterEnhancer.modify(EmitterType)](#EventEmitterEnhancer.modify)
@@ -46,6 +49,7 @@
 
 * [class: EnhancedEventEmitter](#EnhancedEventEmitter)
   * [new EnhancedEventEmitter()](#new_EnhancedEventEmitter)
+  * [EnhancedEventEmitter.enhancedEmitterType](#EnhancedEventEmitter.enhancedEmitterType)
   * [EnhancedEventEmitter.suspended](#EnhancedEventEmitter.suspended)
   * [EnhancedEventEmitter#suspend(event)](#EnhancedEventEmitter#suspend)
   * [EnhancedEventEmitter#unsuspend(event)](#EnhancedEventEmitter#unsuspend)
@@ -66,12 +70,19 @@
   * [EnhancedEventEmitter#addGlobalFilter(filter)](#EnhancedEventEmitter#addGlobalFilter)
   * [EnhancedEventEmitter#filter([event], filter)](#EnhancedEventEmitter#filter)
   * [EnhancedEventEmitter#runFilterChain(emitArguments)](#EnhancedEventEmitter#runFilterChain)
+  * [EnhancedEventEmitter#markEvent(event, [events])](#EnhancedEventEmitter#markEvent)
 
 <a name="new_EnhancedEventEmitter"></a>
 ##new EnhancedEventEmitter()
 This class holds all the extended capabilities added to any emitter.
 
 **Author**: Sagie Gur-Ari  
+<a name="EnhancedEventEmitter.enhancedEmitterType"></a>
+##EnhancedEventEmitter.enhancedEmitterType
+Marker attribute to prevent multiple wrapping of emitter.
+
+**Type**: `boolean`  
+**Access**: private  
 <a name="EnhancedEventEmitter.suspended"></a>
 ##EnhancedEventEmitter.suspended
 If true, all events will not trigger any listener (or 'else' listener).<br>
@@ -331,6 +342,17 @@ Returns true if to allow to emit the event based on the currently setup filters.
 
 **Returns**: `boolean` - True to continue with the emit, false to prevent it  
 **Access**: private  
+<a name="EnhancedEventEmitter#markEvent"></a>
+##EnhancedEventEmitter#markEvent(event, [events])
+Marks the given event in the events map.
+
+**Params**
+
+- event `string` - The event name to mark  
+- \[events\] `object` - The events map  
+
+**Returns**: `object` - The updated events map  
+**Access**: private  
 <a name="EventEmitterEnhancer"></a>
 #EventEmitterEnhancer
 Extends the Node.js events.EventEmitter with extra capabilities.
@@ -340,6 +362,7 @@ Extends the Node.js events.EventEmitter with extra capabilities.
 
 * [EventEmitterEnhancer](#EventEmitterEnhancer)
   * [EventEmitterEnhancer.EnhancedEventEmitter](#EventEmitterEnhancer.EnhancedEventEmitter)
+  * [EventEmitterEnhancer.validateDoubleEnhancement(type)](#EventEmitterEnhancer.validateDoubleEnhancement)
   * [EventEmitterEnhancer.enhance(EmitterType, modifyType)](#EventEmitterEnhancer.enhance)
   * [EventEmitterEnhancer.extend(EmitterType)](#EventEmitterEnhancer.extend)
   * [EventEmitterEnhancer.modify(EmitterType)](#EventEmitterEnhancer.modify)
@@ -350,6 +373,16 @@ Extends the Node.js events.EventEmitter with extra capabilities.
 The node.js event emitter prototype extended with the extra capabilities.
 
 **Type**: `EventEmitter`  
+<a name="EventEmitterEnhancer.validateDoubleEnhancement"></a>
+##EventEmitterEnhancer.validateDoubleEnhancement(type)
+Throws the already enhanced error in case provided input
+has already been enhanced.
+
+**Params**
+
+- type `object` - The type to validate  
+
+**Access**: private  
 <a name="EventEmitterEnhancer.enhance"></a>
 ##EventEmitterEnhancer.enhance(EmitterType, modifyType)
 Modified/extends the provided object prototype with the extended emitter capabilities.<br>
