@@ -1,480 +1,504 @@
-#Index
-
-**Classes**
-
-* [class: EnhancedEventEmitter](#EnhancedEventEmitter)
-  * [new EnhancedEventEmitter()](#new_EnhancedEventEmitter)
-  * [EnhancedEventEmitter.enhancedEmitterType](#EnhancedEventEmitter.enhancedEmitterType)
-  * [EnhancedEventEmitter.suspended](#EnhancedEventEmitter.suspended)
-  * [EnhancedEventEmitter#suspend(event)](#EnhancedEventEmitter#suspend)
-  * [EnhancedEventEmitter#unsuspend(event)](#EnhancedEventEmitter#unsuspend)
-  * [EnhancedEventEmitter#else(listener)](#EnhancedEventEmitter#else)
-  * [EnhancedEventEmitter#removeElseListener(listener)](#EnhancedEventEmitter#removeElseListener)
-  * [EnhancedEventEmitter#unelse(listener)](#EnhancedEventEmitter#unelse)
-  * [EnhancedEventEmitter#removeAllElseListeners()](#EnhancedEventEmitter#removeAllElseListeners)
-  * [EnhancedEventEmitter#elseError(event)](#EnhancedEventEmitter#elseError)
-  * [EnhancedEventEmitter#removeElseError(event)](#EnhancedEventEmitter#removeElseError)
-  * [EnhancedEventEmitter#unelseError(event)](#EnhancedEventEmitter#unelseError)
-  * [EnhancedEventEmitter#emit(event, [params])](#EnhancedEventEmitter#emit)
-  * [EnhancedEventEmitter#handleNoEmit(event, eventArguments)](#EnhancedEventEmitter#handleNoEmit)
-  * [EnhancedEventEmitter#invokeElseListener(eventArguments)](#EnhancedEventEmitter#invokeElseListener)
-  * [EnhancedEventEmitter#emitAsync(event, [params], callback)](#EnhancedEventEmitter#emitAsync)
-  * [EnhancedEventEmitter#onAsync(event, listener)](#EnhancedEventEmitter#onAsync)
-  * [EnhancedEventEmitter#addFilter([event], filter)](#EnhancedEventEmitter#addFilter)
-  * [EnhancedEventEmitter#addEventFilter(event, filter)](#EnhancedEventEmitter#addEventFilter)
-  * [EnhancedEventEmitter#addGlobalFilter(filter)](#EnhancedEventEmitter#addGlobalFilter)
-  * [EnhancedEventEmitter#filter([event], filter)](#EnhancedEventEmitter#filter)
-  * [EnhancedEventEmitter#runFilterChain(emitArguments)](#EnhancedEventEmitter#runFilterChain)
-  * [EnhancedEventEmitter#markEvent(event, [events])](#EnhancedEventEmitter#markEvent)
-
-**Namespaces**
-
-* [EventEmitterEnhancer](#EventEmitterEnhancer)
-  * [EventEmitterEnhancer.EnhancedEventEmitter](#EventEmitterEnhancer.EnhancedEventEmitter)
-  * [EventEmitterEnhancer.validateDoubleEnhancement(type)](#EventEmitterEnhancer.validateDoubleEnhancement)
-  * [EventEmitterEnhancer.enhance(EmitterType, modifyType)](#EventEmitterEnhancer.enhance)
-  * [EventEmitterEnhancer.extend(EmitterType)](#EventEmitterEnhancer.extend)
-  * [EventEmitterEnhancer.modify(EmitterType)](#EventEmitterEnhancer.modify)
-  * [EventEmitterEnhancer.modifyInstance(emitterInstance)](#EventEmitterEnhancer.modifyInstance)
-
-**Typedefs**
-
-* [callback: FilterCallback](#FilterCallback)
-* [callback: ElseCallback](#ElseCallback)
-* [callback: AsyncEmitCallback](#AsyncEmitCallback)
- 
+## Classes
+<dl>
+<dt><a href="#EnhancedEventEmitter">EnhancedEventEmitter</a></dt>
+<dd></dd>
+</dl>
+## Objects
+<dl>
+<dt><a href="#EventEmitterEnhancer">EventEmitterEnhancer</a> : <code>object</code></dt>
+<dd><p>Extends the Node.js events.EventEmitter with extra capabilities.</p>
+</dd>
+</dl>
+## Typedefs
+<dl>
+<dt><a href="#FilterCallback">FilterCallback</a> ⇒ <code>boolean</code></dt>
+<dd><p>&#39;filter&#39; callback.</p>
+</dd>
+<dt><a href="#ElseCallback">ElseCallback</a> : <code>function</code></dt>
+<dd><p>&#39;else&#39; callback.</p>
+</dd>
+<dt><a href="#AsyncEmitCallback">AsyncEmitCallback</a> : <code>function</code></dt>
+<dd><p>&#39;async-emit&#39; callback.</p>
+</dd>
+</dl>
 <a name="EnhancedEventEmitter"></a>
-#class: EnhancedEventEmitter
-**Members**
+## EnhancedEventEmitter
+**Kind**: global class  
+**Access:** public  
+**Author:** Sagie Gur-Ari  
 
-* [class: EnhancedEventEmitter](#EnhancedEventEmitter)
-  * [new EnhancedEventEmitter()](#new_EnhancedEventEmitter)
-  * [EnhancedEventEmitter.enhancedEmitterType](#EnhancedEventEmitter.enhancedEmitterType)
-  * [EnhancedEventEmitter.suspended](#EnhancedEventEmitter.suspended)
-  * [EnhancedEventEmitter#suspend(event)](#EnhancedEventEmitter#suspend)
-  * [EnhancedEventEmitter#unsuspend(event)](#EnhancedEventEmitter#unsuspend)
-  * [EnhancedEventEmitter#else(listener)](#EnhancedEventEmitter#else)
-  * [EnhancedEventEmitter#removeElseListener(listener)](#EnhancedEventEmitter#removeElseListener)
-  * [EnhancedEventEmitter#unelse(listener)](#EnhancedEventEmitter#unelse)
-  * [EnhancedEventEmitter#removeAllElseListeners()](#EnhancedEventEmitter#removeAllElseListeners)
-  * [EnhancedEventEmitter#elseError(event)](#EnhancedEventEmitter#elseError)
-  * [EnhancedEventEmitter#removeElseError(event)](#EnhancedEventEmitter#removeElseError)
-  * [EnhancedEventEmitter#unelseError(event)](#EnhancedEventEmitter#unelseError)
-  * [EnhancedEventEmitter#emit(event, [params])](#EnhancedEventEmitter#emit)
-  * [EnhancedEventEmitter#handleNoEmit(event, eventArguments)](#EnhancedEventEmitter#handleNoEmit)
-  * [EnhancedEventEmitter#invokeElseListener(eventArguments)](#EnhancedEventEmitter#invokeElseListener)
-  * [EnhancedEventEmitter#emitAsync(event, [params], callback)](#EnhancedEventEmitter#emitAsync)
-  * [EnhancedEventEmitter#onAsync(event, listener)](#EnhancedEventEmitter#onAsync)
-  * [EnhancedEventEmitter#addFilter([event], filter)](#EnhancedEventEmitter#addFilter)
-  * [EnhancedEventEmitter#addEventFilter(event, filter)](#EnhancedEventEmitter#addEventFilter)
-  * [EnhancedEventEmitter#addGlobalFilter(filter)](#EnhancedEventEmitter#addGlobalFilter)
-  * [EnhancedEventEmitter#filter([event], filter)](#EnhancedEventEmitter#filter)
-  * [EnhancedEventEmitter#runFilterChain(emitArguments)](#EnhancedEventEmitter#runFilterChain)
-  * [EnhancedEventEmitter#markEvent(event, [events])](#EnhancedEventEmitter#markEvent)
+* [EnhancedEventEmitter](#EnhancedEventEmitter)
+  * [new EnhancedEventEmitter()](#new_EnhancedEventEmitter_new)
+  * [.enhancedEmitterType](#EnhancedEventEmitter.enhancedEmitterType) : <code>boolean</code> ℗
+  * [.suspended](#EnhancedEventEmitter.suspended) : <code>boolean</code>
+  * [#suspend(event)](#EnhancedEventEmitter+suspend)
+  * [#unsuspend(event)](#EnhancedEventEmitter+unsuspend)
+  * [#else(listener)](#EnhancedEventEmitter+else)
+  * [#removeElseListener(listener)](#EnhancedEventEmitter+removeElseListener)
+  * [#unelse(listener)](#EnhancedEventEmitter+unelse)
+  * [#removeAllElseListeners()](#EnhancedEventEmitter+removeAllElseListeners)
+  * [#elseError(event)](#EnhancedEventEmitter+elseError)
+  * [#removeElseError(event)](#EnhancedEventEmitter+removeElseError)
+  * [#unelseError(event)](#EnhancedEventEmitter+unelseError)
+  * [#emit(event, [params])](#EnhancedEventEmitter+emit) ⇒ <code>boolean</code>
+  * [#handleNoEmit(event, eventArguments)](#EnhancedEventEmitter+handleNoEmit) ⇒ <code>boolean</code> ℗
+  * [#invokeElseListener(eventArguments)](#EnhancedEventEmitter+invokeElseListener) ℗
+  * [#emitAsync(event, [params], callback)](#EnhancedEventEmitter+emitAsync)
+  * [#onAsync(event, listener)](#EnhancedEventEmitter+onAsync) ⇒ <code>function</code>
+  * [#addFilter([event], filter)](#EnhancedEventEmitter+addFilter) ⇒ <code>function</code>
+  * [#addEventFilter(event, filter)](#EnhancedEventEmitter+addEventFilter) ⇒ <code>function</code>
+  * [#addGlobalFilter(filter)](#EnhancedEventEmitter+addGlobalFilter) ⇒ <code>function</code>
+  * [#filter([event], filter)](#EnhancedEventEmitter+filter) ⇒ <code>function</code>
+  * [#runFilterChain(emitArguments)](#EnhancedEventEmitter+runFilterChain) ⇒ <code>boolean</code> ℗
+  * [#markEvent(event, [events])](#EnhancedEventEmitter+markEvent) ⇒ <code>object</code> ℗
 
-<a name="new_EnhancedEventEmitter"></a>
-##new EnhancedEventEmitter()
+<a name="new_EnhancedEventEmitter_new"></a>
+### new EnhancedEventEmitter()
 This class holds all the extended capabilities added to any emitter.
 
-**Author**: Sagie Gur-Ari  
 <a name="EnhancedEventEmitter.enhancedEmitterType"></a>
-##EnhancedEventEmitter.enhancedEmitterType
+### EnhancedEventEmitter.enhancedEmitterType : <code>boolean</code> ℗
 Marker attribute to prevent multiple wrapping of emitter.
 
-**Type**: `boolean`  
-**Access**: private  
+**Access:** private  
 <a name="EnhancedEventEmitter.suspended"></a>
-##EnhancedEventEmitter.suspended
+### EnhancedEventEmitter.suspended : <code>boolean</code>
 If true, all events will not trigger any listener (or 'else' listener).<br>
 The emit function will simply do nothing.
 
-**Type**: `boolean`  
-<a name="EnhancedEventEmitter#suspend"></a>
-##EnhancedEventEmitter#suspend(event)
+**Access:** public  
+<a name="EnhancedEventEmitter+suspend"></a>
+### EnhancedEventEmitter#suspend(event)
 Suspends all emit calls for the provided event name (including 'else' listeners).<br>
 The emit function will simply do nothing for the specific event.
 
-**Params**
+**Access:** public  
 
-- event `string` - The event to suspend  
+| Param | Type | Description |
+| --- | --- | --- |
+| event | <code>string</code> | The event to suspend |
 
-<a name="EnhancedEventEmitter#unsuspend"></a>
-##EnhancedEventEmitter#unsuspend(event)
+<a name="EnhancedEventEmitter+unsuspend"></a>
+### EnhancedEventEmitter#unsuspend(event)
 Unsuspends the emit calls for the provided event name.
 
-**Params**
+**Access:** public  
 
-- event `string` - The event to unsuspend  
+| Param | Type | Description |
+| --- | --- | --- |
+| event | <code>string</code> | The event to unsuspend |
 
-<a name="EnhancedEventEmitter#else"></a>
-##EnhancedEventEmitter#else(listener)
+<a name="EnhancedEventEmitter+else"></a>
+### EnhancedEventEmitter#else(listener)
 Adds an 'else' listener which will be triggered by all events that do not have a
 listener currently for them (apart of the special 'error' event).
 
-**Params**
+**Access:** public  
 
-- listener <code>[ElseCallback](#ElseCallback)</code> - The listener that will catch all 'else' events  
+| Param | Type | Description |
+| --- | --- | --- |
+| listener | <code>[ElseCallback](#ElseCallback)</code> | The listener that will catch all 'else' events |
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
-emitter.else(function onNonHandledEvent(event, arg1, arg2) {
- //logic here....
+ var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+ var emitter = new EnhancedEventEmitter();
+ emitter.else(function onNonHandledEvent(event, arg1, arg2) {
+  //logic here....
 
- //to remove 'else' listeners, simply use the unelse function
- emitter.unelse(this);
-});
+  //to remove 'else' listeners, simply use the unelse function
+  emitter.unelse(this);
+ });
 
-emitter.emit('test', 1, 2);
-```
-
-<a name="EnhancedEventEmitter#removeElseListener"></a>
-##EnhancedEventEmitter#removeElseListener(listener)
+ emitter.emit('test', 1, 2);
+ ```
+<a name="EnhancedEventEmitter+removeElseListener"></a>
+### EnhancedEventEmitter#removeElseListener(listener)
 Removes the provided 'else' listener.<br>
 Same as 'unelse' function.
 
-**Params**
+**Access:** public  
 
-- listener <code>[ElseCallback](#ElseCallback)</code> - The listener to remove  
+| Param | Type | Description |
+| --- | --- | --- |
+| listener | <code>[ElseCallback](#ElseCallback)</code> | The listener to remove |
 
-<a name="EnhancedEventEmitter#unelse"></a>
-##EnhancedEventEmitter#unelse(listener)
+<a name="EnhancedEventEmitter+unelse"></a>
+### EnhancedEventEmitter#unelse(listener)
 See 'removeElseListener' documentation.
 
-**Params**
+**Access:** public  
 
-- listener <code>[ElseCallback](#ElseCallback)</code> - The listener to remove  
+| Param | Type | Description |
+| --- | --- | --- |
+| listener | <code>[ElseCallback](#ElseCallback)</code> | The listener to remove |
 
-<a name="EnhancedEventEmitter#removeAllElseListeners"></a>
-##EnhancedEventEmitter#removeAllElseListeners()
+<a name="EnhancedEventEmitter+removeAllElseListeners"></a>
+### EnhancedEventEmitter#removeAllElseListeners()
 Removes all 'else' listeners.
 
-<a name="EnhancedEventEmitter#elseError"></a>
-##EnhancedEventEmitter#elseError(event)
+**Access:** public  
+<a name="EnhancedEventEmitter+elseError"></a>
+### EnhancedEventEmitter#elseError(event)
 In case an event with the provided name is emitted but no listener is attached to it,
 an error event will emitted by this emitter instance instead.
 
-**Params**
+**Access:** public  
 
-- event `string` - The event name  
+| Param | Type | Description |
+| --- | --- | --- |
+| event | <code>string</code> | The event name |
 
-<a name="EnhancedEventEmitter#removeElseError"></a>
-##EnhancedEventEmitter#removeElseError(event)
+<a name="EnhancedEventEmitter+removeElseError"></a>
+### EnhancedEventEmitter#removeElseError(event)
 Removes the else-error handler for the provided event.<br>
 Same as 'unelseError' function.
 
-**Params**
+**Access:** public  
 
-- event `string` - The event name  
+| Param | Type | Description |
+| --- | --- | --- |
+| event | <code>string</code> | The event name |
 
-<a name="EnhancedEventEmitter#unelseError"></a>
-##EnhancedEventEmitter#unelseError(event)
+<a name="EnhancedEventEmitter+unelseError"></a>
+### EnhancedEventEmitter#unelseError(event)
 See 'removeElseError' documentation.
 
-**Params**
+**Access:** public  
 
-- event `string` - The event name  
+| Param | Type | Description |
+| --- | --- | --- |
+| event | <code>string</code> | The event name |
 
-<a name="EnhancedEventEmitter#emit"></a>
-##EnhancedEventEmitter#emit(event, [params])
+<a name="EnhancedEventEmitter+emit"></a>
+### EnhancedEventEmitter#emit(event, [params]) ⇒ <code>boolean</code>
 See Node.js events.EventEmitter documentation.
 
-**Params**
+**Returns**: <code>boolean</code> - True if a listener or an 'else' listener handled the event  
+**Access:** public  
 
-- event `string` - The event name  
-- \[params\] `*` - The event parameters  
+| Param | Type | Description |
+| --- | --- | --- |
+| event | <code>string</code> | The event name |
+| [params] | <code>\*</code> | The event parameters |
 
-**Returns**: `boolean` - True if a listener or an 'else' listener handled the event  
-<a name="EnhancedEventEmitter#handleNoEmit"></a>
-##EnhancedEventEmitter#handleNoEmit(event, eventArguments)
+<a name="EnhancedEventEmitter+handleNoEmit"></a>
+### EnhancedEventEmitter#handleNoEmit(event, eventArguments) ⇒ <code>boolean</code> ℗
 Handles events which had no listeners.
 
-**Params**
+**Returns**: <code>boolean</code> - True if a listener or an 'else' listener handled the event  
+**Access:** private  
 
-- event `string` - The event name  
-- eventArguments `array` - All the arguments to send the else callbacks  
+| Param | Type | Description |
+| --- | --- | --- |
+| event | <code>string</code> | The event name |
+| eventArguments | <code>array</code> | All the arguments to send the else callbacks |
 
-**Returns**: `boolean` - True if a listener or an 'else' listener handled the event  
-**Access**: private  
-<a name="EnhancedEventEmitter#invokeElseListener"></a>
-##EnhancedEventEmitter#invokeElseListener(eventArguments)
+<a name="EnhancedEventEmitter+invokeElseListener"></a>
+### EnhancedEventEmitter#invokeElseListener(eventArguments) ℗
 Invokes all of the 'else' listeners.
 
-**Params**
+**Access:** private  
 
-- eventArguments `array` - All the arguments to send the else callbacks  
+| Param | Type | Description |
+| --- | --- | --- |
+| eventArguments | <code>array</code> | All the arguments to send the else callbacks |
 
-**Access**: private  
-<a name="EnhancedEventEmitter#emitAsync"></a>
-##EnhancedEventEmitter#emitAsync(event, [params], callback)
+<a name="EnhancedEventEmitter+emitAsync"></a>
+### EnhancedEventEmitter#emitAsync(event, [params], callback)
 Invokes the emit after a timeout to enable calling flow to continue and not
 block due to event listeners.
 
-**Params**
+**Access:** public  
 
-- event `string` - The event name  
-- \[params\] `*` - The event parameters  
-- callback <code>[AsyncEmitCallback](#AsyncEmitCallback)</code> - The async callback  
+| Param | Type | Description |
+| --- | --- | --- |
+| event | <code>string</code> | The event name |
+| [params] | <code>\*</code> | The event parameters |
+| callback | <code>[AsyncEmitCallback](#AsyncEmitCallback)</code> | The async callback |
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
-emitter.on('test', function onTestEvent(num1, num2) {
-   //event logic here
-});
+ var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+ var emitter = new EnhancedEventEmitter();
+ emitter.on('test', function onTestEvent(num1, num2) {
+    //event logic here
+ });
 
-emitter.emitAsync('test', 1, 2, function onEmitDone(event, num1, num2, emitted) {
-   //emit callback logic
-});
-```
-
-<a name="EnhancedEventEmitter#onAsync"></a>
-##EnhancedEventEmitter#onAsync(event, listener)
+ emitter.emitAsync('test', 1, 2, function onEmitDone(event, num1, num2, emitted) {
+    //emit callback logic
+ });
+ ```
+<a name="EnhancedEventEmitter+onAsync"></a>
+### EnhancedEventEmitter#onAsync(event, listener) ⇒ <code>function</code>
 Adds a listener that will be triggered after a timeout during an emit.<br>
 This ensures that the provided listener is invoked after all other listeners and that
 it will not block the emit caller flow.<br>
 To remove the listener, the returned function must be called instead of doing emitter.removeListener(...)
 
-**Params**
+**Returns**: <code>function</code> - The remove listener function  
+**Access:** public  
 
-- event `string` - The event name  
-- listener `function` - The listener function  
+| Param | Type | Description |
+| --- | --- | --- |
+| event | <code>string</code> | The event name |
+| listener | <code>function</code> | The listener function |
 
-**Returns**: `function` - The remove listener function  
-<a name="EnhancedEventEmitter#addFilter"></a>
-##EnhancedEventEmitter#addFilter([event], filter)
+<a name="EnhancedEventEmitter+addFilter"></a>
+### EnhancedEventEmitter#addFilter([event], filter) ⇒ <code>function</code>
 Adds a filter that will be triggered before every emit for the provided event type (if
 no event is provided, than the filter is invoked for all events).<br>
 The filter enables to prevent events from reaching the listeners in case some criteria is met.
 
-**Params**
+**Returns**: <code>function</code> - The remove filter function  
+**Access:** public  
 
-- \[event\] `string` - The event name. If not provided, the filter is relevant for all events.  
-- filter <code>[FilterCallback](#FilterCallback)</code> - The filter function  
+| Param | Type | Description |
+| --- | --- | --- |
+| [event] | <code>string</code> | The event name. If not provided, the filter is relevant for all events. |
+| filter | <code>[FilterCallback](#FilterCallback)</code> | The filter function |
 
-**Returns**: `function` - The remove filter function  
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+ var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+ var emitter = new EnhancedEventEmitter();
 
-//add filters for test event only
-var removeTestEventFilter = emitter.filter('test', function (event, arg1, arg2) {
-   if (arg1 && (arg1 > 3)) {
-       return true;    //continue with emit
-   }
+ //add filters for test event only
+ var removeTestEventFilter = emitter.filter('test', function (event, arg1, arg2) {
+    if (arg1 && (arg1 > 3)) {
+        return true;    //continue with emit
+    }
 
-   return false;   //prevent emit
-});
-emitter.filter('test', function (event, arg1, arg2) {
-   if (arg2 && (arg2 < 20)) {
-       return true;    //continue with emit
-   }
+    return false;   //prevent emit
+ });
+ emitter.filter('test', function (event, arg1, arg2) {
+    if (arg2 && (arg2 < 20)) {
+        return true;    //continue with emit
+    }
 
-   return false;   //prevent emit
-});
+    return false;   //prevent emit
+ });
 
-//add global filter for all events
-emitter.filter(function (event, arg1, arg2) {
-   if (arg1 && (arg1 > 5)) {
-       return true;    //continue with emit
-   }
+ //add global filter for all events
+ emitter.filter(function (event, arg1, arg2) {
+    if (arg1 && (arg1 > 5)) {
+        return true;    //continue with emit
+    }
 
-   return false;   //prevent emit
-});
-var removeGlobalArg2Filter = emitter.filter(function (event, arg1, arg2) {
-   if (arg2 && (arg2 < 18)) {
-       return true;    //continue with emit
-   }
+    return false;   //prevent emit
+ });
+ var removeGlobalArg2Filter = emitter.filter(function (event, arg1, arg2) {
+    if (arg2 && (arg2 < 18)) {
+        return true;    //continue with emit
+    }
 
-   return false;   //prevent emit
-});
+    return false;   //prevent emit
+ });
 
-emitter.on('test', function onTestEvent(arg1, arg2) {
-   //event logic here...
-});
+ emitter.on('test', function onTestEvent(arg1, arg2) {
+    //event logic here...
+ });
 
-emitter.emit('test', 10, 15);
+ emitter.emit('test', 10, 15);
 
-//remove some filters
-removeTestEventFilter();
-removeGlobalArg2Filter();
-```
-
-<a name="EnhancedEventEmitter#addEventFilter"></a>
-##EnhancedEventEmitter#addEventFilter(event, filter)
+ //remove some filters
+ removeTestEventFilter();
+ removeGlobalArg2Filter();
+ ```
+<a name="EnhancedEventEmitter+addEventFilter"></a>
+### EnhancedEventEmitter#addEventFilter(event, filter) ⇒ <code>function</code>
 Adds an event filter (See addFilter)
 
-**Params**
+**Returns**: <code>function</code> - The remove filter function  
+**Access:** public  
 
-- event `string` - The event name.  
-- filter <code>[FilterCallback](#FilterCallback)</code> - The filter function  
+| Param | Type | Description |
+| --- | --- | --- |
+| event | <code>string</code> | The event name. |
+| filter | <code>[FilterCallback](#FilterCallback)</code> | The filter function |
 
-**Returns**: `function` - The remove filter function  
-<a name="EnhancedEventEmitter#addGlobalFilter"></a>
-##EnhancedEventEmitter#addGlobalFilter(filter)
+<a name="EnhancedEventEmitter+addGlobalFilter"></a>
+### EnhancedEventEmitter#addGlobalFilter(filter) ⇒ <code>function</code>
 Adds a global filter (See addFilter)
 
-**Params**
+**Returns**: <code>function</code> - The remove filter function  
+**Access:** public  
 
-- filter <code>[FilterCallback](#FilterCallback)</code> - The filter function  
+| Param | Type | Description |
+| --- | --- | --- |
+| filter | <code>[FilterCallback](#FilterCallback)</code> | The filter function |
 
-**Returns**: `function` - The remove filter function  
-<a name="EnhancedEventEmitter#filter"></a>
-##EnhancedEventEmitter#filter([event], filter)
+<a name="EnhancedEventEmitter+filter"></a>
+### EnhancedEventEmitter#filter([event], filter) ⇒ <code>function</code>
 See 'addFilter' documentation.
 
-**Params**
+**Returns**: <code>function</code> - The remove filter function  
+**Access:** public  
 
-- \[event\] `string` - The event name. If not provided, the filter is relevant for all events.  
-- filter <code>[FilterCallback](#FilterCallback)</code> - The filter function  
+| Param | Type | Description |
+| --- | --- | --- |
+| [event] | <code>string</code> | The event name. If not provided, the filter is relevant for all events. |
+| filter | <code>[FilterCallback](#FilterCallback)</code> | The filter function |
 
-**Returns**: `function` - The remove filter function  
-<a name="EnhancedEventEmitter#runFilterChain"></a>
-##EnhancedEventEmitter#runFilterChain(emitArguments)
+<a name="EnhancedEventEmitter+runFilterChain"></a>
+### EnhancedEventEmitter#runFilterChain(emitArguments) ⇒ <code>boolean</code> ℗
 Returns true if to allow to emit the event based on the currently setup filters.
 
-**Params**
+**Returns**: <code>boolean</code> - True to continue with the emit, false to prevent it  
+**Access:** private  
 
-- emitArguments `array` - All emit function arguments array  
+| Param | Type | Description |
+| --- | --- | --- |
+| emitArguments | <code>array</code> | All emit function arguments array |
 
-**Returns**: `boolean` - True to continue with the emit, false to prevent it  
-**Access**: private  
-<a name="EnhancedEventEmitter#markEvent"></a>
-##EnhancedEventEmitter#markEvent(event, [events])
+<a name="EnhancedEventEmitter+markEvent"></a>
+### EnhancedEventEmitter#markEvent(event, [events]) ⇒ <code>object</code> ℗
 Marks the given event in the events map.
 
-**Params**
+**Returns**: <code>object</code> - The updated events map  
+**Access:** private  
 
-- event `string` - The event name to mark  
-- \[events\] `object` - The events map  
+| Param | Type | Description |
+| --- | --- | --- |
+| event | <code>string</code> | The event name to mark |
+| [events] | <code>object</code> | The events map |
 
-**Returns**: `object` - The updated events map  
-**Access**: private  
 <a name="EventEmitterEnhancer"></a>
-#EventEmitterEnhancer
+## EventEmitterEnhancer : <code>object</code>
 Extends the Node.js events.EventEmitter with extra capabilities.
 
-**Author**: Sagie Gur-Ari  
-**Members**
+**Kind**: global namespace  
+**Author:** Sagie Gur-Ari  
 
-* [EventEmitterEnhancer](#EventEmitterEnhancer)
-  * [EventEmitterEnhancer.EnhancedEventEmitter](#EventEmitterEnhancer.EnhancedEventEmitter)
-  * [EventEmitterEnhancer.validateDoubleEnhancement(type)](#EventEmitterEnhancer.validateDoubleEnhancement)
-  * [EventEmitterEnhancer.enhance(EmitterType, modifyType)](#EventEmitterEnhancer.enhance)
-  * [EventEmitterEnhancer.extend(EmitterType)](#EventEmitterEnhancer.extend)
-  * [EventEmitterEnhancer.modify(EmitterType)](#EventEmitterEnhancer.modify)
-  * [EventEmitterEnhancer.modifyInstance(emitterInstance)](#EventEmitterEnhancer.modifyInstance)
+* [EventEmitterEnhancer](#EventEmitterEnhancer) : <code>object</code>
+  * [.EnhancedEventEmitter](#EventEmitterEnhancer.EnhancedEventEmitter) : <code>EventEmitter</code>
+  * _static_
+    * [.validateDoubleEnhancement(type)](#EventEmitterEnhancer.validateDoubleEnhancement) ℗
+    * [.enhance(EmitterType, modifyType)](#EventEmitterEnhancer.enhance) ⇒ <code>object</code> ℗
+    * [.extend(EmitterType)](#EventEmitterEnhancer.extend) ⇒ <code>object</code>
+    * [.modify(EmitterType)](#EventEmitterEnhancer.modify)
+    * [.modifyInstance(emitterInstance)](#EventEmitterEnhancer.modifyInstance)
 
 <a name="EventEmitterEnhancer.EnhancedEventEmitter"></a>
-##EventEmitterEnhancer.EnhancedEventEmitter
+### EventEmitterEnhancer.EnhancedEventEmitter : <code>EventEmitter</code>
 The node.js event emitter prototype extended with the extra capabilities.
 
-**Type**: `EventEmitter`  
+**Access:** public  
 <a name="EventEmitterEnhancer.validateDoubleEnhancement"></a>
-##EventEmitterEnhancer.validateDoubleEnhancement(type)
+### EventEmitterEnhancer.validateDoubleEnhancement(type) ℗
 Throws the already enhanced error in case provided input
 has already been enhanced.
 
-**Params**
+**Kind**: static method of <code>[EventEmitterEnhancer](#EventEmitterEnhancer)</code>  
+**Access:** private  
 
-- type `object` - The type to validate  
+| Param | Type | Description |
+| --- | --- | --- |
+| type | <code>object</code> | The type to validate |
 
-**Access**: private  
 <a name="EventEmitterEnhancer.enhance"></a>
-##EventEmitterEnhancer.enhance(EmitterType, modifyType)
+### EventEmitterEnhancer.enhance(EmitterType, modifyType) ⇒ <code>object</code> ℗
 Modified/extends the provided object prototype with the extended emitter capabilities.<br>
 The provided object type must have an Node.js events.EventEmitter compatible interface.
 
-**Params**
+**Kind**: static method of <code>[EventEmitterEnhancer](#EventEmitterEnhancer)</code>  
+**Returns**: <code>object</code> - The modified object type  
+**Access:** private  
 
-- EmitterType `object` - The object type  
-- modifyType `number` - 0 to extend the prototype of the provided object, 1 to modify the prototype of the provided object, 2 to modify the provided instance  
+| Param | Type | Description |
+| --- | --- | --- |
+| EmitterType | <code>object</code> | The object type |
+| modifyType | <code>number</code> | 0 to extend the prototype of the provided object, 1 to modify the prototype of the provided object, 2 to modify the provided instance |
 
-**Returns**: `object` - The modified object type  
-**Access**: private  
 <a name="EventEmitterEnhancer.extend"></a>
-##EventEmitterEnhancer.extend(EmitterType)
+### EventEmitterEnhancer.extend(EmitterType) ⇒ <code>object</code>
 Extends the provided object prototype with the extended emitter capabilities.<br>
 The provided object type must have an Node.js events.EventEmitter compatible interface.
 
-**Params**
+**Kind**: static method of <code>[EventEmitterEnhancer](#EventEmitterEnhancer)</code>  
+**Returns**: <code>object</code> - The modified object type  
+**Access:** public  
 
-- EmitterType `object` - The object type  
+| Param | Type | Description |
+| --- | --- | --- |
+| EmitterType | <code>object</code> | The object type |
 
-**Returns**: `object` - The modified object type  
 **Example**  
 ```js
-//extend events.EventEmitter class (or any class that has the same interface)
-//now you can create instances of the new EnhancedEventEmitter type while events.EventEmitter is not modified/impacted in any way
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);   //extend the event emitter class (can be Node.js of some custom event emitter). original base class is not affected.
-var emitter = new EnhancedEventEmitter();   //create a new instance using the new extended class type.
-```
-
+     //extend events.EventEmitter class (or any class that has the same interface)
+     //now you can create instances of the new EnhancedEventEmitter type while events.EventEmitter is not modified/impacted in any way
+     var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);   //extend the event emitter class (can be Node.js of some custom event emitter). original base class is not affected.
+     var emitter = new EnhancedEventEmitter();   //create a new instance using the new extended class type.
+     ```
 <a name="EventEmitterEnhancer.modify"></a>
-##EventEmitterEnhancer.modify(EmitterType)
+### EventEmitterEnhancer.modify(EmitterType)
 Modified the provided object prototype with the extended emitter capabilities.<br>
 The provided object type must have an Node.js events.EventEmitter compatible interface.
 
-**Params**
+**Kind**: static method of <code>[EventEmitterEnhancer](#EventEmitterEnhancer)</code>  
+**Access:** public  
 
-- EmitterType `object` - The object type  
+| Param | Type | Description |
+| --- | --- | --- |
+| EmitterType | <code>object</code> | The object type |
 
 **Example**  
 ```js
-//modify the proto of an events.EventEmitter class (or any class that has the same interface)
-//now all existing and future instances of the original class are modified to include the new extended capabilities.
-EventEmitterEnhancer.modify(EventEmitter); //modify the event emitter class prototype (can be Node.js of some custom event emitter). existing instances are impacted.
-var emitter = new EventEmitter();   //create an instance of the original class and automatically get the new extended capabilities.
-```
-
+     //modify the proto of an events.EventEmitter class (or any class that has the same interface)
+     //now all existing and future instances of the original class are modified to include the new extended capabilities.
+     EventEmitterEnhancer.modify(EventEmitter); //modify the event emitter class prototype (can be Node.js of some custom event emitter). existing instances are impacted.
+     var emitter = new EventEmitter();   //create an instance of the original class and automatically get the new extended capabilities.
+     ```
 <a name="EventEmitterEnhancer.modifyInstance"></a>
-##EventEmitterEnhancer.modifyInstance(emitterInstance)
+### EventEmitterEnhancer.modifyInstance(emitterInstance)
 Modified the specific object instance with the extended emitter capabilities.<br>
 The provided object type must have an Node.js events.EventEmitter compatible interface.
 
-**Params**
+**Kind**: static method of <code>[EventEmitterEnhancer](#EventEmitterEnhancer)</code>  
+**Access:** public  
 
-- emitterInstance `object` - The emitter instance  
+| Param | Type | Description |
+| --- | --- | --- |
+| emitterInstance | <code>object</code> | The emitter instance |
 
 **Example**  
 ```js
-//modify specific instance to include the extended capabilities (other existing/future instances of that class type are not modified/impacted in any way).
-var emitter = new EventEmitter();   //create an instance of an event emitter (can be Node.js of some custom event emitter)
-EventEmitterEnhancer.modifyInstance(emitter);   //modify the specific instance and add the extended capabilities. the original prototype is not affected.
-```
-
+     //modify specific instance to include the extended capabilities (other existing/future instances of that class type are not modified/impacted in any way).
+     var emitter = new EventEmitter();   //create an instance of an event emitter (can be Node.js of some custom event emitter)
+     EventEmitterEnhancer.modifyInstance(emitter);   //modify the specific instance and add the extended capabilities. the original prototype is not affected.
+     ```
 <a name="FilterCallback"></a>
-#callback: FilterCallback
+## FilterCallback ⇒ <code>boolean</code>
 'filter' callback.
 
-**Params**
+**Kind**: global typedef  
+**Returns**: <code>boolean</code> - True to continue with the emit, false to prevent emit  
 
-- type `string` - The event type  
-- \[params\] `*` - The event parameters  
+| Param | Type | Description |
+| --- | --- | --- |
+| type | <code>string</code> | The event type |
+| [params] | <code>\*</code> | The event parameters |
 
-**Type**: `function`  
-**Returns**: `boolean` - True to continue with the emit, false to prevent emit  
 <a name="ElseCallback"></a>
-#callback: ElseCallback
+## ElseCallback : <code>function</code>
 'else' callback.
 
-**Params**
+**Kind**: global typedef  
 
-- type `string` - The event type  
-- \[params\] `*` - The event parameters  
+| Param | Type | Description |
+| --- | --- | --- |
+| type | <code>string</code> | The event type |
+| [params] | <code>\*</code> | The event parameters |
 
-**Type**: `function`  
 <a name="AsyncEmitCallback"></a>
-#callback: AsyncEmitCallback
+## AsyncEmitCallback : <code>function</code>
 'async-emit' callback.
 
-**Params**
+**Kind**: global typedef  
 
-- type `string` - The event type  
-- \[params\] `*` - The event parameters  
-- emitted `boolean` - True if emitted, else false  
+| Param | Type | Description |
+| --- | --- | --- |
+| type | <code>string</code> | The event type |
+| [params] | <code>\*</code> | The event parameters |
+| emitted | <code>boolean</code> | True if emitted, else false |
 
-**Type**: `function`  
