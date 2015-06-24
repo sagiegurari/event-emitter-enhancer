@@ -425,11 +425,11 @@ The provided object type must have an Node.js events.EventEmitter compatible int
 
 **Example**  
 ```js
-     //extend events.EventEmitter class (or any class that has the same interface)
-     //now you can create instances of the new EnhancedEventEmitter type while events.EventEmitter is not modified/impacted in any way
-     var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);   //extend the event emitter class (can be Node.js of some custom event emitter). original base class is not affected.
-     var emitter = new EnhancedEventEmitter();   //create a new instance using the new extended class type.
-     ```
+ //extend events.EventEmitter class (or any class that has the same interface)
+ //now you can create instances of the new EnhancedEventEmitter type while events.EventEmitter is not modified/impacted in any way
+ var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);   //extend the event emitter class (can be Node.js of some custom event emitter). original base class is not affected.
+ var emitter = new EnhancedEventEmitter();   //create a new instance using the new extended class type.
+ ```
 <a name="EventEmitterEnhancer.modify"></a>
 ### EventEmitterEnhancer.modify(EmitterType)
 Modified the provided object prototype with the extended emitter capabilities.<br>
@@ -444,11 +444,11 @@ The provided object type must have an Node.js events.EventEmitter compatible int
 
 **Example**  
 ```js
-     //modify the proto of an events.EventEmitter class (or any class that has the same interface)
-     //now all existing and future instances of the original class are modified to include the new extended capabilities.
-     EventEmitterEnhancer.modify(EventEmitter); //modify the event emitter class prototype (can be Node.js of some custom event emitter). existing instances are impacted.
-     var emitter = new EventEmitter();   //create an instance of the original class and automatically get the new extended capabilities.
-     ```
+ //modify the proto of an events.EventEmitter class (or any class that has the same interface)
+ //now all existing and future instances of the original class are modified to include the new extended capabilities.
+ EventEmitterEnhancer.modify(EventEmitter); //modify the event emitter class prototype (can be Node.js of some custom event emitter). existing instances are impacted.
+ var emitter = new EventEmitter();   //create an instance of the original class and automatically get the new extended capabilities.
+ ```
 <a name="EventEmitterEnhancer.modifyInstance"></a>
 ### EventEmitterEnhancer.modifyInstance(emitterInstance)
 Modified the specific object instance with the extended emitter capabilities.<br>
@@ -463,10 +463,10 @@ The provided object type must have an Node.js events.EventEmitter compatible int
 
 **Example**  
 ```js
-     //modify specific instance to include the extended capabilities (other existing/future instances of that class type are not modified/impacted in any way).
-     var emitter = new EventEmitter();   //create an instance of an event emitter (can be Node.js of some custom event emitter)
-     EventEmitterEnhancer.modifyInstance(emitter);   //modify the specific instance and add the extended capabilities. the original prototype is not affected.
-     ```
+ //modify specific instance to include the extended capabilities (other existing/future instances of that class type are not modified/impacted in any way).
+ var emitter = new EventEmitter();   //create an instance of an event emitter (can be Node.js of some custom event emitter)
+ EventEmitterEnhancer.modifyInstance(emitter);   //modify the specific instance and add the extended capabilities. the original prototype is not affected.
+ ```
 <a name="FilterCallback"></a>
 ## FilterCallback ⇒ <code>boolean</code>
 'filter' callback.
