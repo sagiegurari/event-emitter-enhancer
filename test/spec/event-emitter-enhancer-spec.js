@@ -72,7 +72,7 @@ describe('event-emitter-enhancer Tests', function () {
                 EventEmitterEnhancer.extend(EnhancedEventEmitter);
                 assert.fail();
             } catch (error) {
-                assert.isObject(error);
+                assert.isDefined(error);
             }
         });
 
@@ -116,7 +116,7 @@ describe('event-emitter-enhancer Tests', function () {
                 EventEmitterEnhancer.modify(CustomMultiEventEmitter);
                 assert.fail();
             } catch (error) {
-                assert.isObject(error);
+                assert.isDefined(error);
             }
         });
 
@@ -148,7 +148,7 @@ describe('event-emitter-enhancer Tests', function () {
                 EventEmitterEnhancer.modifyInstance(emitter);
                 assert.fail();
             } catch (error) {
-                assert.isObject(error);
+                assert.isDefined(error);
             }
         });
     });
@@ -409,7 +409,7 @@ describe('event-emitter-enhancer Tests', function () {
                 assert.fail();
             });
             emitter.on('error', function (error) {
-                assert.isObject(error);
+                assert.isDefined(error);
 
                 done();
             });
@@ -425,7 +425,7 @@ describe('event-emitter-enhancer Tests', function () {
                 removeValidation(removed, done);
             });
             emitter.on('error', function (error) {
-                assert.isObject(error);
+                assert.isDefined(error);
 
                 emitter.removeElseError('test');
                 removed = true;
@@ -444,7 +444,7 @@ describe('event-emitter-enhancer Tests', function () {
                 removeValidation(removed, done);
             });
             emitter.on('error', function (error) {
-                assert.isObject(error);
+                assert.isDefined(error);
 
                 emitter.unelseError('test');
                 removed = true;
@@ -500,7 +500,7 @@ describe('event-emitter-enhancer Tests', function () {
                 emitter.emitAsync('test', 1, 2);
                 assert.fail();
             } catch (error) {
-                assert.isObject(error);
+                assert.isDefined(error);
             }
         });
 
@@ -510,7 +510,7 @@ describe('event-emitter-enhancer Tests', function () {
                 emitter.emitAsync('test');
                 assert.fail();
             } catch (error) {
-                assert.isObject(error);
+                assert.isDefined(error);
             }
         });
     });
@@ -550,7 +550,7 @@ describe('event-emitter-enhancer Tests', function () {
                 emitter.onAsync('test');
                 assert.fail();
             } catch (error) {
-                assert.isObject(error);
+                assert.isDefined(error);
             }
         });
 
@@ -561,7 +561,7 @@ describe('event-emitter-enhancer Tests', function () {
                 emitter.onAsync('test', notFunction);
                 assert.fail();
             } catch (error) {
-                assert.isObject(error);
+                assert.isDefined(error);
             }
         });
 
@@ -586,7 +586,7 @@ describe('event-emitter-enhancer Tests', function () {
                 emitter.filter();
                 assert.fail();
             } catch (error) {
-                assert.isObject(error);
+                assert.isDefined(error);
             }
         });
 
@@ -596,7 +596,7 @@ describe('event-emitter-enhancer Tests', function () {
                 emitter.filter('test');
                 assert.fail();
             } catch (error) {
-                assert.isObject(error);
+                assert.isDefined(error);
             }
         });
 
@@ -606,7 +606,7 @@ describe('event-emitter-enhancer Tests', function () {
                 emitter.filter('test', 'test', emptyFunction);
                 assert.fail();
             } catch (error) {
-                assert.isObject(error);
+                assert.isDefined(error);
             }
         });
 
