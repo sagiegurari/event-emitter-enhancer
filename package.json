@@ -1,6 +1,6 @@
 {
   "name": "event-emitter-enhancer",
-  "version": "0.0.34",
+  "version": "0.0.35",
   "description": "Enhances the Node.js EventEmitter with extra capabilities.",
   "main": "index.js",
   "directories": {
@@ -31,7 +31,7 @@
     "grunt-contrib-jshint": "*",
     "grunt-coveralls": "*",
     "grunt-eslint": "*",
-    "grunt-jscs": "^1.6.0",
+    "grunt-jscs": "*",
     "grunt-jsdoc-to-markdown": "*",
     "grunt-jslint": "*",
     "grunt-jsonlint": "*",
