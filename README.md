@@ -188,7 +188,7 @@ See full docs at: [API Docs](docs/api.md)
 
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
-| 2015-08-02  | v0.0.36  | Maintenance |
+| 2015-08-02  | v0.0.37  | Maintenance |
 | 2015-04-22  | v0.0.31  | Prevent from multiple enhance of same prototype/instance |
 | 2015-04-05  | v0.0.30  | Maintenance |
 | 2015-02-09  | v0.0.19  | Doc fix. |
