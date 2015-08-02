@@ -2,6 +2,8 @@
 <dl>
 <dt><a href="#EnhancedEventEmitter">EnhancedEventEmitter</a></dt>
 <dd></dd>
+<dt><a href="#EventEmitterEnhancer">EventEmitterEnhancer</a></dt>
+<dd></dd>
 </dl>
 ## Objects
 <dl>
@@ -364,20 +366,23 @@ Marks the given event in the events map.
 | [events] | <code>object</code> | The events map |
 
 <a name="EventEmitterEnhancer"></a>
-## EventEmitterEnhancer : <code>object</code>
-Extends the Node.js events.EventEmitter with extra capabilities.
-
-**Kind**: global namespace  
+## EventEmitterEnhancer
+**Kind**: global class  
+**Access:** public  
 **Author:** Sagie Gur-Ari  
 
-* [EventEmitterEnhancer](#EventEmitterEnhancer) : <code>object</code>
+* [EventEmitterEnhancer](#EventEmitterEnhancer)
+  * [new EventEmitterEnhancer()](#new_EventEmitterEnhancer_new)
   * [.EnhancedEventEmitter](#EventEmitterEnhancer.EnhancedEventEmitter) : <code>EventEmitter</code>
-  * _static_
-    * [.validateDoubleEnhancement(type)](#EventEmitterEnhancer.validateDoubleEnhancement) ℗
-    * [.enhance(EmitterType, modifyType)](#EventEmitterEnhancer.enhance) ⇒ <code>object</code> ℗
-    * [.extend(EmitterType)](#EventEmitterEnhancer.extend) ⇒ <code>object</code>
-    * [.modify(EmitterType)](#EventEmitterEnhancer.modify)
-    * [.modifyInstance(emitterInstance)](#EventEmitterEnhancer.modifyInstance)
+  * [.validateDoubleEnhancement(type)](#EventEmitterEnhancer.validateDoubleEnhancement) ℗
+  * [.enhance(EmitterType, modifyType)](#EventEmitterEnhancer.enhance) ⇒ <code>object</code> ℗
+  * [.extend(EmitterType)](#EventEmitterEnhancer.extend) ⇒ <code>object</code>
+  * [.modify(EmitterType)](#EventEmitterEnhancer.modify)
+  * [.modifyInstance(emitterInstance)](#EventEmitterEnhancer.modifyInstance)
+
+<a name="new_EventEmitterEnhancer_new"></a>
+### new EventEmitterEnhancer()
+This class enables to enhance event emitter prototypes and instances with extra capabilities.
 
 <a name="EventEmitterEnhancer.EnhancedEventEmitter"></a>
 ### EventEmitterEnhancer.EnhancedEventEmitter : <code>EventEmitter</code>
@@ -389,7 +394,6 @@ The node.js event emitter prototype extended with the extra capabilities.
 Throws the already enhanced error in case provided input
 has already been enhanced.
 
-**Kind**: static method of <code>[EventEmitterEnhancer](#EventEmitterEnhancer)</code>  
 **Access:** private  
 
 | Param | Type | Description |
@@ -401,7 +405,6 @@ has already been enhanced.
 Modified/extends the provided object prototype with the extended emitter capabilities.<br>
 The provided object type must have an Node.js events.EventEmitter compatible interface.
 
-**Kind**: static method of <code>[EventEmitterEnhancer](#EventEmitterEnhancer)</code>  
 **Returns**: <code>object</code> - The modified object type  
 **Access:** private  
 
@@ -415,7 +418,6 @@ The provided object type must have an Node.js events.EventEmitter compatible int
 Extends the provided object prototype with the extended emitter capabilities.<br>
 The provided object type must have an Node.js events.EventEmitter compatible interface.
 
-**Kind**: static method of <code>[EventEmitterEnhancer](#EventEmitterEnhancer)</code>  
 **Returns**: <code>object</code> - The modified object type  
 **Access:** public  
 
@@ -435,7 +437,6 @@ var emitter = new EnhancedEventEmitter();   //create a new instance using the ne
 Modified the provided object prototype with the extended emitter capabilities.<br>
 The provided object type must have an Node.js events.EventEmitter compatible interface.
 
-**Kind**: static method of <code>[EventEmitterEnhancer](#EventEmitterEnhancer)</code>  
 **Access:** public  
 
 | Param | Type | Description |
@@ -454,7 +455,109 @@ var emitter = new EventEmitter();   //create an instance of the original class a
 Modified the specific object instance with the extended emitter capabilities.<br>
 The provided object type must have an Node.js events.EventEmitter compatible interface.
 
-**Kind**: static method of <code>[EventEmitterEnhancer](#EventEmitterEnhancer)</code>  
+**Access:** public  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| emitterInstance | <code>object</code> | The emitter instance |
+
+**Example**  
+```js
+//modify specific instance to include the extended capabilities (other existing/future instances of that class type are not modified/impacted in any way).
+var emitter = new EventEmitter();   //create an instance of an event emitter (can be Node.js of some custom event emitter)
+EventEmitterEnhancer.modifyInstance(emitter);   //modify the specific instance and add the extended capabilities. the original prototype is not affected.
+```
+<a name="EventEmitterEnhancer"></a>
+## EventEmitterEnhancer : <code>object</code>
+Extends the Node.js events.EventEmitter with extra capabilities.
+
+**Kind**: global namespace  
+**Author:** Sagie Gur-Ari  
+
+* [EventEmitterEnhancer](#EventEmitterEnhancer) : <code>object</code>
+  * [new EventEmitterEnhancer()](#new_EventEmitterEnhancer_new)
+  * [.EnhancedEventEmitter](#EventEmitterEnhancer.EnhancedEventEmitter) : <code>EventEmitter</code>
+  * [.validateDoubleEnhancement(type)](#EventEmitterEnhancer.validateDoubleEnhancement) ℗
+  * [.enhance(EmitterType, modifyType)](#EventEmitterEnhancer.enhance) ⇒ <code>object</code> ℗
+  * [.extend(EmitterType)](#EventEmitterEnhancer.extend) ⇒ <code>object</code>
+  * [.modify(EmitterType)](#EventEmitterEnhancer.modify)
+  * [.modifyInstance(emitterInstance)](#EventEmitterEnhancer.modifyInstance)
+
+<a name="new_EventEmitterEnhancer_new"></a>
+### new EventEmitterEnhancer()
+This class enables to enhance event emitter prototypes and instances with extra capabilities.
+
+<a name="EventEmitterEnhancer.EnhancedEventEmitter"></a>
+### EventEmitterEnhancer.EnhancedEventEmitter : <code>EventEmitter</code>
+The node.js event emitter prototype extended with the extra capabilities.
+
+**Access:** public  
+<a name="EventEmitterEnhancer.validateDoubleEnhancement"></a>
+### EventEmitterEnhancer.validateDoubleEnhancement(type) ℗
+Throws the already enhanced error in case provided input
+has already been enhanced.
+
+**Access:** private  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| type | <code>object</code> | The type to validate |
+
+<a name="EventEmitterEnhancer.enhance"></a>
+### EventEmitterEnhancer.enhance(EmitterType, modifyType) ⇒ <code>object</code> ℗
+Modified/extends the provided object prototype with the extended emitter capabilities.<br>
+The provided object type must have an Node.js events.EventEmitter compatible interface.
+
+**Returns**: <code>object</code> - The modified object type  
+**Access:** private  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| EmitterType | <code>object</code> | The object type |
+| modifyType | <code>number</code> | 0 to extend the prototype of the provided object, 1 to modify the prototype of the provided object, 2 to modify the provided instance |
+
+<a name="EventEmitterEnhancer.extend"></a>
+### EventEmitterEnhancer.extend(EmitterType) ⇒ <code>object</code>
+Extends the provided object prototype with the extended emitter capabilities.<br>
+The provided object type must have an Node.js events.EventEmitter compatible interface.
+
+**Returns**: <code>object</code> - The modified object type  
+**Access:** public  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| EmitterType | <code>object</code> | The object type |
+
+**Example**  
+```js
+//extend events.EventEmitter class (or any class that has the same interface)
+//now you can create instances of the new EnhancedEventEmitter type while events.EventEmitter is not modified/impacted in any way
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);   //extend the event emitter class (can be Node.js of some custom event emitter). original base class is not affected.
+var emitter = new EnhancedEventEmitter();   //create a new instance using the new extended class type.
+```
+<a name="EventEmitterEnhancer.modify"></a>
+### EventEmitterEnhancer.modify(EmitterType)
+Modified the provided object prototype with the extended emitter capabilities.<br>
+The provided object type must have an Node.js events.EventEmitter compatible interface.
+
+**Access:** public  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| EmitterType | <code>object</code> | The object type |
+
+**Example**  
+```js
+//modify the proto of an events.EventEmitter class (or any class that has the same interface)
+//now all existing and future instances of the original class are modified to include the new extended capabilities.
+EventEmitterEnhancer.modify(EventEmitter); //modify the event emitter class prototype (can be Node.js of some custom event emitter). existing instances are impacted.
+var emitter = new EventEmitter();   //create an instance of the original class and automatically get the new extended capabilities.
+```
+<a name="EventEmitterEnhancer.modifyInstance"></a>
+### EventEmitterEnhancer.modifyInstance(emitterInstance)
+Modified the specific object instance with the extended emitter capabilities.<br>
+The provided object type must have an Node.js events.EventEmitter compatible interface.
+
 **Access:** public  
 
 | Param | Type | Description |

@@ -169,7 +169,7 @@ module.exports = function (grunt) {
             api: {
                 options: {
                     index: true,
-                    'private': true
+                    private: true
                 },
                 src: '<%=BuildConfig.libDirectory%>/**/*.js',
                 dest: 'docs/api.md'
