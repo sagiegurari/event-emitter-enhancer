@@ -1,18 +1,19 @@
 {
   "name": "event-emitter-enhancer",
-  "version": "0.0.38",
+  "version": "0.0.39",
   "description": "Enhances the Node.js EventEmitter with extra capabilities.",
   "main": "index.js",
   "directories": {
     "lib": "lib",
     "test": "test/spec"
   },
+  "homepage": "http://github.com/sagiegurari/event-emitter-enhancer",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sagiegurari/event-emitter-enhancer.git"
+    "url": "http://github.com/sagiegurari/event-emitter-enhancer.git"
   },
   "bugs": {
-    "url": "https://github.com/sagiegurari/event-emitter-enhancer/issues"
+    "url": "http://github.com/sagiegurari/event-emitter-enhancer/issues"
   },
   "keywords": [
     "events",
