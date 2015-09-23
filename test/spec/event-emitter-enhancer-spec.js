@@ -578,6 +578,144 @@ describe('event-emitter-enhancer Tests', function () {
         });
     });
 
+    describe('onAny Tests', function () {
+        it('onAny null events test', function () {
+            var emitter = createEventEmitter();
+            try {
+                emitter.onAny(null, function () {
+                    assert.fail();
+                });
+
+                assert.fail();
+            } catch (error) {
+                assert.isDefined(error);
+            }
+        });
+
+        it('onAny undefined events test', function () {
+            var emitter = createEventEmitter();
+            try {
+                emitter.onAny(undefined, function () {
+                    assert.fail();
+                });
+
+                assert.fail();
+            } catch (error) {
+                assert.isDefined(error);
+            }
+        });
+
+        it('onAny missing callback test', function () {
+            var emitter = createEventEmitter();
+            try {
+                emitter.onAny(['test']);
+                assert.fail();
+            } catch (error) {
+                assert.isDefined(error);
+            }
+        });
+
+        it('onAny single event', function () {
+            var emitter = createEventEmitter();
+
+            var triggerCount = 0;
+            var remove = emitter.onAny('test-single', function (arg1, arg2, arg3) {
+                assert.equal(arg1, 1);
+                assert.equal(arg2, 'a');
+                assert.deepEqual(arg3, {
+                    something: [1, 2, 3]
+                });
+
+                triggerCount++;
+            });
+
+            emitter.emit('fake1', 'wrong');
+            assert.equal(triggerCount, 0);
+
+            emitter.emit('test-single', 1, 'a', {
+                something: [1, 2, 3]
+            });
+            assert.equal(triggerCount, 1);
+
+            remove();
+
+            emitter.emit('test-single', 1, 'a', {
+                something: [1, 2, 3]
+            });
+            assert.equal(triggerCount, 1);
+        });
+
+        it('onAny single array event', function () {
+            var emitter = createEventEmitter();
+
+            var triggerCount = 0;
+            var remove = emitter.onAny(['test-array'], function (arg1, arg2, arg3) {
+                assert.equal(arg1, 1);
+                assert.equal(arg2, 'a');
+                assert.deepEqual(arg3, {
+                    something: [1, 2, 3]
+                });
+
+                triggerCount++;
+            });
+
+            emitter.emit('fake1', 'wrong');
+            assert.equal(triggerCount, 0);
+
+            emitter.emit('test-array', 1, 'a', {
+                something: [1, 2, 3]
+            });
+            assert.equal(triggerCount, 1);
+
+            emitter.emit('fake1', 'wrong');
+            assert.equal(triggerCount, 1);
+
+            remove();
+
+            emitter.emit('test-array', 1, 'a', {
+                something: [1, 2, 3]
+            });
+            assert.equal(triggerCount, 1);
+        });
+
+        it('onAny multiple array event', function () {
+            var emitter = createEventEmitter();
+
+            var triggerCount = 0;
+            var events = ['test-array-1', 'test-array-2', 'test-array-3'];
+            var remove = emitter.onAny(events, function (arg1, arg2, arg3) {
+                assert.equal(arg1, 1);
+                assert.equal(arg2, 'a');
+                assert.deepEqual(arg3, {
+                    something: [1, 2, 3]
+                });
+
+                triggerCount++;
+            });
+
+            emitter.emit('fake1', 'wrong');
+            assert.equal(triggerCount, 0);
+
+            events.forEach(function (eventName) {
+                emitter.emit(eventName, 1, 'a', {
+                    something: [1, 2, 3]
+                });
+            });
+            assert.equal(triggerCount, 3);
+
+            emitter.emit('fake1', 'wrong');
+            assert.equal(triggerCount, 3);
+
+            remove();
+
+            events.forEach(function (eventName) {
+                emitter.emit(eventName, 1, 'a', {
+                    something: [1, 2, 3]
+                });
+            });
+            assert.equal(triggerCount, 3);
+        });
+    });
 
     describe('filter Tests', function () {
         it('no filter + event test', function noFilterOrEventTest() {

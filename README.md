@@ -130,6 +130,24 @@ emitter.emit('test', 1, 2);
 removeListener();
 ```
 
+## 'emitter.onAny(events, listener)'
+Adds a listener to all provided event names.
+
+To remove the listener, the returned function must be called instead of doing emitter.removeListener(...)
+
+```js
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
+
+//add same listener to multiple events
+var remove = emitter.onAny(['test1', 'test2', 'test3'], function (arg1, arg2, arg3) {
+   console.log(arg1, arg2, arg3);
+});
+
+//remove listener from all events
+remove();
+```
+
 ## 'emitter.filter([event], callback)'
 Adds a filter that will be triggered before every emit for the provided event type (if no event is provided, than the filter is invoked for all events).
 
@@ -189,21 +207,22 @@ See full docs at: [API Docs](docs/api.md)
 
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
-| 2015-09-08  | v0.0.43  | Maintenance |
-| 2015-04-22  | v0.0.31  | Prevent from multiple enhance of same prototype/instance |
-| 2015-04-05  | v0.0.30  | Maintenance |
-| 2015-02-09  | v0.0.19  | Doc fix. |
-| 2015-02-09  | v0.0.18  | Grunt cleanups |
-| 2015-02-06  | v0.0.14  | Internal quality changes. |
-| 2014-12-31  | v0.0.11  | Doc fix. |
-| 2014-12-31  | v0.0.10  | EventEmitter is no longer automatically modified,<br>instead there are 2 ways to extend/modify prototype/modify instance<br>functions exposed by this library. |
-| 2014-12-30  | v0.0.9   | Added ability to enhance compatible EventEmitter types |
-| 2014-12-30  | v0.0.8   | Doc changes |
-| 2014-12-29  | v0.0.7   | Added additional tests |
-| 2014-12-29  | v0.0.6   | Added 'filter' |
-| 2014-12-28  | v0.0.5   | Added 'onAsync' |
-| 2014-12-28  | v0.0.4   | Added 'emitAsync' |
-| 2014-12-28  | v0.0.2   | Initial release. |
+| 2015-09-23  | v0.0.45 | Added 'onAny' |
+| 2015-09-08  | v0.0.44 | Maintenance |
+| 2015-04-22  | v0.0.31 | Prevent from multiple enhance of same prototype/instance |
+| 2015-04-05  | v0.0.30 | Maintenance |
+| 2015-02-09  | v0.0.19 | Doc fix. |
+| 2015-02-09  | v0.0.18 | Grunt cleanups |
+| 2015-02-06  | v0.0.14 | Internal quality changes. |
+| 2014-12-31  | v0.0.11 | Doc fix. |
+| 2014-12-31  | v0.0.10 | EventEmitter is no longer automatically modified,<br>instead there are 2 ways to extend/modify prototype/modify instance<br>functions exposed by this library. |
+| 2014-12-30  | v0.0.9  | Added ability to enhance compatible EventEmitter types |
+| 2014-12-30  | v0.0.8  | Doc changes |
+| 2014-12-29  | v0.0.7  | Added additional tests |
+| 2014-12-29  | v0.0.6  | Added 'filter' |
+| 2014-12-28  | v0.0.5  | Added 'onAsync' |
+| 2014-12-28  | v0.0.4  | Added 'emitAsync' |
+| 2014-12-28  | v0.0.2  | Initial release. |
 
 ## License
 Developed by Sagie Gur-Ari and licensed under the Apache 2 open source license.

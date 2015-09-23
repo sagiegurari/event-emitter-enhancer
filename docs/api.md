@@ -47,6 +47,7 @@
   * [#invokeElseListener(eventArguments)](#EnhancedEventEmitter+invokeElseListener) ℗
   * [#emitAsync(event, [params], callback)](#EnhancedEventEmitter+emitAsync)
   * [#onAsync(event, listener)](#EnhancedEventEmitter+onAsync) ⇒ <code>function</code>
+  * [#onAny(events, listener)](#EnhancedEventEmitter+onAny) ⇒ <code>function</code>
   * [#addFilter([event], filter)](#EnhancedEventEmitter+addFilter) ⇒ <code>function</code>
   * [#addEventFilter(event, filter)](#EnhancedEventEmitter+addEventFilter) ⇒ <code>function</code>
   * [#addGlobalFilter(filter)](#EnhancedEventEmitter+addGlobalFilter) ⇒ <code>function</code>
@@ -246,6 +247,32 @@ To remove the listener, the returned function must be called instead of doing em
 | event | <code>string</code> | The event name |
 | listener | <code>function</code> | The listener function |
 
+<a name="EnhancedEventEmitter+onAny"></a>
+### EnhancedEventEmitter#onAny(events, listener) ⇒ <code>function</code>
+Adds a listener to all provided event names.<br>
+To remove the listener, the returned function must be called instead of doing emitter.removeListener(...)
+
+**Returns**: <code>function</code> - The remove listener function  
+**Access:** public  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| events | <code>string</code> &#124; <code>Array</code> | The event name/s |
+| listener | <code>function</code> | The listener function |
+
+**Example**  
+```js
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
+
+//add same listener to multiple events
+var remove = emitter.onAny(['test1', 'test2', 'test3'], function (arg1, arg2, arg3) {
+   console.log(arg1, arg2, arg3);
+});
+
+//remove listener from all events
+remove();
+```
 <a name="EnhancedEventEmitter+addFilter"></a>
 ### EnhancedEventEmitter#addFilter([event], filter) ⇒ <code>function</code>
 Adds a filter that will be triggered before every emit for the provided event type (if
