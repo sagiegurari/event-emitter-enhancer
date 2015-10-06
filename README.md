@@ -1,14 +1,29 @@
 # event-emitter-enhancer
 
-[![NPM Version](http://img.shields.io/npm/v/event-emitter-enhancer.svg?style=flat)](https://www.npmjs.org/package/event-emitter-enhancer) [![Build Status](https://img.shields.io/travis/sagiegurari/event-emitter-enhancer.svg?style=flat)](http://travis-ci.org/sagiegurari/event-emitter-enhancer) [![Coverage Status](https://img.shields.io/coveralls/sagiegurari/event-emitter-enhancer.svg?style=flat)](https://coveralls.io/r/sagiegurari/event-emitter-enhancer) [![Code Climate](https://codeclimate.com/github/sagiegurari/event-emitter-enhancer/badges/gpa.svg)](https://codeclimate.com/github/sagiegurari/event-emitter-enhancer) [![bitHound Score](https://www.bithound.io/sagiegurari/event-emitter-enhancer/badges/score.svg)](https://www.bithound.io/sagiegurari/event-emitter-enhancer) [![Inline docs](http://inch-ci.org/github/sagiegurari/event-emitter-enhancer.svg?branch=master)](http://inch-ci.org/github/sagiegurari/event-emitter-enhancer)<br>
-[![License](https://img.shields.io/npm/l/event-emitter-enhancer.svg?style=flat)](https://github.com/sagiegurari/event-emitter-enhancer/blob/master/LICENSE) [![Total Downloads](https://img.shields.io/npm/dt/event-emitter-enhancer.svg?style=flat)](https://www.npmjs.org/package/event-emitter-enhancer) [![Dependency Status](https://david-dm.org/sagiegurari/event-emitter-enhancer.svg)](https://david-dm.org/sagiegurari/event-emitter-enhancer) [![DevDependencies](http://img.shields.io/david/dev/sagiegurari/event-emitter-enhancer.svg?style=flat)](https://david-dm.org/sagiegurari/event-emitter-enhancer#info=devDependencies)<br>
+[![NPM Version](http://img.shields.io/npm/v/event-emitter-enhancer.svg?style=flat)](https://www.npmjs.org/package/event-emitter-enhancer) [![Build Status](https://travis-ci.org/sagiegurari/event-emitter-enhancer.svg)](http://travis-ci.org/sagiegurari/event-emitter-enhancer) [![Coverage Status](https://coveralls.io/repos/sagiegurari/event-emitter-enhancer/badge.svg)](https://coveralls.io/r/sagiegurari/event-emitter-enhancer) [![Code Climate](https://codeclimate.com/github/sagiegurari/event-emitter-enhancer/badges/gpa.svg)](https://codeclimate.com/github/sagiegurari/event-emitter-enhancer) [![bitHound Score](https://www.bithound.io/sagiegurari/event-emitter-enhancer/badges/score.svg)](https://www.bithound.io/sagiegurari/event-emitter-enhancer) [![Inline docs](http://inch-ci.org/github/sagiegurari/event-emitter-enhancer.svg?branch=master)](http://inch-ci.org/github/sagiegurari/event-emitter-enhancer)<br>
+[![License](https://img.shields.io/npm/l/event-emitter-enhancer.svg?style=flat)](https://github.com/sagiegurari/event-emitter-enhancer/blob/master/LICENSE) [![Total Downloads](https://img.shields.io/npm/dt/event-emitter-enhancer.svg?style=flat)](https://www.npmjs.org/package/event-emitter-enhancer) [![Dependency Status](https://david-dm.org/sagiegurari/event-emitter-enhancer.svg)](https://david-dm.org/sagiegurari/event-emitter-enhancer) [![devDependency Status](https://david-dm.org/sagiegurari/event-emitter-enhancer/dev-status.svg)](https://david-dm.org/sagiegurari/event-emitter-enhancer#info=devDependencies)<br>
 [![Retire Status](http://retire.insecurity.today/api/image?uri=https://raw.githubusercontent.com/sagiegurari/event-emitter-enhancer/master/package.json)](http://retire.insecurity.today/api/image?uri=https://raw.githubusercontent.com/sagiegurari/event-emitter-enhancer/master/package.json)
 
 > Extends the Node.js events.EventEmitter to provide additional functionality.
 
+* [Overview](#overview)
+* [Usage](#usage)
+  * [else](#usage-else)
+  * [suspend](#usage-suspend)
+  * [elseError](#usage-else-error)
+  * [emitAsync](#usage-emit-async)
+  * [onAsync](#usage-on-async)
+  * [onAny](#usage-on-any)
+  * [filter](#usage-filter)
+* [API Documentation](docs/api.md)
+* [Release History](#history)
+* [License](#license)
+
+<a name="overview"></a>
 ## Overview
 This library extends the Node.js events.EventEmitter to provide additional functionality.
 
+<a name="usage"></a>
 ## Usage
 First you must require this library as follows:
 
@@ -39,6 +54,7 @@ var emitter = new EventEmitter();   //create an instance of an event emitter (ca
 EventEmitterEnhancer.modifyInstance(emitter);   //modify the specific instance and add the extended capabilities. the original prototype is not affected.
 ```
 
+<a name="usage-else"></a>
 ## 'emitter.else(listener)'
 'else' enables you to attach listeners to all events that do not have any active listeners (apart of the special 'error' event).
 
@@ -55,6 +71,7 @@ emitter.else(function onNonHandledEvent(event, arg1, arg2) {
 emitter.emit('test', 1, 2);
 ```
 
+<a name="usage-suspend"></a>
 ## 'emitter.suspend(event)'
 'suspend' enables you to suspend specific or all events until unsuspend is called.
 
@@ -74,6 +91,7 @@ emitter.suspend('test');   //suspend only 'test' event (to unsuspend use emitter
 emitter.emit('test');
 ```
 
+<a name="usage-else-error"></a>
 ## 'emitter.elseError(event)'
 In case an event with the provided name is emitted but no listener is attached to it, an error event will emitted by this emitter instance instead.
 
@@ -92,6 +110,7 @@ emitter.elseError('test');
 emitter.emit('test');
 ```
 
+<a name="usage-emit-async"></a>
 ## 'emitter.emitAsync(event, [...params], callback)'
 Invokes the emit after a timeout to enable calling flow to continue and not block due to event listeners.
 
@@ -107,6 +126,7 @@ emitter.emitAsync('test', 1, 2, function onEmitDone(event, num1, num2, emitted) 
 });
 ```
 
+<a name="usage-on-async"></a>
 ## 'emitter.onAsync(event, listener)'
 Adds a listener that will be triggered after a timeout during an emit.
 
@@ -130,6 +150,7 @@ emitter.emit('test', 1, 2);
 removeListener();
 ```
 
+<a name="usage-on-any"></a>
 ## 'emitter.onAny(events, listener)'
 Adds a listener to all provided event names.
 
@@ -148,6 +169,7 @@ var remove = emitter.onAny(['test1', 'test2', 'test3'], function (arg1, arg2, ar
 remove();
 ```
 
+<a name="usage-filter"></a>
 ## 'emitter.filter([event], callback)'
 Adds a filter that will be triggered before every emit for the provided event type (if no event is provided, than the filter is invoked for all events).
 
@@ -203,10 +225,12 @@ removeGlobalArg2Filter();
 ## API Documentation
 See full docs at: [API Docs](docs/api.md)
 
+<a name="history"></a>
 ## Release History
 
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
+| 2015-10-06  | v0.0.45 | Maintenance |
 | 2015-09-23  | v0.0.44 | Added 'onAny' |
 | 2015-09-08  | v0.0.43 | Maintenance |
 | 2015-04-22  | v0.0.31 | Prevent from multiple enhance of same prototype/instance |
@@ -224,5 +248,6 @@ See full docs at: [API Docs](docs/api.md)
 | 2014-12-28  | v0.0.4  | Added 'emitAsync' |
 | 2014-12-28  | v0.0.2  | Initial release. |
 
+<a name="license"></a>
 ## License
 Developed by Sagie Gur-Ari and licensed under the Apache 2 open source license.
