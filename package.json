@@ -1,6 +1,6 @@
 {
   "name": "event-emitter-enhancer",
-  "version": "0.0.45",
+  "version": "0.0.46",
   "description": "Enhances the Node.js EventEmitter with extra capabilities.",
   "main": "index.js",
   "directories": {
@@ -39,6 +39,7 @@
     "grunt-mocha-test": "latest",
     "grunt-todos": "latest",
     "load-grunt-tasks": "latest",
+    "mocha": "latest",
     "mocha-lcov-reporter": "latest",
     "time-grunt": "latest"
   },
