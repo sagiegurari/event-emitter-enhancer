@@ -1,12 +1,12 @@
 {
   "name": "event-emitter-enhancer",
-  "version": "0.0.47",
+  "version": "0.0.48",
   "description": "Enhances the Node.js EventEmitter with extra capabilities.",
-  "main": "index.js",
-  "directories": {
-    "lib": "lib",
-    "test": "test/spec"
+  "author": {
+    "name": "Sagie Gur-Ari",
+    "email": "sagiegurari@gmail.com"
   },
+  "license": "Apache-2.0",
   "homepage": "http://github.com/sagiegurari/event-emitter-enhancer",
   "repository": {
     "type": "git",
@@ -19,6 +19,19 @@
     "events",
     "EventEmitter"
   ],
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test/spec"
+  },
+  "scripts": {
+    "test": "grunt test",
+    "clean": "grunt cleanup",
+    "lint": "grunt lint",
+    "docs": "grunt docs",
+    "build": "grunt build",
+    "precommit": "npm run build"
+  },
   "dependencies": {},
   "devDependencies": {
     "blanket": "latest",
@@ -43,18 +56,5 @@
     "mocha": "latest",
     "mocha-lcov-reporter": "latest",
     "time-grunt": "latest"
-  },
-  "author": {
-    "name": "Sagie Gur-Ari",
-    "email": "sagiegurari@gmail.com"
-  },
-  "license": "Apache-2.0",
-  "scripts": {
-    "test": "grunt test",
-    "clean": "grunt cleanup",
-    "lint": "grunt lint",
-    "docs": "grunt docs",
-    "build": "grunt build",
-    "precommit": "npm run build"
   }
 }
