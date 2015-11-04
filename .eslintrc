@@ -26,6 +26,7 @@
     "no-undefined": 0,
     "func-names": 0,
     "consistent-this": 0,
+    "callback-return": 0,
     "valid-jsdoc": [
       2,
       {
@@ -55,7 +56,6 @@
         "after": true
       }
     ],
-    "callback-return": 2,
     "id-length": [
       2,
       {
