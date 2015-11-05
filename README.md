@@ -63,7 +63,7 @@ var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
 var emitter = new EnhancedEventEmitter();
 emitter.else(function onNonHandledEvent(event, arg1, arg2) {
     //logic here....
-    
+
     //to remove 'else' listeners, simply use the unelse function
     emitter.unelse(this);
 });
@@ -100,7 +100,7 @@ var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
 var emitter = new EnhancedEventEmitter();
 emitter.on('error', function (error) {
     //logic here...
-    
+
     //To remove elseError
     emitter.unelseError('test');
 });
@@ -230,7 +230,7 @@ See full docs at: [API Docs](docs/api.md)
 
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
-| 2015-11-04  | v0.0.50 | Maintenance |
+| 2015-11-05  | v0.0.51 | Maintenance |
 | 2015-09-23  | v0.0.44 | Added 'onAny' |
 | 2015-09-08  | v0.0.43 | Maintenance |
 | 2015-04-22  | v0.0.31 | Prevent from multiple enhance of same prototype/instance |
