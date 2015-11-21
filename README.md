@@ -15,6 +15,7 @@
   * [onAsync](#usage-on-async)
   * [onAny](#usage-on-any)
   * [filter](#usage-filter)
+* [Installation](#installation)
 * [API Documentation](docs/api.md)
 * [Release History](#history)
 * [License](#license)
@@ -222,6 +223,14 @@ removeTestEventFilter();
 removeGlobalArg2Filter();
 ```
 
+<a name="installation"></a>
+## Installation
+In order to use this library, just run the following npm install command:
+
+```sh
+npm install --save event-emitter-enhancer
+``
+
 ## API Documentation
 See full docs at: [API Docs](docs/api.md)
 
@@ -230,7 +239,7 @@ See full docs at: [API Docs](docs/api.md)
 
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
-| 2015-11-05  | v0.0.51 | Maintenance |
+| 2015-11-21  | v0.0.52 | Maintenance |
 | 2015-09-23  | v0.0.44 | Added 'onAny' |
 | 2015-09-08  | v0.0.43 | Maintenance |
 | 2015-04-22  | v0.0.31 | Prevent from multiple enhance of same prototype/instance |

@@ -1,6 +1,6 @@
 {
   "name": "event-emitter-enhancer",
-  "version": "0.0.51",
+  "version": "0.0.52",
   "description": "Enhances the Node.js EventEmitter with extra capabilities.",
   "author": {
     "name": "Sagie Gur-Ari",
@@ -38,7 +38,7 @@
     "chai": "latest",
     "eventemitter2": "latest",
     "grunt": "latest",
-    "grunt-blanket": "latest",
+    "grunt-blanket": "0.0.9",
     "grunt-cli": "latest",
     "grunt-contrib-clean": "latest",
     "grunt-contrib-copy": "latest",
