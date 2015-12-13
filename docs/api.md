@@ -1,17 +1,22 @@
 ## Classes
+
 <dl>
 <dt><a href="#EnhancedEventEmitter">EnhancedEventEmitter</a></dt>
 <dd></dd>
 <dt><a href="#EventEmitterEnhancer">EventEmitterEnhancer</a></dt>
 <dd></dd>
 </dl>
+
 ## Objects
+
 <dl>
 <dt><a href="#EventEmitterEnhancer">EventEmitterEnhancer</a> : <code>object</code></dt>
 <dd><p>Extends the Node.js events.EventEmitter with extra capabilities.</p>
 </dd>
 </dl>
+
 ## Typedefs
+
 <dl>
 <dt><a href="#FilterCallback">FilterCallback</a> ⇒ <code>boolean</code></dt>
 <dd><p>&#39;filter&#39; callback.</p>
@@ -23,6 +28,7 @@
 <dd><p>&#39;async-emit&#39; callback.</p>
 </dd>
 </dl>
+
 <a name="EnhancedEventEmitter"></a>
 ## EnhancedEventEmitter
 **Kind**: global class  
@@ -30,30 +36,30 @@
 **Author:** Sagie Gur-Ari  
 
 * [EnhancedEventEmitter](#EnhancedEventEmitter)
-  * [new EnhancedEventEmitter()](#new_EnhancedEventEmitter_new)
-  * [.enhancedEmitterType](#EnhancedEventEmitter.enhancedEmitterType) : <code>boolean</code> ℗
-  * [.suspended](#EnhancedEventEmitter.suspended) : <code>boolean</code>
-  * [#suspend(event)](#EnhancedEventEmitter+suspend)
-  * [#unsuspend(event)](#EnhancedEventEmitter+unsuspend)
-  * [#else(listener)](#EnhancedEventEmitter+else)
-  * [#removeElseListener(listener)](#EnhancedEventEmitter+removeElseListener)
-  * [#unelse(listener)](#EnhancedEventEmitter+unelse)
-  * [#removeAllElseListeners()](#EnhancedEventEmitter+removeAllElseListeners)
-  * [#elseError(event)](#EnhancedEventEmitter+elseError)
-  * [#removeElseError(event)](#EnhancedEventEmitter+removeElseError)
-  * [#unelseError(event)](#EnhancedEventEmitter+unelseError)
-  * [#emit(event, [params])](#EnhancedEventEmitter+emit) ⇒ <code>boolean</code>
-  * [#handleNoEmit(event, eventArguments)](#EnhancedEventEmitter+handleNoEmit) ⇒ <code>boolean</code> ℗
-  * [#invokeElseListener(eventArguments)](#EnhancedEventEmitter+invokeElseListener) ℗
-  * [#emitAsync(event, [params], callback)](#EnhancedEventEmitter+emitAsync)
-  * [#onAsync(event, listener)](#EnhancedEventEmitter+onAsync) ⇒ <code>function</code>
-  * [#onAny(events, listener)](#EnhancedEventEmitter+onAny) ⇒ <code>function</code>
-  * [#addFilter([event], filter)](#EnhancedEventEmitter+addFilter) ⇒ <code>function</code>
-  * [#addEventFilter(event, filter)](#EnhancedEventEmitter+addEventFilter) ⇒ <code>function</code>
-  * [#addGlobalFilter(filter)](#EnhancedEventEmitter+addGlobalFilter) ⇒ <code>function</code>
-  * [#filter([event], filter)](#EnhancedEventEmitter+filter) ⇒ <code>function</code>
-  * [#runFilterChain(emitArguments)](#EnhancedEventEmitter+runFilterChain) ⇒ <code>boolean</code> ℗
-  * [#markEvent(event, [events])](#EnhancedEventEmitter+markEvent) ⇒ <code>object</code> ℗
+    * [new EnhancedEventEmitter()](#new_EnhancedEventEmitter_new)
+    * [.enhancedEmitterType](#EnhancedEventEmitter.enhancedEmitterType) : <code>boolean</code> ℗
+    * [.suspended](#EnhancedEventEmitter.suspended) : <code>boolean</code>
+    * [#suspend(event)](#EnhancedEventEmitter+suspend)
+    * [#unsuspend(event)](#EnhancedEventEmitter+unsuspend)
+    * [#else(listener)](#EnhancedEventEmitter+else)
+    * [#removeElseListener(listener)](#EnhancedEventEmitter+removeElseListener)
+    * [#unelse(listener)](#EnhancedEventEmitter+unelse)
+    * [#removeAllElseListeners()](#EnhancedEventEmitter+removeAllElseListeners)
+    * [#elseError(event)](#EnhancedEventEmitter+elseError)
+    * [#removeElseError(event)](#EnhancedEventEmitter+removeElseError)
+    * [#unelseError(event)](#EnhancedEventEmitter+unelseError)
+    * [#emit(event, [params])](#EnhancedEventEmitter+emit) ⇒ <code>boolean</code>
+    * [#handleNoEmit(event, eventArguments)](#EnhancedEventEmitter+handleNoEmit) ⇒ <code>boolean</code> ℗
+    * [#invokeElseListener(eventArguments)](#EnhancedEventEmitter+invokeElseListener) ℗
+    * [#emitAsync(event, [params], callback)](#EnhancedEventEmitter+emitAsync)
+    * [#onAsync(event, listener)](#EnhancedEventEmitter+onAsync) ⇒ <code>function</code>
+    * [#onAny(events, listener)](#EnhancedEventEmitter+onAny) ⇒ <code>function</code>
+    * [#addFilter([event], filter)](#EnhancedEventEmitter+addFilter) ⇒ <code>function</code>
+    * [#addEventFilter(event, filter)](#EnhancedEventEmitter+addEventFilter) ⇒ <code>function</code>
+    * [#addGlobalFilter(filter)](#EnhancedEventEmitter+addGlobalFilter) ⇒ <code>function</code>
+    * [#filter([event], filter)](#EnhancedEventEmitter+filter) ⇒ <code>function</code>
+    * [#runFilterChain(emitArguments)](#EnhancedEventEmitter+runFilterChain) ⇒ <code>boolean</code> ℗
+    * [#markEvent(event, [events])](#EnhancedEventEmitter+markEvent) ⇒ <code>object</code> ℗
 
 <a name="new_EnhancedEventEmitter_new"></a>
 ### new EnhancedEventEmitter()
@@ -399,13 +405,13 @@ Marks the given event in the events map.
 **Author:** Sagie Gur-Ari  
 
 * [EventEmitterEnhancer](#EventEmitterEnhancer)
-  * [new EventEmitterEnhancer()](#new_EventEmitterEnhancer_new)
-  * [.EnhancedEventEmitter](#EventEmitterEnhancer.EnhancedEventEmitter) : <code>EventEmitter</code>
-  * [#validateDoubleEnhancement(type)](#EventEmitterEnhancer+validateDoubleEnhancement) ℗
-  * [#enhance(EmitterType, modifyType)](#EventEmitterEnhancer+enhance) ⇒ <code>object</code> ℗
-  * [#extend(EmitterType)](#EventEmitterEnhancer+extend) ⇒ <code>object</code>
-  * [#modify(EmitterType)](#EventEmitterEnhancer+modify)
-  * [#modifyInstance(emitterInstance)](#EventEmitterEnhancer+modifyInstance)
+    * [new EventEmitterEnhancer()](#new_EventEmitterEnhancer_new)
+    * [.EnhancedEventEmitter](#EventEmitterEnhancer.EnhancedEventEmitter) : <code>EventEmitter</code>
+    * [#validateDoubleEnhancement(type)](#EventEmitterEnhancer+validateDoubleEnhancement) ℗
+    * [#enhance(EmitterType, modifyType)](#EventEmitterEnhancer+enhance) ⇒ <code>object</code> ℗
+    * [#extend(EmitterType)](#EventEmitterEnhancer+extend) ⇒ <code>object</code>
+    * [#modify(EmitterType)](#EventEmitterEnhancer+modify)
+    * [#modifyInstance(emitterInstance)](#EventEmitterEnhancer+modifyInstance)
 
 <a name="new_EventEmitterEnhancer_new"></a>
 ### new EventEmitterEnhancer()
@@ -502,13 +508,13 @@ Extends the Node.js events.EventEmitter with extra capabilities.
 **Author:** Sagie Gur-Ari  
 
 * [EventEmitterEnhancer](#EventEmitterEnhancer) : <code>object</code>
-  * [new EventEmitterEnhancer()](#new_EventEmitterEnhancer_new)
-  * [.EnhancedEventEmitter](#EventEmitterEnhancer.EnhancedEventEmitter) : <code>EventEmitter</code>
-  * [#validateDoubleEnhancement(type)](#EventEmitterEnhancer+validateDoubleEnhancement) ℗
-  * [#enhance(EmitterType, modifyType)](#EventEmitterEnhancer+enhance) ⇒ <code>object</code> ℗
-  * [#extend(EmitterType)](#EventEmitterEnhancer+extend) ⇒ <code>object</code>
-  * [#modify(EmitterType)](#EventEmitterEnhancer+modify)
-  * [#modifyInstance(emitterInstance)](#EventEmitterEnhancer+modifyInstance)
+    * [new EventEmitterEnhancer()](#new_EventEmitterEnhancer_new)
+    * [.EnhancedEventEmitter](#EventEmitterEnhancer.EnhancedEventEmitter) : <code>EventEmitter</code>
+    * [#validateDoubleEnhancement(type)](#EventEmitterEnhancer+validateDoubleEnhancement) ℗
+    * [#enhance(EmitterType, modifyType)](#EventEmitterEnhancer+enhance) ⇒ <code>object</code> ℗
+    * [#extend(EmitterType)](#EventEmitterEnhancer+extend) ⇒ <code>object</code>
+    * [#modify(EmitterType)](#EventEmitterEnhancer+modify)
+    * [#modifyInstance(emitterInstance)](#EventEmitterEnhancer+modifyInstance)
 
 <a name="new_EventEmitterEnhancer_new"></a>
 ### new EventEmitterEnhancer()
