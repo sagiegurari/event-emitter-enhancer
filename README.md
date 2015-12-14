@@ -17,6 +17,7 @@
   * [filter](#usage-filter)
 * [Installation](#installation)
 * [API Documentation](docs/api.md)
+* [Contributing](docs/CONTRIBUTING.md)
 * [Release History](#history)
 * [License](#license)
 
@@ -234,12 +235,15 @@ npm install --save simple-oracledb
 ## API Documentation
 See full docs at: [API Docs](docs/api.md)
 
+## Contributing
+See [contributing guide](docs/CONTRIBUTING.md)
+
 <a name="history"></a>
 ## Release History
 
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
-| 2015-12-13  | v0.0.60 | Maintenance |
+| 2015-12-14  | v0.0.61 | Maintenance |
 | 2015-09-23  | v0.0.44 | Added 'onAny' |
 | 2015-09-08  | v0.0.43 | Maintenance |
 | 2015-04-22  | v0.0.31 | Prevent from multiple enhance of same prototype/instance |
