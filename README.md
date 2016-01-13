@@ -243,7 +243,7 @@ See [contributing guide](docs/CONTRIBUTING.md)
 
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
-| 2015-12-17  | v0.0.63 | Maintenance |
+| 2016-01-13  | v0.0.64 | Maintenance |
 | 2015-09-23  | v0.0.44 | Added 'onAny' |
 | 2015-09-08  | v0.0.43 | Maintenance |
 | 2015-04-22  | v0.0.31 | Prevent from multiple enhance of same prototype/instance |

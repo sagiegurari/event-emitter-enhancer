@@ -37,7 +37,6 @@
 
 * [EnhancedEventEmitter](#EnhancedEventEmitter)
     * [new EnhancedEventEmitter()](#new_EnhancedEventEmitter_new)
-    * [.enhancedEmitterType](#EnhancedEventEmitter.enhancedEmitterType) : <code>boolean</code> ℗
     * [.suspended](#EnhancedEventEmitter.suspended) : <code>boolean</code>
     * [#suspend(event)](#EnhancedEventEmitter+suspend)
     * [#unsuspend(event)](#EnhancedEventEmitter+unsuspend)
@@ -49,8 +48,6 @@
     * [#removeElseError(event)](#EnhancedEventEmitter+removeElseError)
     * [#unelseError(event)](#EnhancedEventEmitter+unelseError)
     * [#emit(event, [params])](#EnhancedEventEmitter+emit) ⇒ <code>boolean</code>
-    * [#handleNoEmit(event, eventArguments)](#EnhancedEventEmitter+handleNoEmit) ⇒ <code>boolean</code> ℗
-    * [#invokeElseListener(eventArguments)](#EnhancedEventEmitter+invokeElseListener) ℗
     * [#emitAsync(event, [params], callback)](#EnhancedEventEmitter+emitAsync)
     * [#onAsync(event, listener)](#EnhancedEventEmitter+onAsync) ⇒ <code>function</code>
     * [#onAny(events, listener)](#EnhancedEventEmitter+onAny) ⇒ <code>function</code>
@@ -58,18 +55,11 @@
     * [#addEventFilter(event, filter)](#EnhancedEventEmitter+addEventFilter) ⇒ <code>function</code>
     * [#addGlobalFilter(filter)](#EnhancedEventEmitter+addGlobalFilter) ⇒ <code>function</code>
     * [#filter([event], filter)](#EnhancedEventEmitter+filter) ⇒ <code>function</code>
-    * [#runFilterChain(emitArguments)](#EnhancedEventEmitter+runFilterChain) ⇒ <code>boolean</code> ℗
-    * [#markEvent(event, [events])](#EnhancedEventEmitter+markEvent) ⇒ <code>object</code> ℗
 
 <a name="new_EnhancedEventEmitter_new"></a>
 ### new EnhancedEventEmitter()
 This class holds all the extended capabilities added to any emitter.
 
-<a name="EnhancedEventEmitter.enhancedEmitterType"></a>
-### EnhancedEventEmitter.enhancedEmitterType : <code>boolean</code> ℗
-Marker attribute to prevent multiple wrapping of emitter.
-
-**Access:** private  
 <a name="EnhancedEventEmitter.suspended"></a>
 ### EnhancedEventEmitter.suspended : <code>boolean</code>
 If true, all events will not trigger any listener (or 'else' listener).<br>
@@ -190,28 +180,6 @@ See Node.js events.EventEmitter documentation.
 | --- | --- | --- |
 | event | <code>string</code> | The event name |
 | [params] | <code>\*</code> | The event parameters |
-
-<a name="EnhancedEventEmitter+handleNoEmit"></a>
-### EnhancedEventEmitter#handleNoEmit(event, eventArguments) ⇒ <code>boolean</code> ℗
-Handles events which had no listeners.
-
-**Returns**: <code>boolean</code> - True if a listener or an 'else' listener handled the event  
-**Access:** private  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| event | <code>string</code> | The event name |
-| eventArguments | <code>array</code> | All the arguments to send the else callbacks |
-
-<a name="EnhancedEventEmitter+invokeElseListener"></a>
-### EnhancedEventEmitter#invokeElseListener(eventArguments) ℗
-Invokes all of the 'else' listeners.
-
-**Access:** private  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| eventArguments | <code>array</code> | All the arguments to send the else callbacks |
 
 <a name="EnhancedEventEmitter+emitAsync"></a>
 ### EnhancedEventEmitter#emitAsync(event, [params], callback)
@@ -375,29 +343,6 @@ See 'addFilter' documentation.
 | [event] | <code>string</code> | The event name. If not provided, the filter is relevant for all events. |
 | filter | <code>[FilterCallback](#FilterCallback)</code> | The filter function |
 
-<a name="EnhancedEventEmitter+runFilterChain"></a>
-### EnhancedEventEmitter#runFilterChain(emitArguments) ⇒ <code>boolean</code> ℗
-Returns true if to allow to emit the event based on the currently setup filters.
-
-**Returns**: <code>boolean</code> - True to continue with the emit, false to prevent it  
-**Access:** private  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| emitArguments | <code>array</code> | All emit function arguments array |
-
-<a name="EnhancedEventEmitter+markEvent"></a>
-### EnhancedEventEmitter#markEvent(event, [events]) ⇒ <code>object</code> ℗
-Marks the given event in the events map.
-
-**Returns**: <code>object</code> - The updated events map  
-**Access:** private  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| event | <code>string</code> | The event name to mark |
-| [events] | <code>object</code> | The events map |
-
 <a name="EventEmitterEnhancer"></a>
 ## EventEmitterEnhancer
 **Kind**: global class  
@@ -407,8 +352,6 @@ Marks the given event in the events map.
 * [EventEmitterEnhancer](#EventEmitterEnhancer)
     * [new EventEmitterEnhancer()](#new_EventEmitterEnhancer_new)
     * [.EnhancedEventEmitter](#EventEmitterEnhancer.EnhancedEventEmitter) : <code>EventEmitter</code>
-    * [#validateDoubleEnhancement(type)](#EventEmitterEnhancer+validateDoubleEnhancement) ℗
-    * [#enhance(EmitterType, modifyType)](#EventEmitterEnhancer+enhance) ⇒ <code>object</code> ℗
     * [#extend(EmitterType)](#EventEmitterEnhancer+extend) ⇒ <code>object</code>
     * [#modify(EmitterType)](#EventEmitterEnhancer+modify)
     * [#modifyInstance(emitterInstance)](#EventEmitterEnhancer+modifyInstance)
@@ -422,30 +365,6 @@ This class enables to enhance event emitter prototypes and instances with extra 
 The node.js event emitter prototype extended with the extra capabilities.
 
 **Access:** public  
-<a name="EventEmitterEnhancer+validateDoubleEnhancement"></a>
-### EventEmitterEnhancer#validateDoubleEnhancement(type) ℗
-Throws the already enhanced error in case provided input
-has already been enhanced.
-
-**Access:** private  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| type | <code>object</code> | The type to validate |
-
-<a name="EventEmitterEnhancer+enhance"></a>
-### EventEmitterEnhancer#enhance(EmitterType, modifyType) ⇒ <code>object</code> ℗
-Modified/extends the provided object prototype with the extended emitter capabilities.<br>
-The provided object type must have an Node.js events.EventEmitter compatible interface.
-
-**Returns**: <code>object</code> - The modified object type  
-**Access:** private  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| EmitterType | <code>object</code> | The object type |
-| modifyType | <code>number</code> | 0 to extend the prototype of the provided object, 1 to modify the prototype of the provided object, 2 to modify the provided instance |
-
 <a name="EventEmitterEnhancer+extend"></a>
 ### EventEmitterEnhancer#extend(EmitterType) ⇒ <code>object</code>
 Extends the provided object prototype with the extended emitter capabilities.<br>
@@ -510,8 +429,6 @@ Extends the Node.js events.EventEmitter with extra capabilities.
 * [EventEmitterEnhancer](#EventEmitterEnhancer) : <code>object</code>
     * [new EventEmitterEnhancer()](#new_EventEmitterEnhancer_new)
     * [.EnhancedEventEmitter](#EventEmitterEnhancer.EnhancedEventEmitter) : <code>EventEmitter</code>
-    * [#validateDoubleEnhancement(type)](#EventEmitterEnhancer+validateDoubleEnhancement) ℗
-    * [#enhance(EmitterType, modifyType)](#EventEmitterEnhancer+enhance) ⇒ <code>object</code> ℗
     * [#extend(EmitterType)](#EventEmitterEnhancer+extend) ⇒ <code>object</code>
     * [#modify(EmitterType)](#EventEmitterEnhancer+modify)
     * [#modifyInstance(emitterInstance)](#EventEmitterEnhancer+modifyInstance)
@@ -525,30 +442,6 @@ This class enables to enhance event emitter prototypes and instances with extra 
 The node.js event emitter prototype extended with the extra capabilities.
 
 **Access:** public  
-<a name="EventEmitterEnhancer+validateDoubleEnhancement"></a>
-### EventEmitterEnhancer#validateDoubleEnhancement(type) ℗
-Throws the already enhanced error in case provided input
-has already been enhanced.
-
-**Access:** private  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| type | <code>object</code> | The type to validate |
-
-<a name="EventEmitterEnhancer+enhance"></a>
-### EventEmitterEnhancer#enhance(EmitterType, modifyType) ⇒ <code>object</code> ℗
-Modified/extends the provided object prototype with the extended emitter capabilities.<br>
-The provided object type must have an Node.js events.EventEmitter compatible interface.
-
-**Returns**: <code>object</code> - The modified object type  
-**Access:** private  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| EmitterType | <code>object</code> | The object type |
-| modifyType | <code>number</code> | 0 to extend the prototype of the provided object, 1 to modify the prototype of the provided object, 2 to modify the provided instance |
-
 <a name="EventEmitterEnhancer+extend"></a>
 ### EventEmitterEnhancer#extend(EmitterType) ⇒ <code>object</code>
 Extends the provided object prototype with the extended emitter capabilities.<br>
