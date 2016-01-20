@@ -1,6 +1,6 @@
 {
   "name": "event-emitter-enhancer",
-  "version": "0.0.68",
+  "version": "0.0.69",
   "description": "Enhances the Node.js EventEmitter with extra capabilities.",
   "author": {
     "name": "Sagie Gur-Ari",
@@ -57,6 +57,12 @@
     "load-grunt-tasks": "latest",
     "mocha": "latest",
     "mocha-lcov-reporter": "latest",
-    "time-grunt": "latest"
+    "time-grunt": "latest",
+    "travis-cov": "latest"
+  },
+  "config": {
+    "travis-cov": {
+      "threshold": 100
+    }
   }
 }
