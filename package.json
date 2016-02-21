@@ -1,6 +1,6 @@
 {
   "name": "event-emitter-enhancer",
-  "version": "0.0.71",
+  "version": "0.0.72",
   "description": "Enhances the Node.js EventEmitter with extra capabilities.",
   "author": {
     "name": "Sagie Gur-Ari",
@@ -31,18 +31,14 @@
     "docs": "grunt docs",
     "build": "grunt build",
     "prepush": "npm run build",
-    "synclibs": "npm install && npm update"
+    "grunt": "grunt"
   },
   "dependencies": {},
   "devDependencies": {
-    "blanket": "latest",
     "chai": "latest",
-    "eventemitter2": "latest",
     "grunt": "latest",
-    "grunt-blanket": "0.0.9",
     "grunt-cli": "latest",
     "grunt-contrib-clean": "latest",
-    "grunt-contrib-copy": "latest",
     "grunt-contrib-jshint": "latest",
     "grunt-coveralls": "latest",
     "grunt-eslint": "latest",
@@ -50,19 +46,13 @@
     "grunt-jsdoc-to-markdown": "latest",
     "grunt-jslint": "latest",
     "grunt-jsonlint": "latest",
-    "grunt-mocha-test": "latest",
+    "grunt-mocha-istanbul": "latest",
     "grunt-todos": "latest",
     "husky": "latest",
+    "istanbul": "latest",
     "load-grunt-configs": "latest",
     "load-grunt-tasks": "latest",
     "mocha": "latest",
-    "mocha-lcov-reporter": "latest",
-    "time-grunt": "latest",
-    "travis-cov": "latest"
-  },
-  "config": {
-    "travis-cov": {
-      "threshold": 100
-    }
+    "time-grunt": "latest"
   }
 }
