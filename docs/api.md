@@ -30,6 +30,7 @@
 </dl>
 
 <a name="EnhancedEventEmitter"></a>
+
 ## EnhancedEventEmitter
 **Kind**: global class  
 **Access:** public  
@@ -57,16 +58,19 @@
     * [#filter([event], filter)](#EnhancedEventEmitter+filter) ⇒ <code>function</code>
 
 <a name="new_EnhancedEventEmitter_new"></a>
+
 ### new EnhancedEventEmitter()
 This class holds all the extended capabilities added to any emitter.
 
 <a name="EnhancedEventEmitter.suspended"></a>
+
 ### EnhancedEventEmitter.suspended : <code>boolean</code>
 If true, all events will not trigger any listener (or 'else' listener).<br>
 The emit function will simply do nothing.
 
 **Access:** public  
 <a name="EnhancedEventEmitter+suspend"></a>
+
 ### EnhancedEventEmitter#suspend(event)
 Suspends all emit calls for the provided event name (including 'else' listeners).<br>
 The emit function will simply do nothing for the specific event.
@@ -78,6 +82,7 @@ The emit function will simply do nothing for the specific event.
 | event | <code>string</code> | The event to suspend |
 
 <a name="EnhancedEventEmitter+unsuspend"></a>
+
 ### EnhancedEventEmitter#unsuspend(event)
 Unsuspends the emit calls for the provided event name.
 
@@ -88,6 +93,7 @@ Unsuspends the emit calls for the provided event name.
 | event | <code>string</code> | The event to unsuspend |
 
 <a name="EnhancedEventEmitter+else"></a>
+
 ### EnhancedEventEmitter#else(listener)
 Adds an 'else' listener which will be triggered by all events that do not have a
 listener currently for them (apart of the special 'error' event).
@@ -112,6 +118,7 @@ emitter.else(function onNonHandledEvent(event, arg1, arg2) {
 emitter.emit('test', 1, 2);
 ```
 <a name="EnhancedEventEmitter+removeElseListener"></a>
+
 ### EnhancedEventEmitter#removeElseListener(listener)
 Removes the provided 'else' listener.<br>
 Same as 'unelse' function.
@@ -123,6 +130,7 @@ Same as 'unelse' function.
 | listener | <code>[ElseCallback](#ElseCallback)</code> | The listener to remove |
 
 <a name="EnhancedEventEmitter+unelse"></a>
+
 ### EnhancedEventEmitter#unelse(listener)
 See 'removeElseListener' documentation.
 
@@ -133,11 +141,13 @@ See 'removeElseListener' documentation.
 | listener | <code>[ElseCallback](#ElseCallback)</code> | The listener to remove |
 
 <a name="EnhancedEventEmitter+removeAllElseListeners"></a>
+
 ### EnhancedEventEmitter#removeAllElseListeners()
 Removes all 'else' listeners.
 
 **Access:** public  
 <a name="EnhancedEventEmitter+elseError"></a>
+
 ### EnhancedEventEmitter#elseError(event)
 In case an event with the provided name is emitted but no listener is attached to it,
 an error event will emitted by this emitter instance instead.
@@ -149,6 +159,7 @@ an error event will emitted by this emitter instance instead.
 | event | <code>string</code> | The event name |
 
 <a name="EnhancedEventEmitter+removeElseError"></a>
+
 ### EnhancedEventEmitter#removeElseError(event)
 Removes the else-error handler for the provided event.<br>
 Same as 'unelseError' function.
@@ -160,6 +171,7 @@ Same as 'unelseError' function.
 | event | <code>string</code> | The event name |
 
 <a name="EnhancedEventEmitter+unelseError"></a>
+
 ### EnhancedEventEmitter#unelseError(event)
 See 'removeElseError' documentation.
 
@@ -170,6 +182,7 @@ See 'removeElseError' documentation.
 | event | <code>string</code> | The event name |
 
 <a name="EnhancedEventEmitter+emit"></a>
+
 ### EnhancedEventEmitter#emit(event, [params]) ⇒ <code>boolean</code>
 See Node.js events.EventEmitter documentation.
 
@@ -182,6 +195,7 @@ See Node.js events.EventEmitter documentation.
 | [params] | <code>\*</code> | The event parameters |
 
 <a name="EnhancedEventEmitter+emitAsync"></a>
+
 ### EnhancedEventEmitter#emitAsync(event, [params], callback)
 Invokes the emit after a timeout to enable calling flow to continue and not
 block due to event listeners.
@@ -207,6 +221,7 @@ emitter.emitAsync('test', 1, 2, function onEmitDone(event, num1, num2, emitted) 
 });
 ```
 <a name="EnhancedEventEmitter+onAsync"></a>
+
 ### EnhancedEventEmitter#onAsync(event, listener) ⇒ <code>function</code>
 Adds a listener that will be triggered after a timeout during an emit.<br>
 This ensures that the provided listener is invoked after all other listeners and that
@@ -222,6 +237,7 @@ To remove the listener, the returned function must be called instead of doing em
 | listener | <code>function</code> | The listener function |
 
 <a name="EnhancedEventEmitter+onAny"></a>
+
 ### EnhancedEventEmitter#onAny(events, listener) ⇒ <code>function</code>
 Adds a listener to all provided event names.<br>
 To remove the listener, the returned function must be called instead of doing emitter.removeListener(...)
@@ -248,6 +264,7 @@ var remove = emitter.onAny(['test1', 'test2', 'test3'], function (arg1, arg2, ar
 remove();
 ```
 <a name="EnhancedEventEmitter+addFilter"></a>
+
 ### EnhancedEventEmitter#addFilter([event], filter) ⇒ <code>function</code>
 Adds a filter that will be triggered before every emit for the provided event type (if
 no event is provided, than the filter is invoked for all events).<br>
@@ -309,6 +326,7 @@ removeTestEventFilter();
 removeGlobalArg2Filter();
 ```
 <a name="EnhancedEventEmitter+addEventFilter"></a>
+
 ### EnhancedEventEmitter#addEventFilter(event, filter) ⇒ <code>function</code>
 Adds an event filter (See addFilter)
 
@@ -321,6 +339,7 @@ Adds an event filter (See addFilter)
 | filter | <code>[FilterCallback](#FilterCallback)</code> | The filter function |
 
 <a name="EnhancedEventEmitter+addGlobalFilter"></a>
+
 ### EnhancedEventEmitter#addGlobalFilter(filter) ⇒ <code>function</code>
 Adds a global filter (See addFilter)
 
@@ -332,6 +351,7 @@ Adds a global filter (See addFilter)
 | filter | <code>[FilterCallback](#FilterCallback)</code> | The filter function |
 
 <a name="EnhancedEventEmitter+filter"></a>
+
 ### EnhancedEventEmitter#filter([event], filter) ⇒ <code>function</code>
 See 'addFilter' documentation.
 
@@ -344,6 +364,7 @@ See 'addFilter' documentation.
 | filter | <code>[FilterCallback](#FilterCallback)</code> | The filter function |
 
 <a name="EventEmitterEnhancer"></a>
+
 ## EventEmitterEnhancer
 **Kind**: global class  
 **Access:** public  
@@ -357,15 +378,18 @@ See 'addFilter' documentation.
     * [#modifyInstance(emitterInstance)](#EventEmitterEnhancer+modifyInstance)
 
 <a name="new_EventEmitterEnhancer_new"></a>
+
 ### new EventEmitterEnhancer()
 This class enables to enhance event emitter prototypes and instances with extra capabilities.
 
 <a name="EventEmitterEnhancer.EnhancedEventEmitter"></a>
+
 ### EventEmitterEnhancer.EnhancedEventEmitter : <code>EventEmitter</code>
 The node.js event emitter prototype extended with the extra capabilities.
 
 **Access:** public  
 <a name="EventEmitterEnhancer+extend"></a>
+
 ### EventEmitterEnhancer#extend(EmitterType) ⇒ <code>object</code>
 Extends the provided object prototype with the extended emitter capabilities.<br>
 The provided object type must have an Node.js events.EventEmitter compatible interface.
@@ -385,6 +409,7 @@ var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);   //extend
 var emitter = new EnhancedEventEmitter();   //create a new instance using the new extended class type.
 ```
 <a name="EventEmitterEnhancer+modify"></a>
+
 ### EventEmitterEnhancer#modify(EmitterType)
 Modified the provided object prototype with the extended emitter capabilities.<br>
 The provided object type must have an Node.js events.EventEmitter compatible interface.
@@ -403,6 +428,7 @@ EventEmitterEnhancer.modify(EventEmitter); //modify the event emitter class prot
 var emitter = new EventEmitter();   //create an instance of the original class and automatically get the new extended capabilities.
 ```
 <a name="EventEmitterEnhancer+modifyInstance"></a>
+
 ### EventEmitterEnhancer#modifyInstance(emitterInstance)
 Modified the specific object instance with the extended emitter capabilities.<br>
 The provided object type must have an Node.js events.EventEmitter compatible interface.
@@ -420,6 +446,7 @@ var emitter = new EventEmitter();   //create an instance of an event emitter (ca
 EventEmitterEnhancer.modifyInstance(emitter);   //modify the specific instance and add the extended capabilities. the original prototype is not affected.
 ```
 <a name="EventEmitterEnhancer"></a>
+
 ## EventEmitterEnhancer : <code>object</code>
 Extends the Node.js events.EventEmitter with extra capabilities.
 
@@ -434,15 +461,18 @@ Extends the Node.js events.EventEmitter with extra capabilities.
     * [#modifyInstance(emitterInstance)](#EventEmitterEnhancer+modifyInstance)
 
 <a name="new_EventEmitterEnhancer_new"></a>
+
 ### new EventEmitterEnhancer()
 This class enables to enhance event emitter prototypes and instances with extra capabilities.
 
 <a name="EventEmitterEnhancer.EnhancedEventEmitter"></a>
+
 ### EventEmitterEnhancer.EnhancedEventEmitter : <code>EventEmitter</code>
 The node.js event emitter prototype extended with the extra capabilities.
 
 **Access:** public  
 <a name="EventEmitterEnhancer+extend"></a>
+
 ### EventEmitterEnhancer#extend(EmitterType) ⇒ <code>object</code>
 Extends the provided object prototype with the extended emitter capabilities.<br>
 The provided object type must have an Node.js events.EventEmitter compatible interface.
@@ -462,6 +492,7 @@ var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);   //extend
 var emitter = new EnhancedEventEmitter();   //create a new instance using the new extended class type.
 ```
 <a name="EventEmitterEnhancer+modify"></a>
+
 ### EventEmitterEnhancer#modify(EmitterType)
 Modified the provided object prototype with the extended emitter capabilities.<br>
 The provided object type must have an Node.js events.EventEmitter compatible interface.
@@ -480,6 +511,7 @@ EventEmitterEnhancer.modify(EventEmitter); //modify the event emitter class prot
 var emitter = new EventEmitter();   //create an instance of the original class and automatically get the new extended capabilities.
 ```
 <a name="EventEmitterEnhancer+modifyInstance"></a>
+
 ### EventEmitterEnhancer#modifyInstance(emitterInstance)
 Modified the specific object instance with the extended emitter capabilities.<br>
 The provided object type must have an Node.js events.EventEmitter compatible interface.
@@ -497,6 +529,7 @@ var emitter = new EventEmitter();   //create an instance of an event emitter (ca
 EventEmitterEnhancer.modifyInstance(emitter);   //modify the specific instance and add the extended capabilities. the original prototype is not affected.
 ```
 <a name="FilterCallback"></a>
+
 ## FilterCallback ⇒ <code>boolean</code>
 'filter' callback.
 
@@ -509,6 +542,7 @@ EventEmitterEnhancer.modifyInstance(emitter);   //modify the specific instance a
 | [params] | <code>\*</code> | The event parameters |
 
 <a name="ElseCallback"></a>
+
 ## ElseCallback : <code>function</code>
 'else' callback.
 
@@ -520,6 +554,7 @@ EventEmitterEnhancer.modifyInstance(emitter);   //modify the specific instance a
 | [params] | <code>\*</code> | The event parameters |
 
 <a name="AsyncEmitCallback"></a>
+
 ## AsyncEmitCallback : <code>function</code>
 'async-emit' callback.
 
