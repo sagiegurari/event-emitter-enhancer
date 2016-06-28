@@ -1,8 +1,8 @@
-# event-emitter-enhancer
+# {"gitdown": "gitinfo", "name": "name"}
 
-[![NPM Version](http://img.shields.io/npm/v/event-emitter-enhancer.svg?style=flat)](https://www.npmjs.org/package/event-emitter-enhancer) [![Build Status](https://travis-ci.org/sagiegurari/event-emitter-enhancer.svg)](http://travis-ci.org/sagiegurari/event-emitter-enhancer) [![Coverage Status](https://coveralls.io/repos/sagiegurari/event-emitter-enhancer/badge.svg)](https://coveralls.io/r/sagiegurari/event-emitter-enhancer) [![Code Climate](https://codeclimate.com/github/sagiegurari/event-emitter-enhancer/badges/gpa.svg)](https://codeclimate.com/github/sagiegurari/event-emitter-enhancer) [![bitHound Code](https://www.bithound.io/github/sagiegurari/event-emitter-enhancer/badges/code.svg)](https://www.bithound.io/github/sagiegurari/event-emitter-enhancer) [![Inline docs](http://inch-ci.org/github/sagiegurari/event-emitter-enhancer.svg?branch=master)](http://inch-ci.org/github/sagiegurari/event-emitter-enhancer)<br>
-[![License](https://img.shields.io/npm/l/event-emitter-enhancer.svg?style=flat)](https://github.com/sagiegurari/event-emitter-enhancer/blob/master/LICENSE) [![Total Downloads](https://img.shields.io/npm/dt/event-emitter-enhancer.svg?style=flat)](https://www.npmjs.org/package/event-emitter-enhancer) [![Dependency Status](https://david-dm.org/sagiegurari/event-emitter-enhancer.svg)](https://david-dm.org/sagiegurari/event-emitter-enhancer) [![devDependency Status](https://david-dm.org/sagiegurari/event-emitter-enhancer/dev-status.svg)](https://david-dm.org/sagiegurari/event-emitter-enhancer#info=devDependencies)<br>
-[![Retire Status](http://retire.insecurity.today/api/image?uri=https://raw.githubusercontent.com/sagiegurari/event-emitter-enhancer/master/package.json)](http://retire.insecurity.today/api/image?uri=https://raw.githubusercontent.com/sagiegurari/event-emitter-enhancer/master/package.json)
+[![NPM Version](http://img.shields.io/npm/v/{"gitdown": "gitinfo", "name": "name"}.svg?style=flat)](https://www.npmjs.org/package/{"gitdown": "gitinfo", "name": "name"}) [![Build Status](https://travis-ci.org/{"gitdown": "gitinfo", "name": "username"}/{"gitdown": "gitinfo", "name": "name"}.svg)](http://travis-ci.org/{"gitdown": "gitinfo", "name": "username"}/{"gitdown": "gitinfo", "name": "name"}) [![Coverage Status](https://coveralls.io/repos/{"gitdown": "gitinfo", "name": "username"}/{"gitdown": "gitinfo", "name": "name"}/badge.svg)](https://coveralls.io/r/{"gitdown": "gitinfo", "name": "username"}/{"gitdown": "gitinfo", "name": "name"}) [![Code Climate](https://codeclimate.com/github/{"gitdown": "gitinfo", "name": "username"}/{"gitdown": "gitinfo", "name": "name"}/badges/gpa.svg)](https://codeclimate.com/github/{"gitdown": "gitinfo", "name": "username"}/{"gitdown": "gitinfo", "name": "name"}) [![bitHound Code](https://www.bithound.io/github/{"gitdown": "gitinfo", "name": "username"}/{"gitdown": "gitinfo", "name": "name"}/badges/code.svg)](https://www.bithound.io/github/{"gitdown": "gitinfo", "name": "username"}/{"gitdown": "gitinfo", "name": "name"}) [![Inline docs](http://inch-ci.org/github/{"gitdown": "gitinfo", "name": "username"}/{"gitdown": "gitinfo", "name": "name"}.svg?branch=master)](http://inch-ci.org/github/{"gitdown": "gitinfo", "name": "username"}/{"gitdown": "gitinfo", "name": "name"})<br>
+[![License](https://img.shields.io/npm/l/{"gitdown": "gitinfo", "name": "name"}.svg?style=flat)](https://github.com/{"gitdown": "gitinfo", "name": "username"}/{"gitdown": "gitinfo", "name": "name"}/blob/master/LICENSE) [![Total Downloads](https://img.shields.io/npm/dt/{"gitdown": "gitinfo", "name": "name"}.svg?style=flat)](https://www.npmjs.org/package/{"gitdown": "gitinfo", "name": "name"}) [![Dependency Status](https://david-dm.org/{"gitdown": "gitinfo", "name": "username"}/{"gitdown": "gitinfo", "name": "name"}.svg)](https://david-dm.org/{"gitdown": "gitinfo", "name": "username"}/{"gitdown": "gitinfo", "name": "name"}) [![devDependency Status](https://david-dm.org/{"gitdown": "gitinfo", "name": "username"}/{"gitdown": "gitinfo", "name": "name"}/dev-status.svg)](https://david-dm.org/{"gitdown": "gitinfo", "name": "username"}/{"gitdown": "gitinfo", "name": "name"}#info=devDependencies)<br>
+[![Retire Status](http://retire.insecurity.today/api/image?uri=https://raw.githubusercontent.com/{"gitdown": "gitinfo", "name": "username"}/{"gitdown": "gitinfo", "name": "name"}/master/package.json)](http://retire.insecurity.today/api/image?uri=https://raw.githubusercontent.com/{"gitdown": "gitinfo", "name": "username"}/{"gitdown": "gitinfo", "name": "name"}/master/package.json)
 
 > Extends the Node.js events.EventEmitter to provide additional functionality.
 
@@ -229,38 +229,7 @@ removeGlobalArg2Filter();
 In order to use this library, just run the following npm install command:
 
 ```sh
-npm install --save event-emitter-enhancer
+npm install --save {"gitdown": "gitinfo", "name": "name"}
 ```
 
-## API Documentation
-See full docs at: [API Docs](docs/api.md)
-
-## Contributing
-See [contributing guide](.github/CONTRIBUTING.md)
-
-<a name="history"></a>
-## Release History
-
-| Date        | Version | Description |
-| ----------- | ------- | ----------- |
-| 2016-06-28  | v0.0.87 | Maintenance |
-| 2015-09-23  | v0.0.44 | Added 'onAny' |
-| 2015-09-08  | v0.0.43 | Maintenance |
-| 2015-04-22  | v0.0.31 | Prevent from multiple enhance of same prototype/instance |
-| 2015-04-05  | v0.0.30 | Maintenance |
-| 2015-02-09  | v0.0.19 | Doc fix. |
-| 2015-02-09  | v0.0.18 | Grunt cleanups |
-| 2015-02-06  | v0.0.14 | Internal quality changes. |
-| 2014-12-31  | v0.0.11 | Doc fix. |
-| 2014-12-31  | v0.0.10 | EventEmitter is no longer automatically modified,<br>instead there are 2 ways to extend/modify prototype/modify instance<br>functions exposed by this library. |
-| 2014-12-30  | v0.0.9  | Added ability to enhance compatible EventEmitter types |
-| 2014-12-30  | v0.0.8  | Doc changes |
-| 2014-12-29  | v0.0.7  | Added additional tests |
-| 2014-12-29  | v0.0.6  | Added 'filter' |
-| 2014-12-28  | v0.0.5  | Added 'onAsync' |
-| 2014-12-28  | v0.0.4  | Added 'emitAsync' |
-| 2014-12-28  | v0.0.2  | Initial release. |
-
-<a name="license"></a>
-## License
-Developed by Sagie Gur-Ari and licensed under the Apache 2 open source license.
+{"gitdown": "include", "file": "./README-footer-template.md"}
