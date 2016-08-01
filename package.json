@@ -1,6 +1,6 @@
 {
   "name": "event-emitter-enhancer",
-  "version": "0.0.95",
+  "version": "0.1.1",
   "description": "Enhances the Node.js EventEmitter with extra capabilities.",
   "author": {
     "name": "Sagie Gur-Ari",
@@ -31,6 +31,7 @@
     "docs": "grunt docs",
     "format": "grunt format",
     "build": "grunt build",
+    "jstest": "grunt jstest",
     "prepush": "npm run build",
     "grunt": "grunt"
   },
