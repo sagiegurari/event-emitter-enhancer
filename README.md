@@ -1,7 +1,7 @@
 # event-emitter-enhancer
 
 [![NPM Version](http://img.shields.io/npm/v/event-emitter-enhancer.svg?style=flat)](https://www.npmjs.org/package/event-emitter-enhancer) [![Build Status](https://travis-ci.org/sagiegurari/event-emitter-enhancer.svg)](http://travis-ci.org/sagiegurari/event-emitter-enhancer) [![Coverage Status](https://coveralls.io/repos/sagiegurari/event-emitter-enhancer/badge.svg)](https://coveralls.io/r/sagiegurari/event-emitter-enhancer) [![Code Climate](https://codeclimate.com/github/sagiegurari/event-emitter-enhancer/badges/gpa.svg)](https://codeclimate.com/github/sagiegurari/event-emitter-enhancer) [![bitHound Code](https://www.bithound.io/github/sagiegurari/event-emitter-enhancer/badges/code.svg)](https://www.bithound.io/github/sagiegurari/event-emitter-enhancer) [![Inline docs](http://inch-ci.org/github/sagiegurari/event-emitter-enhancer.svg?branch=master)](http://inch-ci.org/github/sagiegurari/event-emitter-enhancer)<br>
-[![License](https://img.shields.io/npm/l/event-emitter-enhancer.svg?style=flat)](https://github.com/sagiegurari/event-emitter-enhancer/blob/master/LICENSE) [![Total Downloads](https://img.shields.io/npm/dt/event-emitter-enhancer.svg?style=flat)](https://www.npmjs.org/package/event-emitter-enhancer) [![Dependency Status](https://david-dm.org/sagiegurari/event-emitter-enhancer.svg)](https://david-dm.org/sagiegurari/event-emitter-enhancer) [![devDependency Status](https://david-dm.org/sagiegurari/event-emitter-enhancer/dev-status.svg)](https://david-dm.org/sagiegurari/event-emitter-enhancer#info=devDependencies)<br>
+[![License](https://img.shields.io/npm/l/event-emitter-enhancer.svg?style=flat)](https://github.com/sagiegurari/event-emitter-enhancer/blob/master/LICENSE) [![Total Downloads](https://img.shields.io/npm/dt/event-emitter-enhancer.svg?style=flat)](https://www.npmjs.org/package/event-emitter-enhancer) [![Dependency Status](https://david-dm.org/sagiegurari/event-emitter-enhancer.svg)](https://david-dm.org/sagiegurari/event-emitter-enhancer) [![devDependency Status](https://david-dm.org/sagiegurari/event-emitter-enhancer/dev-status.svg)](https://david-dm.org/sagiegurari/event-emitter-enhancer?type=dev)<br>
 [![Retire Status](http://retire.insecurity.today/api/image?uri=https://raw.githubusercontent.com/sagiegurari/event-emitter-enhancer/master/package.json)](http://retire.insecurity.today/api/image?uri=https://raw.githubusercontent.com/sagiegurari/event-emitter-enhancer/master/package.json)
 
 > Extends the Node.js events.EventEmitter to provide additional functionality.
@@ -243,7 +243,7 @@ See [contributing guide](.github/CONTRIBUTING.md)
 
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
-| 2016-08-03  | v0.1.3  | Maintenance |
+| 2016-08-05  | v0.1.4  | Maintenance |
 | 2015-09-23  | v0.0.44 | Added 'onAny' |
 | 2015-09-08  | v0.0.43 | Maintenance |
 | 2015-04-22  | v0.0.31 | Prevent from multiple enhance of same prototype/instance |
