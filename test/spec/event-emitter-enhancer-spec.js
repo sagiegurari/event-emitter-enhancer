@@ -1,5 +1,5 @@
 'use strict';
-/*global describe: false, it: false */
+/*global describe: false, it: false*/
 
 var chai = require('chai');
 var assert = chai.assert;
@@ -8,11 +8,14 @@ var EventEmitterEnhancer = require('../../lib/event-emitter-enhancer');
 
 function createEventEmitter() {
     var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+
     return new EnhancedEventEmitter();
 }
+
 function emptyFunction() {
     return undefined;
 }
+
 function removeValidation(removed, done) {
     if (removed) {
         done();
