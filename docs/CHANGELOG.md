@@ -1,6 +1,6 @@
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
-| 2016-09-13  | v1.0.7  | Maintenance |
+| 2016-09-14  | v1.0.8  | Maintenance |
 | 2015-09-23  | v0.0.44 | Added 'onAny' |
 | 2015-09-08  | v0.0.43 | Maintenance |
 | 2015-04-22  | v0.0.31 | Prevent from multiple enhance of same prototype/instance |
