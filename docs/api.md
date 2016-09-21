@@ -73,7 +73,7 @@ The emit function will simply do nothing.
 
 ### EnhancedEventEmitter#suspend(event)
 Suspends all emit calls for the provided event name (including 'else' listeners).<br>
-The emit function will simply do nothing for the specific event.
+For suspended events, the emit function will simply do nothing ('else' listeners won't be invoked either).
 
 **Access:** public  
 
@@ -81,6 +81,20 @@ The emit function will simply do nothing for the specific event.
 | --- | --- | --- |
 | event | <code>string</code> | The event to suspend |
 
+**Example**  
+```js
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
+emitter.on('test', function () {
+  //will never be called
+});
+
+emitter.suspended = true;  //suspend ALL events (to unsuspend use emitter.suspended = false;)
+//or
+emitter.suspend('test');   //suspend only 'test' event (to unsuspend use emitter.unsuspend('test');)
+
+emitter.emit('test');
+```
 <a name="EnhancedEventEmitter+unsuspend"></a>
 
 ### EnhancedEventEmitter#unsuspend(event)
@@ -95,8 +109,7 @@ Unsuspends the emit calls for the provided event name.
 <a name="EnhancedEventEmitter+else"></a>
 
 ### EnhancedEventEmitter#else(listener)
-Adds an 'else' listener which will be triggered by all events that do not have a
-listener currently for them (apart of the special 'error' event).
+Adds an 'else' listener which will be triggered by all events that do not have a listener currently for them (apart of the special 'error' event).
 
 **Access:** public  
 
@@ -149,8 +162,7 @@ Removes all 'else' listeners.
 <a name="EnhancedEventEmitter+elseError"></a>
 
 ### EnhancedEventEmitter#elseError(event)
-In case an event with the provided name is emitted but no listener is attached to it,
-an error event will emitted by this emitter instance instead.
+In case an event with the provided name is emitted but no listener is attached to it, an error event will emitted by this emitter instance instead.
 
 **Access:** public  
 
@@ -158,6 +170,21 @@ an error event will emitted by this emitter instance instead.
 | --- | --- | --- |
 | event | <code>string</code> | The event name |
 
+**Example**  
+```js
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
+emitter.on('error', function (error) {
+  //logic here...
+
+  //To remove elseError
+  emitter.unelseError('test');
+});
+
+emitter.elseError('test');
+
+emitter.emit('test');
+```
 <a name="EnhancedEventEmitter+removeElseError"></a>
 
 ### EnhancedEventEmitter#removeElseError(event)
@@ -197,8 +224,7 @@ See Node.js events.EventEmitter documentation.
 <a name="EnhancedEventEmitter+emitAsync"></a>
 
 ### EnhancedEventEmitter#emitAsync(event, [params], callback)
-Invokes the emit after a timeout to enable calling flow to continue and not
-block due to event listeners.
+Invokes the emit after a timeout to enable calling flow to continue and not block due to event listeners.
 
 **Access:** public  
 
@@ -224,8 +250,7 @@ emitter.emitAsync('test', 1, 2, function onEmitDone(event, num1, num2, emitted) 
 
 ### EnhancedEventEmitter#onAsync(event, listener) ⇒ <code>function</code>
 Adds a listener that will be triggered after a timeout during an emit.<br>
-This ensures that the provided listener is invoked after all other listeners and that
-it will not block the emit caller flow.<br>
+This ensures that the provided listener is invoked after all other listeners and that it will not block the emit caller flow.<br>
 To remove the listener, the returned function must be called instead of doing emitter.removeListener(...)
 
 **Returns**: <code>function</code> - The remove listener function  
@@ -236,6 +261,22 @@ To remove the listener, the returned function must be called instead of doing em
 | event | <code>string</code> | The event name |
 | listener | <code>function</code> | The listener function |
 
+**Example**  
+```js
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
+emitter.on('test', function onEventSync() {
+  //sync handle function logic
+});
+var removeListener = emitter.onAsync('test', function onEventAsync() {
+  //async handle function logic
+});
+
+emitter.emit('test', 1, 2);
+
+//remove the async listener
+removeListener();
+```
 <a name="EnhancedEventEmitter+onAny"></a>
 
 ### EnhancedEventEmitter#onAny(events, listener) ⇒ <code>function</code>
@@ -266,8 +307,7 @@ remove();
 <a name="EnhancedEventEmitter+addFilter"></a>
 
 ### EnhancedEventEmitter#addFilter([event], filter) ⇒ <code>function</code>
-Adds a filter that will be triggered before every emit for the provided event type (if
-no event is provided, than the filter is invoked for all events).<br>
+Adds a filter that will be triggered before every emit for the provided event type (if no event is provided, than the filter is invoked for all events).<br>
 The filter enables to prevent events from reaching the listeners in case some criteria is met.
 
 **Returns**: <code>function</code> - The remove filter function  

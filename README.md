@@ -57,33 +57,37 @@ EventEmitterEnhancer.modifyInstance(emitter);   //modify the specific instance a
 ```
 
 <a name="usage-else"></a>
-## 'emitter.else(listener)'
-'else' enables you to attach listeners to all events that do not have any active listeners (apart of the special 'error' event).
+<!-- markdownlint-disable MD009 MD031 MD036 -->
+### 'emitter.else(listener)'
+Adds an 'else' listener which will be triggered by all events that do not have a listener currently for them (apart of the special 'error' event).
 
+**Example**  
 ```js
 var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
 var emitter = new EnhancedEventEmitter();
 emitter.else(function onNonHandledEvent(event, arg1, arg2) {
-    //logic here....
+ //logic here....
 
-    //to remove 'else' listeners, simply use the unelse function
-    emitter.unelse(this);
+ //to remove 'else' listeners, simply use the unelse function
+ emitter.unelse(this);
 });
 
 emitter.emit('test', 1, 2);
 ```
+<!-- markdownlint-enable MD009 MD031 MD036 -->
 
 <a name="usage-suspend"></a>
-## 'emitter.suspend(event)'
-'suspend' enables you to suspend specific or all events until unsuspend is called.
-
+<!-- markdownlint-disable MD009 MD031 MD036 -->
+### 'emitter.suspend(event)'
+Suspends all emit calls for the provided event name (including 'else' listeners).<br>
 For suspended events, the emit function will simply do nothing ('else' listeners won't be invoked either).
 
+**Example**  
 ```js
 var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
 var emitter = new EnhancedEventEmitter();
 emitter.on('test', function () {
-    //will never be called
+  //will never be called
 });
 
 emitter.suspended = true;  //suspend ALL events (to unsuspend use emitter.suspended = false;)
@@ -92,58 +96,65 @@ emitter.suspend('test');   //suspend only 'test' event (to unsuspend use emitter
 
 emitter.emit('test');
 ```
+<!-- markdownlint-enable MD009 MD031 MD036 -->
 
 <a name="usage-else-error"></a>
-## 'emitter.elseError(event)'
+<!-- markdownlint-disable MD009 MD031 MD036 -->
+### 'emitter.elseError(event)'
 In case an event with the provided name is emitted but no listener is attached to it, an error event will emitted by this emitter instance instead.
 
+**Example**  
 ```js
 var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
 var emitter = new EnhancedEventEmitter();
 emitter.on('error', function (error) {
-    //logic here...
+  //logic here...
 
-    //To remove elseError
-    emitter.unelseError('test');
+  //To remove elseError
+  emitter.unelseError('test');
 });
 
 emitter.elseError('test');
 
 emitter.emit('test');
 ```
+<!-- markdownlint-enable MD009 MD031 MD036 -->
 
 <a name="usage-emit-async"></a>
-## 'emitter.emitAsync(event, [...params], callback)'
+<!-- markdownlint-disable MD009 MD031 MD036 -->
+### 'emitter.emitAsync(event, [...params], callback)'
 Invokes the emit after a timeout to enable calling flow to continue and not block due to event listeners.
 
+**Example**  
 ```js
 var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
 var emitter = new EnhancedEventEmitter();
 emitter.on('test', function onTestEvent(num1, num2) {
-    //event logic here
+   //event logic here
 });
 
 emitter.emitAsync('test', 1, 2, function onEmitDone(event, num1, num2, emitted) {
-    //emit callback logic
+   //emit callback logic
 });
 ```
+<!-- markdownlint-enable MD009 MD031 MD036 -->
 
 <a name="usage-on-async"></a>
-## 'emitter.onAsync(event, listener)'
-Adds a listener that will be triggered after a timeout during an emit.
-
-This ensures that the provided listener is invoked after all other listeners and that it will not block the emit caller flow.
-
+<!-- markdownlint-disable MD009 MD031 MD036 -->
+### 'emitter.onAsync(event, listener) ⇒ function'
+Adds a listener that will be triggered after a timeout during an emit.<br>
+This ensures that the provided listener is invoked after all other listeners and that it will not block the emit caller flow.<br>
 To remove the listener, the returned function must be called instead of doing emitter.removeListener(...)
 
+**Example**  
 ```js
 var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
 var emitter = new EnhancedEventEmitter();
 emitter.on('test', function onEventSync() {
-    //sync handle function logic
+  //sync handle function logic
 });
 var removeListener = emitter.onAsync('test', function onEventAsync() {
-    //async handle function logic
+  //async handle function logic
 });
 
 emitter.emit('test', 1, 2);
@@ -151,13 +162,15 @@ emitter.emit('test', 1, 2);
 //remove the async listener
 removeListener();
 ```
+<!-- markdownlint-enable MD009 MD031 MD036 -->
 
 <a name="usage-on-any"></a>
-## 'emitter.onAny(events, listener)'
-Adds a listener to all provided event names.
-
+<!-- markdownlint-disable MD009 MD031 MD036 -->
+### 'emitter.onAny(events, listener) ⇒ function'
+Adds a listener to all provided event names.<br>
 To remove the listener, the returned function must be called instead of doing emitter.removeListener(...)
 
+**Example**  
 ```js
 var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
 var emitter = new EnhancedEventEmitter();
@@ -170,51 +183,53 @@ var remove = emitter.onAny(['test1', 'test2', 'test3'], function (arg1, arg2, ar
 //remove listener from all events
 remove();
 ```
+<!-- markdownlint-enable MD009 MD031 MD036 -->
 
 <a name="usage-filter"></a>
-## 'emitter.filter([event], callback)'
-Adds a filter that will be triggered before every emit for the provided event type (if no event is provided, than the filter is invoked for all events).
-
+<!-- markdownlint-disable MD009 MD031 MD036 -->
+### 'emitter.filter([event], filter) ⇒ function'
+Adds a filter that will be triggered before every emit for the provided event type (if no event is provided, than the filter is invoked for all events).<br>
 The filter enables to prevent events from reaching the listeners in case some criteria is met.
 
+**Example**  
 ```js
 var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
 var emitter = new EnhancedEventEmitter();
 
 //add filters for test event only
 var removeTestEventFilter = emitter.filter('test', function (event, arg1, arg2) {
-    if (arg1 && (arg1 > 3)) {
-        return true;    //continue with emit
-    }
+   if (arg1 && (arg1 > 3)) {
+       return true;    //continue with emit
+   }
 
-    return false;   //prevent emit
+   return false;   //prevent emit
 });
 emitter.filter('test', function (event, arg1, arg2) {
-    if (arg2 && (arg2 < 20)) {
-        return true;    //continue with emit
-    }
+   if (arg2 && (arg2 < 20)) {
+       return true;    //continue with emit
+   }
 
-    return false;   //prevent emit
+   return false;   //prevent emit
 });
 
 //add global filter for all events
 emitter.filter(function (event, arg1, arg2) {
-    if (arg1 && (arg1 > 5)) {
-        return true;    //continue with emit
-    }
+   if (arg1 && (arg1 > 5)) {
+       return true;    //continue with emit
+   }
 
-    return false;   //prevent emit
+   return false;   //prevent emit
 });
 var removeGlobalArg2Filter = emitter.filter(function (event, arg1, arg2) {
-    if (arg2 && (arg2 < 18)) {
-        return true;    //continue with emit
-    }
+   if (arg2 && (arg2 < 18)) {
+       return true;    //continue with emit
+   }
 
-    return false;   //prevent emit
+   return false;   //prevent emit
 });
 
 emitter.on('test', function onTestEvent(arg1, arg2) {
-    //event logic here...
+   //event logic here...
 });
 
 emitter.emit('test', 10, 15);
@@ -223,6 +238,7 @@ emitter.emit('test', 10, 15);
 removeTestEventFilter();
 removeGlobalArg2Filter();
 ```
+<!-- markdownlint-enable MD009 MD031 MD036 -->
 
 <a name="installation"></a>
 ## Installation
@@ -243,7 +259,7 @@ See [contributing guide](.github/CONTRIBUTING.md)
 
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
-| 2016-09-14  | v1.0.8  | Maintenance |
+| 2016-09-21  | v1.0.9  | Maintenance |
 | 2015-09-23  | v0.0.44 | Added 'onAny' |
 | 2015-09-08  | v0.0.43 | Maintenance |
 | 2015-04-22  | v0.0.31 | Prevent from multiple enhance of same prototype/instance |
