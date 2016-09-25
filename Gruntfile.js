@@ -11,33 +11,24 @@ module.exports = function (grunt) {
         buildConfig: {
             projectRoot: __dirname,
             nodeProject: true
-        }
-    }, function projectConfig() {
-        grunt.registerTask('project-docs', 'Create project docs', [
-            'apidoc2readme:readme'
-        ]);
-
-        return {
-            tasks: {
-                apidoc2readme: {
-                    readme: {
-                        options: {
-                            tags: {
-                                'usage-else': 'EnhancedEventEmitter+else',
-                                'usage-suspend': 'EnhancedEventEmitter+suspend',
-                                'usage-else-error': 'EnhancedEventEmitter+elseError',
-                                'usage-emit-async': 'EnhancedEventEmitter+emitAsync',
-                                'usage-on-async': 'EnhancedEventEmitter+onAsync',
-                                'usage-on-any': 'EnhancedEventEmitter+onAny',
-                                'usage-filter': 'EnhancedEventEmitter+addFilter'
-                            },
-                            modifySignature: function (line) {
-                                return line.split('### \'EnhancedEventEmitter.').join('### \'emitter.').split('emitter.addFilter(').join('emitter.filter(').split('emitAsync(event, [params]').join('emitAsync(event, [...params]');
-                            }
-                        }
+        },
+        apidoc2readme: {
+            readme: {
+                options: {
+                    tags: {
+                        'usage-else': 'EnhancedEventEmitter+else',
+                        'usage-suspend': 'EnhancedEventEmitter+suspend',
+                        'usage-else-error': 'EnhancedEventEmitter+elseError',
+                        'usage-emit-async': 'EnhancedEventEmitter+emitAsync',
+                        'usage-on-async': 'EnhancedEventEmitter+onAsync',
+                        'usage-on-any': 'EnhancedEventEmitter+onAny',
+                        'usage-filter': 'EnhancedEventEmitter+addFilter'
+                    },
+                    modifySignature: function (line) {
+                        return line.split('### \'EnhancedEventEmitter.').join('### \'emitter.').split('emitter.addFilter(').join('emitter.filter(').split('emitAsync(event, [params]').join('emitAsync(event, [...params]');
                     }
                 }
             }
-        };
+        }
     });
 };

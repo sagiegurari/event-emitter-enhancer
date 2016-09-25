@@ -26,8 +26,6 @@ function removeValidation(removed, done) {
 }
 
 describe('event-emitter-enhancer Tests', function () {
-    this.timeout(100);
-
     describe('extend Tests', function () {
         it('predefined extended events.EventEmitter test', function () {
             var EnhancedEventEmitter = EventEmitterEnhancer.EnhancedEventEmitter;
