@@ -121,7 +121,7 @@ Adds an 'else' listener which will be triggered by all events that do not have a
 ```js
 var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
 var emitter = new EnhancedEventEmitter();
-emitter.else(function onNonHandledEvent(event, arg1, arg2) {
+emitter.else(function onUnhandledEvent(event, arg1, arg2) {
  //logic here....
 
  //to remove 'else' listeners, simply use the unelse function

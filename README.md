@@ -65,7 +65,7 @@ Adds an 'else' listener which will be triggered by all events that do not have a
 ```js
 var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
 var emitter = new EnhancedEventEmitter();
-emitter.else(function onNonHandledEvent(event, arg1, arg2) {
+emitter.else(function onUnhandledEvent(event, arg1, arg2) {
  //logic here....
 
  //to remove 'else' listeners, simply use the unelse function
@@ -259,7 +259,7 @@ See [contributing guide](.github/CONTRIBUTING.md)
 
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
-| 2016-09-25  | v1.0.11 | Maintenance |
+| 2016-10-07  | v1.0.12 | Maintenance |
 | 2015-09-23  | v0.0.44 | Added 'onAny' |
 | 2015-09-08  | v0.0.43 | Maintenance |
 | 2015-04-22  | v0.0.31 | Prevent from multiple enhance of same prototype/instance |
