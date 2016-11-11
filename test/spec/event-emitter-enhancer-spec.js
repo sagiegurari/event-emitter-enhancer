@@ -70,12 +70,15 @@ describe('event-emitter-enhancer', function () {
             var emitter = new EnhancedEventEmitter();
             assert.isTrue(emitter.enhancedEmitterType);
 
+            var errorFound = false;
             try {
                 EventEmitterEnhancer.extend(EnhancedEventEmitter);
-                assert.fail();
             } catch (error) {
                 assert.isDefined(error);
+                errorFound = true;
             }
+
+            assert.isTrue(errorFound);
         });
 
         it('modify custom events.EventEmitter', function () {
@@ -114,12 +117,15 @@ describe('event-emitter-enhancer', function () {
             var emitter = new CustomMultiEventEmitter();
             assert.isTrue(emitter.enhancedEmitterType);
 
+            var errorFound = false;
             try {
                 EventEmitterEnhancer.modify(CustomMultiEventEmitter);
-                assert.fail();
             } catch (error) {
                 assert.isDefined(error);
+                errorFound = true;
             }
+
+            assert.isTrue(errorFound);
         });
 
         it('modifyInstance custom events.EventEmitter', function () {
@@ -146,12 +152,15 @@ describe('event-emitter-enhancer', function () {
             assert.isUndefined(EventEmitter.prototype.enhancedEmitterType);
             assert.isTrue(emitter.enhancedEmitterType);
 
+            var errorFound = false;
             try {
                 EventEmitterEnhancer.modifyInstance(emitter);
-                assert.fail();
             } catch (error) {
                 assert.isDefined(error);
+                errorFound = true;
             }
+
+            assert.isTrue(errorFound);
         });
     });
 
@@ -498,24 +507,32 @@ describe('event-emitter-enhancer', function () {
 
         it('async emit missing event with args', function () {
             var emitter = createEventEmitter();
+
+            var errorFound = false;
             try {
                 emitter.emitAsync(1, 2, function () {
                     return undefined;
                 });
-                assert.fail();
             } catch (error) {
                 assert.isDefined(error);
+                errorFound = true;
             }
+
+            assert.isTrue(errorFound);
         });
 
         it('async emit no args', function () {
             var emitter = createEventEmitter();
+
+            var errorFound = false;
             try {
                 emitter.emitAsync();
-                assert.fail();
             } catch (error) {
                 assert.isDefined(error);
+                errorFound = true;
             }
+
+            assert.isTrue(errorFound);
         });
 
         it('async emit missing callback with args', function (done) {
@@ -575,23 +592,31 @@ describe('event-emitter-enhancer', function () {
 
         it('async on missing callback', function () {
             var emitter = createEventEmitter();
+
+            var errorFound = false;
             try {
                 emitter.onAsync('test');
-                assert.fail();
             } catch (error) {
                 assert.isDefined(error);
+                errorFound = true;
             }
+
+            assert.isTrue(errorFound);
         });
 
         it('async on not a callback', function () {
             var emitter = createEventEmitter();
+
+            var errorFound = false;
             try {
                 var notFunction = 'something';
                 emitter.onAsync('test', notFunction);
-                assert.fail();
             } catch (error) {
                 assert.isDefined(error);
+                errorFound = true;
             }
+
+            assert.isTrue(errorFound);
         });
 
         it('async on remove callback', function () {
@@ -610,38 +635,48 @@ describe('event-emitter-enhancer', function () {
     describe('onAny', function () {
         it('onAny null events', function () {
             var emitter = createEventEmitter();
+
+            var errorFound = false;
             try {
                 emitter.onAny(null, function () {
                     assert.fail();
                 });
-
-                assert.fail();
             } catch (error) {
                 assert.isDefined(error);
+                errorFound = true;
             }
+
+            assert.isTrue(errorFound);
         });
 
         it('onAny undefined events', function () {
             var emitter = createEventEmitter();
+
+            var errorFound = false;
             try {
                 emitter.onAny(undefined, function () {
                     assert.fail();
                 });
-
-                assert.fail();
             } catch (error) {
                 assert.isDefined(error);
+                errorFound = true;
             }
+
+            assert.isTrue(errorFound);
         });
 
         it('onAny missing callback', function () {
             var emitter = createEventEmitter();
+
+            var errorFound = false;
             try {
                 emitter.onAny(['test']);
-                assert.fail();
             } catch (error) {
                 assert.isDefined(error);
+                errorFound = true;
             }
+
+            assert.isTrue(errorFound);
         });
 
         it('onAny single', function () {
@@ -749,32 +784,44 @@ describe('event-emitter-enhancer', function () {
     describe('filter', function () {
         it('no filter + event', function noFilterOrEventTest() {
             var emitter = createEventEmitter();
+
+            var errorFound = false;
             try {
                 emitter.filter();
-                assert.fail();
             } catch (error) {
                 assert.isDefined(error);
+                errorFound = true;
             }
+
+            assert.isTrue(errorFound);
         });
 
         it('no filter', function noFilterFuncTest() {
             var emitter = createEventEmitter();
+
+            var errorFound = false;
             try {
                 emitter.filter('test');
-                assert.fail();
             } catch (error) {
                 assert.isDefined(error);
+                errorFound = true;
             }
+
+            assert.isTrue(errorFound);
         });
 
         it('too many args', function tooManyArgsTest() {
             var emitter = createEventEmitter();
+
+            var errorFound = false;
             try {
                 emitter.filter('test', 'test', emptyFunction);
-                assert.fail();
             } catch (error) {
                 assert.isDefined(error);
+                errorFound = true;
             }
+
+            assert.isTrue(errorFound);
         });
 
         it('single global filter', function (done) {

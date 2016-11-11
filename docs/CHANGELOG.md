@@ -1,5 +1,6 @@
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
+| 2016-11-11  | v1.0.16 | Maintenance |
 | 2016-11-11  | v1.0.15 | 'emitAsync' callback is now optional |
 | 2016-11-05  | v1.0.14 | Maintenance |
 | 2015-09-23  | v0.0.44 | Added 'onAny' |
