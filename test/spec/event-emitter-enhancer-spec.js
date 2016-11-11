@@ -25,9 +25,9 @@ function removeValidation(removed, done) {
     }
 }
 
-describe('event-emitter-enhancer Tests', function () {
-    describe('extend Tests', function () {
-        it('predefined extended events.EventEmitter test', function () {
+describe('event-emitter-enhancer', function () {
+    describe('extend', function () {
+        it('predefined extended events.EventEmitter', function () {
             var EnhancedEventEmitter = EventEmitterEnhancer.EnhancedEventEmitter;
             var emitter = new EnhancedEventEmitter();
 
@@ -44,7 +44,7 @@ describe('event-emitter-enhancer Tests', function () {
             assert.isUndefined(emitter.filter);
         });
 
-        it('extend events.EventEmitter test', function () {
+        it('extend events.EventEmitter', function () {
             var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
             var emitter = new EnhancedEventEmitter();
 
@@ -61,7 +61,7 @@ describe('event-emitter-enhancer Tests', function () {
             assert.isUndefined(emitter.filter);
         });
 
-        it('extend events.EventEmitter multi prevent test', function () {
+        it('extend events.EventEmitter multi prevent', function () {
             assert.isUndefined(EventEmitter.prototype.enhancedEmitterType);
             var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
 
@@ -78,7 +78,7 @@ describe('event-emitter-enhancer Tests', function () {
             }
         });
 
-        it('modify custom events.EventEmitter test', function () {
+        it('modify custom events.EventEmitter', function () {
             var CustomEventEmitter = function () {
                 EventEmitter.call(this);
             };
@@ -100,7 +100,7 @@ describe('event-emitter-enhancer Tests', function () {
             assert.isUndefined(emitter.filter);
         });
 
-        it('modify custom events.EventEmitter multi prevent test', function () {
+        it('modify custom events.EventEmitter multi prevent', function () {
             assert.isUndefined(EventEmitter.prototype.enhancedEmitterType);
             var CustomMultiEventEmitter = function () {
                 EventEmitter.call(this);
@@ -122,7 +122,7 @@ describe('event-emitter-enhancer Tests', function () {
             }
         });
 
-        it('modifyInstance custom events.EventEmitter test', function () {
+        it('modifyInstance custom events.EventEmitter', function () {
             var emitter = new EventEmitter();
             EventEmitterEnhancer.modifyInstance(emitter);
 
@@ -139,7 +139,7 @@ describe('event-emitter-enhancer Tests', function () {
             assert.isUndefined(emitter.filter);
         });
 
-        it('modifyInstance custom events.EventEmitter multi prevent test', function () {
+        it('modifyInstance custom events.EventEmitter multi prevent', function () {
             var emitter = new EventEmitter();
             EventEmitterEnhancer.modifyInstance(emitter);
 
@@ -155,8 +155,8 @@ describe('event-emitter-enhancer Tests', function () {
         });
     });
 
-    describe('suspend Tests', function () {
-        it('suspend all test', function (done) {
+    describe('suspend', function () {
+        it('suspend all', function (done) {
             var emitter1 = createEventEmitter();
             emitter1.on('test', function () {
                 done();
@@ -173,7 +173,7 @@ describe('event-emitter-enhancer Tests', function () {
             emitter1.emit('test');
         });
 
-        it('suspend specific test', function (done) {
+        it('suspend specific', function (done) {
             var emitter1 = createEventEmitter();
             emitter1.on('test', function () {
                 done();
@@ -191,7 +191,7 @@ describe('event-emitter-enhancer Tests', function () {
             emitter1.emit('test');
         });
 
-        it('unsuspend specific test', function (done) {
+        it('unsuspend specific', function (done) {
             var emitter1 = createEventEmitter();
             var emitter2 = createEventEmitter();
 
@@ -219,8 +219,8 @@ describe('event-emitter-enhancer Tests', function () {
         });
     });
 
-    describe('else Tests', function () {
-        it('no else test', function (done) {
+    describe('else', function () {
+        it('no else', function (done) {
             var emitter = createEventEmitter();
             emitter.on('test', function () {
                 done();
@@ -229,7 +229,7 @@ describe('event-emitter-enhancer Tests', function () {
             emitter.emit('test');
         });
 
-        it('single else test', function (done) {
+        it('single else', function (done) {
             var emitter = createEventEmitter();
             emitter.else(function (type, arg1, arg2) {
                 assert.equal(type, 'test');
@@ -243,7 +243,7 @@ describe('event-emitter-enhancer Tests', function () {
             emitter.emit('test', 1, 2);
         });
 
-        it('multi else test', function (done) {
+        it('multi else', function (done) {
             var emitter = createEventEmitter();
             var elseCalled = 0;
             emitter.else(function () {
@@ -265,7 +265,7 @@ describe('event-emitter-enhancer Tests', function () {
             emitter.emit('test', 1, 2);
         });
 
-        it('no else call test', function (done) {
+        it('no else call', function (done) {
             var emitter = createEventEmitter();
             emitter.else(function () {
                 assert.fail();
@@ -278,8 +278,8 @@ describe('event-emitter-enhancer Tests', function () {
         });
     });
 
-    describe('remove else Tests', function () {
-        it('no else test', function (done) {
+    describe('remove else', function () {
+        it('no else', function (done) {
             var emitter = createEventEmitter();
             emitter.on('test', function () {
                 done();
@@ -289,7 +289,7 @@ describe('event-emitter-enhancer Tests', function () {
             emitter.emit('test');
         });
 
-        it('remove single else test', function (done) {
+        it('remove single else', function (done) {
             var emitter = createEventEmitter();
             var removed = false;
             emitter.else(function (type, arg1, arg2) {
@@ -313,7 +313,7 @@ describe('event-emitter-enhancer Tests', function () {
             emitter.emit('test', 1, 2);
         });
 
-        it('multi else remove test', function (done) {
+        it('multi else remove', function (done) {
             var emitter = createEventEmitter();
             var elseCalled = 0;
             var removed = false;
@@ -348,7 +348,7 @@ describe('event-emitter-enhancer Tests', function () {
             emitter.emit('test', 1, 2);
         });
 
-        it('remove all else call test', function (done) {
+        it('remove all else call', function (done) {
             var emitter = createEventEmitter();
             var elseCalled = 0;
             var removed = false;
@@ -379,7 +379,7 @@ describe('event-emitter-enhancer Tests', function () {
             emitter.emit('test');
         });
 
-        it('remove with unelse test', function (done) {
+        it('remove with unelse', function (done) {
             var emitter = createEventEmitter();
             var removed = false;
             emitter.else(function (type, arg1, arg2) {
@@ -404,8 +404,8 @@ describe('event-emitter-enhancer Tests', function () {
         });
     });
 
-    describe('else error Tests', function () {
-        it('single event else error test', function (done) {
+    describe('elseError', function () {
+        it('single event else error', function (done) {
             var emitter = createEventEmitter();
             emitter.else(function () {
                 assert.fail();
@@ -420,7 +420,7 @@ describe('event-emitter-enhancer Tests', function () {
             emitter.emit('test');
         });
 
-        it('remove event else error test', function (done) {
+        it('remove event else error', function (done) {
             var emitter = createEventEmitter();
             var removed = false;
             emitter.else(function () {
@@ -439,7 +439,7 @@ describe('event-emitter-enhancer Tests', function () {
             emitter.emit('test');
         });
 
-        it('remove event unelse error test', function (done) {
+        it('remove event unelse error', function (done) {
             var emitter = createEventEmitter();
             var removed = false;
             emitter.else(function () {
@@ -459,8 +459,8 @@ describe('event-emitter-enhancer Tests', function () {
         });
     });
 
-    describe('async emit Tests', function () {
-        it('async emit test', function (done) {
+    describe('emitAsync', function () {
+        it('async emit', function (done) {
             var eventDone = false;
             var emitter = createEventEmitter();
             emitter.on('testAsync', function (arg1, arg2) {
@@ -484,7 +484,7 @@ describe('event-emitter-enhancer Tests', function () {
             }
         });
 
-        it('async emit noemit test', function (done) {
+        it('async emit noemit', function (done) {
             var emitter = createEventEmitter();
             emitter.emitAsync('testNoEmit', 1, 2, function onEmitDone(event, arg1, arg2, emitted) {
                 assert.equal(event, 'testNoEmit');
@@ -496,29 +496,56 @@ describe('event-emitter-enhancer Tests', function () {
             });
         });
 
-        it('async emit missing callback with args test', function () {
+        it('async emit missing event with args', function () {
             var emitter = createEventEmitter();
             try {
-                emitter.emitAsync('test', 1, 2);
+                emitter.emitAsync(1, 2, function () {
+                    return undefined;
+                });
                 assert.fail();
             } catch (error) {
                 assert.isDefined(error);
             }
         });
 
-        it('async emit missing callback without args test', function () {
+        it('async emit no args', function () {
             var emitter = createEventEmitter();
             try {
-                emitter.emitAsync('test');
+                emitter.emitAsync();
                 assert.fail();
             } catch (error) {
                 assert.isDefined(error);
             }
+        });
+
+        it('async emit missing callback with args', function (done) {
+            var emitter = createEventEmitter();
+
+            emitter.on('test', function (value1, value2) {
+                assert.strictEqual(value1, 1);
+                assert.strictEqual(value2, 2);
+
+                done();
+            });
+
+            emitter.emitAsync('test', 1, 2);
+        });
+
+        it('async emit missing callback without args', function (done) {
+            var emitter = createEventEmitter();
+
+            emitter.on('test', function () {
+                assert.strictEqual(0, arguments.length);
+
+                done();
+            });
+
+            emitter.emitAsync('test');
         });
     });
 
-    describe('async on Tests', function () {
-        it('async on test', function (done) {
+    describe('onAsync', function () {
+        it('async on', function (done) {
             var eventDone = false;
             var eventDoneValidation = function () {
                 if (eventDone) {
@@ -546,7 +573,7 @@ describe('event-emitter-enhancer Tests', function () {
             }
         });
 
-        it('async on missing callback test', function () {
+        it('async on missing callback', function () {
             var emitter = createEventEmitter();
             try {
                 emitter.onAsync('test');
@@ -556,7 +583,7 @@ describe('event-emitter-enhancer Tests', function () {
             }
         });
 
-        it('async on not a callback test', function () {
+        it('async on not a callback', function () {
             var emitter = createEventEmitter();
             try {
                 var notFunction = 'something';
@@ -567,7 +594,7 @@ describe('event-emitter-enhancer Tests', function () {
             }
         });
 
-        it('async on remove callback test', function () {
+        it('async on remove callback', function () {
             var emitter = createEventEmitter();
             var remove = emitter.onAsync('test', emptyFunction);
             emitter.on('test', emptyFunction);
@@ -580,8 +607,8 @@ describe('event-emitter-enhancer Tests', function () {
         });
     });
 
-    describe('onAny Tests', function () {
-        it('onAny null events test', function () {
+    describe('onAny', function () {
+        it('onAny null events', function () {
             var emitter = createEventEmitter();
             try {
                 emitter.onAny(null, function () {
@@ -594,7 +621,7 @@ describe('event-emitter-enhancer Tests', function () {
             }
         });
 
-        it('onAny undefined events test', function () {
+        it('onAny undefined events', function () {
             var emitter = createEventEmitter();
             try {
                 emitter.onAny(undefined, function () {
@@ -607,7 +634,7 @@ describe('event-emitter-enhancer Tests', function () {
             }
         });
 
-        it('onAny missing callback test', function () {
+        it('onAny missing callback', function () {
             var emitter = createEventEmitter();
             try {
                 emitter.onAny(['test']);
@@ -617,7 +644,7 @@ describe('event-emitter-enhancer Tests', function () {
             }
         });
 
-        it('onAny single event', function () {
+        it('onAny single', function () {
             var emitter = createEventEmitter();
 
             var triggerCount = 0;
@@ -719,8 +746,8 @@ describe('event-emitter-enhancer Tests', function () {
         });
     });
 
-    describe('filter Tests', function () {
-        it('no filter + event test', function noFilterOrEventTest() {
+    describe('filter', function () {
+        it('no filter + event', function noFilterOrEventTest() {
             var emitter = createEventEmitter();
             try {
                 emitter.filter();
@@ -730,7 +757,7 @@ describe('event-emitter-enhancer Tests', function () {
             }
         });
 
-        it('no filter test', function noFilterFuncTest() {
+        it('no filter', function noFilterFuncTest() {
             var emitter = createEventEmitter();
             try {
                 emitter.filter('test');
@@ -740,7 +767,7 @@ describe('event-emitter-enhancer Tests', function () {
             }
         });
 
-        it('too many args test', function tooManyArgsTest() {
+        it('too many args', function tooManyArgsTest() {
             var emitter = createEventEmitter();
             try {
                 emitter.filter('test', 'test', emptyFunction);
@@ -750,7 +777,7 @@ describe('event-emitter-enhancer Tests', function () {
             }
         });
 
-        it('single global filter test', function (done) {
+        it('single global filter', function (done) {
             var emitter = createEventEmitter();
             var filterAdded = false;
             emitter.on('test', function () {
@@ -774,7 +801,7 @@ describe('event-emitter-enhancer Tests', function () {
             emitter.emit('test', 1, 2);
         });
 
-        it('single specific filter test', function (done) {
+        it('single specific filter', function (done) {
             var emitter = createEventEmitter();
             var filterAdded = false;
             emitter.on('test', function () {
@@ -798,7 +825,7 @@ describe('event-emitter-enhancer Tests', function () {
             emitter.emit('test', 1, 2);
         });
 
-        it('single specific different event filter test', function (done) {
+        it('single specific different event filter', function (done) {
             var emitter = createEventEmitter();
             var filterAdded = false;
             emitter.on('test', function () {
@@ -816,7 +843,7 @@ describe('event-emitter-enhancer Tests', function () {
             emitter.emit('test', 1, 2);
         });
 
-        it('multiple global filter test', function (done) {
+        it('multiple global filter', function (done) {
             var emitter = createEventEmitter();
             var filterAdded = false;
             emitter.on('test', function () {
@@ -855,7 +882,7 @@ describe('event-emitter-enhancer Tests', function () {
             emitter.emit('test', 1, 2);
         });
 
-        it('multiple specific filter test', function (done) {
+        it('multiple specific filter', function (done) {
             var emitter = createEventEmitter();
             var filterAdded = false;
             emitter.on('test', function () {
@@ -896,7 +923,7 @@ describe('event-emitter-enhancer Tests', function () {
             emitter.emit('test', 1, 2);
         });
 
-        it('remove global filter test', function (done) {
+        it('remove global filter', function (done) {
             var emitter = createEventEmitter();
             var filterAdded = false;
             emitter.on('test', function () {
@@ -948,7 +975,7 @@ describe('event-emitter-enhancer Tests', function () {
             emitter.emit('test', 1, 2);
         });
 
-        it('remove specific filter test', function (done) {
+        it('remove specific filter', function (done) {
             var emitter = createEventEmitter();
             var filterAdded = false;
             emitter.on('test', function () {
@@ -1005,8 +1032,8 @@ describe('event-emitter-enhancer Tests', function () {
         });
     });
 
-    describe('enhance Tests', function () {
-        it('enhance EventEmitter2 test', function (done) {
+    describe('enhance', function () {
+        it('enhance EventEmitter2', function (done) {
             var EventEmitter2 = require('eventemitter2').EventEmitter2;
             var EnhancedEventEmitter2 = EventEmitterEnhancer.extend(EventEmitter2);
 

@@ -49,7 +49,7 @@
     * [#removeElseError(event)](#EnhancedEventEmitter+removeElseError)
     * [#unelseError(event)](#EnhancedEventEmitter+unelseError)
     * [#emit(event, [params])](#EnhancedEventEmitter+emit) ⇒ <code>boolean</code>
-    * [#emitAsync(event, [params], callback)](#EnhancedEventEmitter+emitAsync)
+    * [#emitAsync(event, [params], [callback])](#EnhancedEventEmitter+emitAsync)
     * [#onAsync(event, listener)](#EnhancedEventEmitter+onAsync) ⇒ <code>function</code>
     * [#onAny(events, listener)](#EnhancedEventEmitter+onAny) ⇒ <code>function</code>
     * [#addFilter([event], filter)](#EnhancedEventEmitter+addFilter) ⇒ <code>function</code>
@@ -223,7 +223,7 @@ See Node.js events.EventEmitter documentation.
 
 <a name="EnhancedEventEmitter+emitAsync"></a>
 
-### EnhancedEventEmitter#emitAsync(event, [params], callback)
+### EnhancedEventEmitter#emitAsync(event, [params], [callback])
 Invokes the emit after a timeout to enable calling flow to continue and not block due to event listeners.
 
 **Access:** public  
@@ -231,8 +231,8 @@ Invokes the emit after a timeout to enable calling flow to continue and not bloc
 | Param | Type | Description |
 | --- | --- | --- |
 | event | <code>string</code> | The event name |
-| [params] | <code>\*</code> | The event parameters |
-| callback | <code>[AsyncEmitCallback](#AsyncEmitCallback)</code> | The async callback |
+| [params] | <code>\*</code> | The event parameters (if last param is a function, it is considered as the callback of the emitAsync) |
+| [callback] | <code>[AsyncEmitCallback](#AsyncEmitCallback)</code> | The async callback |
 
 **Example**  
 ```js
