@@ -18,7 +18,7 @@
 ## Typedefs
 
 <dl>
-<dt><a href="#FilterCallback">FilterCallback</a> ⇒ <code>boolean</code></dt>
+<dt><a href="#FilterCallback">FilterCallback</a> ⇒ <code>Boolean</code></dt>
 <dd><p>&#39;filter&#39; callback.</p>
 </dd>
 <dt><a href="#ElseCallback">ElseCallback</a> : <code>function</code></dt>
@@ -38,7 +38,7 @@
 
 * [EnhancedEventEmitter](#EnhancedEventEmitter)
     * [new EnhancedEventEmitter()](#new_EnhancedEventEmitter_new)
-    * [.suspended](#EnhancedEventEmitter.suspended) : <code>boolean</code>
+    * [.suspended](#EnhancedEventEmitter.suspended) : <code>Boolean</code>
     * [#suspend(event)](#EnhancedEventEmitter+suspend)
     * [#unsuspend(event)](#EnhancedEventEmitter+unsuspend)
     * [#else(listener)](#EnhancedEventEmitter+else)
@@ -48,7 +48,7 @@
     * [#elseError(event)](#EnhancedEventEmitter+elseError)
     * [#removeElseError(event)](#EnhancedEventEmitter+removeElseError)
     * [#unelseError(event)](#EnhancedEventEmitter+unelseError)
-    * [#emit(event, [params])](#EnhancedEventEmitter+emit) ⇒ <code>boolean</code>
+    * [#emit(event, [params])](#EnhancedEventEmitter+emit) ⇒ <code>Boolean</code>
     * [#emitAsync(event, [params], [callback])](#EnhancedEventEmitter+emitAsync)
     * [#onAsync(event, listener)](#EnhancedEventEmitter+onAsync) ⇒ <code>function</code>
     * [#onAny(events, listener)](#EnhancedEventEmitter+onAny) ⇒ <code>function</code>
@@ -64,7 +64,7 @@ This class holds all the extended capabilities added to any emitter.
 
 <a name="EnhancedEventEmitter.suspended"></a>
 
-### EnhancedEventEmitter.suspended : <code>boolean</code>
+### EnhancedEventEmitter.suspended : <code>Boolean</code>
 If true, all events will not trigger any listener (or 'else' listener).<br>
 The emit function will simply do nothing.
 
@@ -79,7 +79,7 @@ For suspended events, the emit function will simply do nothing ('else' listeners
 
 | Param | Type | Description |
 | --- | --- | --- |
-| event | <code>string</code> | The event to suspend |
+| event | <code>String</code> | The event to suspend |
 
 **Example**  
 ```js
@@ -104,7 +104,7 @@ Unsuspends the emit calls for the provided event name.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| event | <code>string</code> | The event to unsuspend |
+| event | <code>String</code> | The event to unsuspend |
 
 <a name="EnhancedEventEmitter+else"></a>
 
@@ -168,7 +168,7 @@ In case an event with the provided name is emitted but no listener is attached t
 
 | Param | Type | Description |
 | --- | --- | --- |
-| event | <code>string</code> | The event name |
+| event | <code>String</code> | The event name |
 
 **Example**  
 ```js
@@ -195,7 +195,7 @@ Same as 'unelseError' function.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| event | <code>string</code> | The event name |
+| event | <code>String</code> | The event name |
 
 <a name="EnhancedEventEmitter+unelseError"></a>
 
@@ -206,19 +206,19 @@ See 'removeElseError' documentation.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| event | <code>string</code> | The event name |
+| event | <code>String</code> | The event name |
 
 <a name="EnhancedEventEmitter+emit"></a>
 
-### EnhancedEventEmitter#emit(event, [params]) ⇒ <code>boolean</code>
+### EnhancedEventEmitter#emit(event, [params]) ⇒ <code>Boolean</code>
 See Node.js events.EventEmitter documentation.
 
-**Returns**: <code>boolean</code> - True if a listener or an 'else' listener handled the event  
+**Returns**: <code>Boolean</code> - True if a listener or an 'else' listener handled the event  
 **Access:** public  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| event | <code>string</code> | The event name |
+| event | <code>String</code> | The event name |
 | [params] | <code>\*</code> | The event parameters |
 
 <a name="EnhancedEventEmitter+emitAsync"></a>
@@ -230,7 +230,7 @@ Invokes the emit after a timeout to enable calling flow to continue and not bloc
 
 | Param | Type | Description |
 | --- | --- | --- |
-| event | <code>string</code> | The event name |
+| event | <code>String</code> | The event name |
 | [params] | <code>\*</code> | The event parameters (if last param is a function, it is considered as the callback of the emitAsync) |
 | [callback] | <code>[AsyncEmitCallback](#AsyncEmitCallback)</code> | The async callback |
 
@@ -258,7 +258,7 @@ To remove the listener, the returned function must be called instead of doing em
 
 | Param | Type | Description |
 | --- | --- | --- |
-| event | <code>string</code> | The event name |
+| event | <code>String</code> | The event name |
 | listener | <code>function</code> | The listener function |
 
 **Example**  
@@ -288,7 +288,7 @@ To remove the listener, the returned function must be called instead of doing em
 
 | Param | Type | Description |
 | --- | --- | --- |
-| events | <code>string</code> &#124; <code>Array</code> | The event name/s |
+| events | <code>String</code> &#124; <code>Array</code> | The event name/s |
 | listener | <code>function</code> | The listener function |
 
 **Example**  
@@ -315,7 +315,7 @@ The filter enables to prevent events from reaching the listeners in case some cr
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [event] | <code>string</code> | The event name. If not provided, the filter is relevant for all events. |
+| [event] | <code>String</code> | The event name. If not provided, the filter is relevant for all events. |
 | filter | <code>[FilterCallback](#FilterCallback)</code> | The filter function |
 
 **Example**  
@@ -375,7 +375,7 @@ Adds an event filter (See addFilter)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| event | <code>string</code> | The event name. |
+| event | <code>String</code> | The event name. |
 | filter | <code>[FilterCallback](#FilterCallback)</code> | The filter function |
 
 <a name="EnhancedEventEmitter+addGlobalFilter"></a>
@@ -400,7 +400,7 @@ See 'addFilter' documentation.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [event] | <code>string</code> | The event name. If not provided, the filter is relevant for all events. |
+| [event] | <code>String</code> | The event name. If not provided, the filter is relevant for all events. |
 | filter | <code>[FilterCallback](#FilterCallback)</code> | The filter function |
 
 <a name="EventEmitterEnhancer"></a>
@@ -413,7 +413,7 @@ See 'addFilter' documentation.
 * [EventEmitterEnhancer](#EventEmitterEnhancer)
     * [new EventEmitterEnhancer()](#new_EventEmitterEnhancer_new)
     * [.EnhancedEventEmitter](#EventEmitterEnhancer.EnhancedEventEmitter) : <code>EventEmitter</code>
-    * [#extend(EmitterType)](#EventEmitterEnhancer+extend) ⇒ <code>object</code>
+    * [#extend(EmitterType)](#EventEmitterEnhancer+extend) ⇒ <code>Object</code>
     * [#modify(EmitterType)](#EventEmitterEnhancer+modify)
     * [#modifyInstance(emitterInstance)](#EventEmitterEnhancer+modifyInstance)
 
@@ -430,16 +430,16 @@ The node.js event emitter prototype extended with the extra capabilities.
 **Access:** public  
 <a name="EventEmitterEnhancer+extend"></a>
 
-### EventEmitterEnhancer#extend(EmitterType) ⇒ <code>object</code>
+### EventEmitterEnhancer#extend(EmitterType) ⇒ <code>Object</code>
 Extends the provided object prototype with the extended emitter capabilities.<br>
 The provided object type must have an Node.js events.EventEmitter compatible interface.
 
-**Returns**: <code>object</code> - The modified object type  
+**Returns**: <code>Object</code> - The modified object type  
 **Access:** public  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| EmitterType | <code>object</code> | The object type |
+| EmitterType | <code>Object</code> | The object type |
 
 **Example**  
 ```js
@@ -458,7 +458,7 @@ The provided object type must have an Node.js events.EventEmitter compatible int
 
 | Param | Type | Description |
 | --- | --- | --- |
-| EmitterType | <code>object</code> | The object type |
+| EmitterType | <code>Object</code> | The object type |
 
 **Example**  
 ```js
@@ -477,7 +477,7 @@ The provided object type must have an Node.js events.EventEmitter compatible int
 
 | Param | Type | Description |
 | --- | --- | --- |
-| emitterInstance | <code>object</code> | The emitter instance |
+| emitterInstance | <code>Object</code> | The emitter instance |
 
 **Example**  
 ```js
@@ -496,7 +496,7 @@ Extends the Node.js events.EventEmitter with extra capabilities.
 * [EventEmitterEnhancer](#EventEmitterEnhancer) : <code>object</code>
     * [new EventEmitterEnhancer()](#new_EventEmitterEnhancer_new)
     * [.EnhancedEventEmitter](#EventEmitterEnhancer.EnhancedEventEmitter) : <code>EventEmitter</code>
-    * [#extend(EmitterType)](#EventEmitterEnhancer+extend) ⇒ <code>object</code>
+    * [#extend(EmitterType)](#EventEmitterEnhancer+extend) ⇒ <code>Object</code>
     * [#modify(EmitterType)](#EventEmitterEnhancer+modify)
     * [#modifyInstance(emitterInstance)](#EventEmitterEnhancer+modifyInstance)
 
@@ -513,16 +513,16 @@ The node.js event emitter prototype extended with the extra capabilities.
 **Access:** public  
 <a name="EventEmitterEnhancer+extend"></a>
 
-### EventEmitterEnhancer#extend(EmitterType) ⇒ <code>object</code>
+### EventEmitterEnhancer#extend(EmitterType) ⇒ <code>Object</code>
 Extends the provided object prototype with the extended emitter capabilities.<br>
 The provided object type must have an Node.js events.EventEmitter compatible interface.
 
-**Returns**: <code>object</code> - The modified object type  
+**Returns**: <code>Object</code> - The modified object type  
 **Access:** public  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| EmitterType | <code>object</code> | The object type |
+| EmitterType | <code>Object</code> | The object type |
 
 **Example**  
 ```js
@@ -541,7 +541,7 @@ The provided object type must have an Node.js events.EventEmitter compatible int
 
 | Param | Type | Description |
 | --- | --- | --- |
-| EmitterType | <code>object</code> | The object type |
+| EmitterType | <code>Object</code> | The object type |
 
 **Example**  
 ```js
@@ -560,7 +560,7 @@ The provided object type must have an Node.js events.EventEmitter compatible int
 
 | Param | Type | Description |
 | --- | --- | --- |
-| emitterInstance | <code>object</code> | The emitter instance |
+| emitterInstance | <code>Object</code> | The emitter instance |
 
 **Example**  
 ```js
@@ -570,15 +570,15 @@ EventEmitterEnhancer.modifyInstance(emitter);   //modify the specific instance a
 ```
 <a name="FilterCallback"></a>
 
-## FilterCallback ⇒ <code>boolean</code>
+## FilterCallback ⇒ <code>Boolean</code>
 'filter' callback.
 
 **Kind**: global typedef  
-**Returns**: <code>boolean</code> - True to continue with the emit, false to prevent emit  
+**Returns**: <code>Boolean</code> - True to continue with the emit, false to prevent emit  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| type | <code>string</code> | The event type |
+| type | <code>String</code> | The event type |
 | [params] | <code>\*</code> | The event parameters |
 
 <a name="ElseCallback"></a>
@@ -590,7 +590,7 @@ EventEmitterEnhancer.modifyInstance(emitter);   //modify the specific instance a
 
 | Param | Type | Description |
 | --- | --- | --- |
-| type | <code>string</code> | The event type |
+| type | <code>String</code> | The event type |
 | [params] | <code>\*</code> | The event parameters |
 
 <a name="AsyncEmitCallback"></a>
@@ -602,7 +602,7 @@ EventEmitterEnhancer.modifyInstance(emitter);   //modify the specific instance a
 
 | Param | Type | Description |
 | --- | --- | --- |
-| type | <code>string</code> | The event type |
+| type | <code>String</code> | The event type |
 | [params] | <code>\*</code> | The event parameters |
-| emitted | <code>boolean</code> | True if emitted, else false |
+| emitted | <code>Boolean</code> | True if emitted, else false |
 
