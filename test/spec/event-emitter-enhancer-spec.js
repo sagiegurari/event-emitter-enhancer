@@ -31,6 +31,9 @@ describe('event-emitter-enhancer', function () {
             var EnhancedEventEmitter = EventEmitterEnhancer.EnhancedEventEmitter;
             var emitter = new EnhancedEventEmitter();
 
+            assert.isFunction(emitter.baseOn);
+            assert.isFunction(emitter.baseEmit);
+
             assert.isFunction(emitter.onAsync);
             assert.isFunction(emitter.elseError);
             assert.isFunction(emitter.else);
@@ -47,6 +50,9 @@ describe('event-emitter-enhancer', function () {
         it('extend events.EventEmitter', function () {
             var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
             var emitter = new EnhancedEventEmitter();
+
+            assert.isFunction(emitter.baseOn);
+            assert.isFunction(emitter.baseEmit);
 
             assert.isFunction(emitter.onAsync);
             assert.isFunction(emitter.elseError);
@@ -90,6 +96,9 @@ describe('event-emitter-enhancer', function () {
             EventEmitterEnhancer.modify(CustomEventEmitter);
             var emitter = new CustomEventEmitter();
 
+            assert.isFunction(emitter.baseOn);
+            assert.isFunction(emitter.baseEmit);
+
             assert.isFunction(emitter.onAsync);
             assert.isFunction(emitter.elseError);
             assert.isFunction(emitter.else);
@@ -132,6 +141,9 @@ describe('event-emitter-enhancer', function () {
             var emitter = new EventEmitter();
             EventEmitterEnhancer.modifyInstance(emitter);
 
+            assert.isFunction(emitter.baseOn);
+            assert.isFunction(emitter.baseEmit);
+
             assert.isFunction(emitter.onAsync);
             assert.isFunction(emitter.elseError);
             assert.isFunction(emitter.else);
@@ -149,6 +161,9 @@ describe('event-emitter-enhancer', function () {
             var emitter = new EventEmitter();
             EventEmitterEnhancer.modifyInstance(emitter);
 
+            assert.isFunction(emitter.baseOn);
+            assert.isFunction(emitter.baseEmit);
+
             assert.isUndefined(EventEmitter.prototype.enhancedEmitterType);
             assert.isTrue(emitter.enhancedEmitterType);
 
@@ -161,6 +176,408 @@ describe('event-emitter-enhancer', function () {
             }
 
             assert.isTrue(errorFound);
+        });
+    });
+
+    describe('on', function () {
+        it('nodejs with remove', function () {
+            var emitter = createEventEmitter();
+
+            var invoked = false;
+            var remove = emitter.on('test', function (arg1, arg2, arg3) {
+                if (invoked) {
+                    assert.fail();
+                }
+
+                assert.strictEqual(arg1, 1);
+                assert.strictEqual(arg2, 2);
+                assert.strictEqual(arg3, 3);
+
+                invoked = true;
+            });
+
+            emitter.emit('test', 1, 2, 3);
+
+            remove();
+
+            emitter.emit('test', 'bad');
+        });
+
+        it('multiple listeners, single event', function () {
+            var emitter = createEventEmitter();
+
+            var invoked1 = false;
+            var invoked2 = false;
+
+            emitter.on({
+                event: 'test-event',
+                listener: [
+                    function (arg1, arg2) {
+                        assert.strictEqual(arg1, 'test');
+                        assert.strictEqual(arg2, 2);
+
+                        invoked1 = true;
+                    },
+                    function (arg1, arg2) {
+                        assert.strictEqual(arg1, 'test');
+                        assert.strictEqual(arg2, 2);
+
+                        invoked2 = true;
+                    }
+                ]
+            });
+
+            emitter.emit('test-event1', 'abc', 123);
+            assert.isFalse(invoked1);
+            assert.isFalse(invoked2);
+
+            emitter.emit('test-event', 'test', 2);
+            assert.isTrue(invoked1);
+            assert.isTrue(invoked2);
+        });
+
+        it('single listener, multiple events', function () {
+            var emitter = createEventEmitter();
+
+            var invoked1 = false;
+            var invoked2 = false;
+
+            emitter.on({
+                event: [
+                    'test-event1',
+                    'test-event2'
+                ],
+                listener: function (arg1, arg2) {
+                    if (invoked1 && invoked2) {
+                        assert.fail();
+                    } else if (invoked1) {
+                        assert.strictEqual(arg1, 'test');
+                        assert.strictEqual(arg2, 2);
+
+                        invoked2 = true;
+                    } else {
+                        assert.strictEqual(arg1, 'abc');
+                        assert.strictEqual(arg2, 123);
+
+                        invoked1 = true;
+                    }
+                }
+            });
+
+            emitter.emit('test-event3', 'bad');
+            assert.isFalse(invoked1);
+            assert.isFalse(invoked2);
+
+            emitter.emit('test-event1', 'abc', 123);
+            assert.isTrue(invoked1);
+            assert.isFalse(invoked2);
+
+            emitter.emit('test-event2', 'test', 2);
+            assert.isTrue(invoked1);
+            assert.isTrue(invoked2);
+        });
+
+        it('multiple listeners, multiple event', function () {
+            var emitter = createEventEmitter();
+
+            var invoked1a = false;
+            var invoked1b = false;
+            var invoked2a = false;
+            var invoked2b = false;
+
+            var remove = emitter.on({
+                event: [
+                    'test-event1',
+                    'test-event2'
+                ],
+                listener: [
+                    function (arg1, arg2) {
+                        if (invoked1a && invoked1b) {
+                            assert.fail();
+                        } else if (invoked1a) {
+                            assert.strictEqual(arg1, 'test');
+                            assert.strictEqual(arg2, 2);
+
+                            invoked1b = true;
+                        } else {
+                            assert.strictEqual(arg1, 'abc');
+                            assert.strictEqual(arg2, 123);
+
+                            invoked1a = true;
+                        }
+                    },
+                    function (arg1, arg2) {
+                        if (invoked2a && invoked2b) {
+                            assert.fail();
+                        } else if (invoked2a) {
+                            assert.strictEqual(arg1, 'test');
+                            assert.strictEqual(arg2, 2);
+
+                            invoked2b = true;
+                        } else {
+                            assert.strictEqual(arg1, 'abc');
+                            assert.strictEqual(arg2, 123);
+
+                            invoked2a = true;
+                        }
+                    }
+                ]
+            });
+
+            emitter.emit('test-event3', 'bad');
+            assert.isFalse(invoked1a);
+            assert.isFalse(invoked1b);
+            assert.isFalse(invoked2a);
+            assert.isFalse(invoked2b);
+
+            emitter.emit('test-event1', 'abc', 123);
+            assert.isTrue(invoked1a);
+            assert.isFalse(invoked1b);
+            assert.isTrue(invoked2a);
+            assert.isFalse(invoked2b);
+
+            emitter.emit('test-event2', 'test', 2);
+            assert.isTrue(invoked1a);
+            assert.isTrue(invoked1b);
+            assert.isTrue(invoked2a);
+            assert.isTrue(invoked2b);
+
+            remove();
+
+            emitter.emit('test-event1', 'abc', 123);
+            emitter.emit('test-event2', 'test', 2);
+        });
+
+        it('async and multiple listeners, multiple event', function (done) {
+            var emitter = createEventEmitter();
+
+            var invoked1a = false;
+            var invoked1b = false;
+            var invoked2a = false;
+            var invoked2b = false;
+            emitter.on({
+                event: [
+                    'test-event1',
+                    'test-event2'
+                ],
+                listener: [
+                    function (arg1, arg2) {
+                        if (invoked1a && invoked1b) {
+                            assert.fail();
+                        } else if (invoked1a) {
+                            assert.strictEqual(arg1, 'test');
+                            assert.strictEqual(arg2, 2);
+
+                            invoked1b = true;
+                        } else {
+                            assert.strictEqual(arg1, 'abc');
+                            assert.strictEqual(arg2, 123);
+
+                            invoked1a = true;
+                        }
+                    },
+                    function (arg1, arg2) {
+                        if (invoked2a && invoked2b) {
+                            assert.fail();
+                        } else if (invoked2a) {
+                            assert.strictEqual(arg1, 'test');
+                            assert.strictEqual(arg2, 2);
+
+                            invoked2b = true;
+                        } else {
+                            assert.strictEqual(arg1, 'abc');
+                            assert.strictEqual(arg2, 123);
+
+                            invoked2a = true;
+                        }
+                    }
+                ],
+                async: true
+            });
+
+            emitter.emit('test-event3', 'bad');
+
+            setTimeout(function () {
+                assert.isFalse(invoked1a);
+                assert.isFalse(invoked1b);
+                assert.isFalse(invoked2a);
+                assert.isFalse(invoked2b);
+
+                emitter.emit('test-event1', 'abc', 123);
+                setTimeout(function () {
+                    assert.isTrue(invoked1a);
+                    assert.isFalse(invoked1b);
+                    assert.isTrue(invoked2a);
+                    assert.isFalse(invoked2b);
+
+                    emitter.emit('test-event2', 'test', 2);
+                    setTimeout(function () {
+                        assert.isTrue(invoked1a);
+                        assert.isTrue(invoked1b);
+                        assert.isTrue(invoked2a);
+                        assert.isTrue(invoked2b);
+
+                        done();
+                    }, 1);
+                }, 1);
+            }, 1);
+        });
+
+        it('timeout and multiple listeners, multiple event', function (done) {
+            var emitter = createEventEmitter();
+
+            var invoked1a = false;
+            var invoked1b = false;
+            var invoked2a = false;
+            var invoked2b = false;
+
+            emitter.on({
+                event: [
+                    'test-event1',
+                    'test-event2'
+                ],
+                listener: [
+                    function (arg1, arg2) {
+                        if (invoked1a && invoked1b) {
+                            assert.fail();
+                        } else if (invoked1a) {
+                            assert.strictEqual(arg1, 'test');
+                            assert.strictEqual(arg2, 2);
+
+                            invoked1b = true;
+                        } else {
+                            assert.strictEqual(arg1, 'abc');
+                            assert.strictEqual(arg2, 123);
+
+                            invoked1a = true;
+                        }
+                    },
+                    function (arg1, arg2) {
+                        if (invoked2a && invoked2b) {
+                            assert.fail();
+                        } else if (invoked2a) {
+                            assert.strictEqual(arg1, 'test');
+                            assert.strictEqual(arg2, 2);
+
+                            invoked2b = true;
+                        } else {
+                            assert.strictEqual(arg1, 'abc');
+                            assert.strictEqual(arg2, 123);
+
+                            invoked2a = true;
+                        }
+                    }
+                ],
+                timeout: 500
+            });
+
+            setTimeout(function () {
+                emitter.emit('test-event3', 'bad');
+                assert.isFalse(invoked1a);
+                assert.isFalse(invoked1b);
+                assert.isFalse(invoked2a);
+                assert.isFalse(invoked2b);
+
+                emitter.emit('test-event1', 'abc', 123);
+                assert.isTrue(invoked1a);
+                assert.isFalse(invoked1b);
+                assert.isTrue(invoked2a);
+                assert.isFalse(invoked2b);
+
+                emitter.emit('test-event2', 'test', 2);
+                assert.isTrue(invoked1a);
+                assert.isTrue(invoked1b);
+                assert.isTrue(invoked2a);
+                assert.isTrue(invoked2b);
+
+                setTimeout(function () {
+                    emitter.emit('test-event3', 'bad');
+                    emitter.emit('test-event1', 'abc', 123);
+                    emitter.emit('test-event2', 'test', 2);
+
+                    done();
+                }, 500);
+            }, 100);
+        });
+
+        it('timeout and async and multiple listeners, multiple event', function (done) {
+            var emitter = createEventEmitter();
+
+            var invoked1a = false;
+            var invoked1b = false;
+            var invoked2a = false;
+            var invoked2b = false;
+            emitter.on({
+                event: [
+                    'test-event1',
+                    'test-event2'
+                ],
+                listener: [
+                    function (arg1, arg2) {
+                        if (invoked1a && invoked1b) {
+                            assert.fail();
+                        } else if (invoked1a) {
+                            assert.strictEqual(arg1, 'test');
+                            assert.strictEqual(arg2, 2);
+
+                            invoked1b = true;
+                        } else {
+                            assert.strictEqual(arg1, 'abc');
+                            assert.strictEqual(arg2, 123);
+
+                            invoked1a = true;
+                        }
+                    },
+                    function (arg1, arg2) {
+                        if (invoked2a && invoked2b) {
+                            assert.fail();
+                        } else if (invoked2a) {
+                            assert.strictEqual(arg1, 'test');
+                            assert.strictEqual(arg2, 2);
+
+                            invoked2b = true;
+                        } else {
+                            assert.strictEqual(arg1, 'abc');
+                            assert.strictEqual(arg2, 123);
+
+                            invoked2a = true;
+                        }
+                    }
+                ],
+                async: true,
+                timeout: 500
+            });
+
+            emitter.emit('test-event3', 'bad');
+
+            setTimeout(function () {
+                assert.isFalse(invoked1a);
+                assert.isFalse(invoked1b);
+                assert.isFalse(invoked2a);
+                assert.isFalse(invoked2b);
+
+                emitter.emit('test-event1', 'abc', 123);
+                setTimeout(function () {
+                    assert.isTrue(invoked1a);
+                    assert.isFalse(invoked1b);
+                    assert.isTrue(invoked2a);
+                    assert.isFalse(invoked2b);
+
+                    emitter.emit('test-event2', 'test', 2);
+                    setTimeout(function () {
+                        assert.isTrue(invoked1a);
+                        assert.isTrue(invoked1b);
+                        assert.isTrue(invoked2a);
+                        assert.isTrue(invoked2b);
+
+                        setTimeout(function () {
+                            emitter.emit('test-event1', 'bad');
+
+                            setTimeout(done, 100);
+                        }, 600);
+                    }, 1);
+                }, 1);
+            }, 1);
         });
     });
 

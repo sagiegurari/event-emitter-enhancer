@@ -1,5 +1,6 @@
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
+| 2017-01-06  | v1.0.24 | New extended 'on' function |
 | 2016-12-31  | v1.0.23 | Maintenance |
 | 2016-11-11  | v1.0.15 | 'emitAsync' callback is now optional |
 | 2016-11-05  | v1.0.14 | Maintenance |

@@ -8,6 +8,8 @@
 
 * [Overview](#overview)
 * [Usage](#usage)
+  * [on(event, listener)](#usage-on1)
+  * [on(options)](#usage-on2)
   * [else](#usage-else)
   * [suspend](#usage-suspend)
   * [elseError](#usage-else-error)
@@ -55,6 +57,59 @@ var emitter = new EventEmitter();   //create an instance of the original class a
 var emitter = new EventEmitter();   //create an instance of an event emitter (can be Node.js of some custom event emitter)
 EventEmitterEnhancer.modifyInstance(emitter);   //modify the specific instance and add the extended capabilities. the original prototype is not affected.
 ```
+
+<a name="usage-on1"></a>
+<!-- markdownlint-disable MD009 MD031 MD036 -->
+### 'emitter.on(event, listener) ⇒ function'
+See node.js events.EventEmitter.on.<br>
+This function also returns a removeListener function to easily remove the provided listener.
+
+**Example**  
+```js
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
+
+var remove = emitter.on('error', function (error) {
+   console.error(error);
+});
+
+//remove listener (no longer need to keep a reference to the listener function)
+remove();
+```
+<!-- markdownlint-enable MD009 MD031 MD036 -->
+
+<a name="usage-on2"></a>
+<!-- markdownlint-disable MD009 MD031 MD036 -->
+### 'emitter.on(options) ⇒ function'
+Enables more complex on capabilities including providing multiple listeners/event names, timeout the listener and more.<br>
+To remove the listener/s, the returned function must be called instead of doing emitter.removeListener(...)
+
+**Example**  
+```js
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
+
+var removeListener = emitter.on({
+  event: ['error', 'connection-error', 'write-error', 'read-error'], //The event names (can be string for a single event)
+  listener: [ //The listener callback functions (can be a function instead of an array for a single listener callback)
+    function firstListener(arg1, arg2) {
+      //do something
+    },
+    function secondListener(arg1, arg2) {
+      //do something
+    }
+  ],
+  async: true, //The callback functions will be called after next tick
+  timeout: 1500 //All listeners will be removed after the provided timeout (if not provided, listeners can only be removed manually via returned function)
+});
+
+//emit any event
+emitter.emit('write-error', 1, 2, 3);
+
+//once done, remove all listeners from all events
+removeListener();
+```
+<!-- markdownlint-enable MD009 MD031 MD036 -->
 
 <a name="usage-else"></a>
 <!-- markdownlint-disable MD009 MD031 MD036 -->
@@ -259,6 +314,7 @@ See [contributing guide](.github/CONTRIBUTING.md)
 
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
+| 2017-01-06  | v1.0.24 | New extended 'on' function |
 | 2016-12-31  | v1.0.23 | Maintenance |
 | 2016-11-11  | v1.0.15 | 'emitAsync' callback is now optional |
 | 2016-11-05  | v1.0.14 | Maintenance |

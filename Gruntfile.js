@@ -16,6 +16,11 @@ module.exports = function (grunt) {
             readme: {
                 options: {
                     tags: {
+                        'usage-on1': 'EnhancedEventEmitter+on',
+                        'usage-on2': {
+                            tag: 'EnhancedEventEmitter+on',
+                            occurrence: 2
+                        },
                         'usage-else': 'EnhancedEventEmitter+else',
                         'usage-suspend': 'EnhancedEventEmitter+suspend',
                         'usage-else-error': 'EnhancedEventEmitter+elseError',

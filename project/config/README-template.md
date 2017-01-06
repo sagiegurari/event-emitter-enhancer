@@ -8,6 +8,8 @@
 
 * [Overview](#overview)
 * [Usage](#usage)
+  * [on(event, listener)](#usage-on1)
+  * [on(options)](#usage-on2)
   * [else](#usage-else)
   * [suspend](#usage-suspend)
   * [elseError](#usage-else-error)
@@ -55,6 +57,10 @@ var emitter = new EventEmitter();   //create an instance of the original class a
 var emitter = new EventEmitter();   //create an instance of an event emitter (can be Node.js of some custom event emitter)
 EventEmitterEnhancer.modifyInstance(emitter);   //modify the specific instance and add the extended capabilities. the original prototype is not affected.
 ```
+
+<a name="usage-on1"></a>
+
+<a name="usage-on2"></a>
 
 <a name="usage-else"></a>
 

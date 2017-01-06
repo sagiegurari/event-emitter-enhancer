@@ -39,6 +39,8 @@
 * [EnhancedEventEmitter](#EnhancedEventEmitter)
     * [new EnhancedEventEmitter()](#new_EnhancedEventEmitter_new)
     * [.suspended](#EnhancedEventEmitter.suspended) : <code>Boolean</code>
+    * [#on(event, listener)](#EnhancedEventEmitter+on) ⇒ <code>function</code>
+    * [#on(options)](#EnhancedEventEmitter+on) ⇒ <code>function</code>
     * [#suspend(event)](#EnhancedEventEmitter+suspend)
     * [#unsuspend(event)](#EnhancedEventEmitter+unsuspend)
     * [#else(listener)](#EnhancedEventEmitter+else)
@@ -69,6 +71,74 @@ If true, all events will not trigger any listener (or 'else' listener).<br>
 The emit function will simply do nothing.
 
 **Access:** public  
+<a name="EnhancedEventEmitter+on"></a>
+
+### EnhancedEventEmitter#on(event, listener) ⇒ <code>function</code>
+See node.js events.EventEmitter.on.<br>
+This function also returns a removeListener function to easily remove the provided listener.
+
+**Returns**: <code>function</code> - The remove listener function  
+**Access:** public  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| event | <code>String</code> | The name of the event |
+| listener | <code>function</code> | The callback function |
+
+**Example**  
+```js
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
+
+var remove = emitter.on('error', function (error) {
+   console.error(error);
+});
+
+//remove listener (no longer need to keep a reference to the listener function)
+remove();
+```
+<a name="EnhancedEventEmitter+on"></a>
+
+### EnhancedEventEmitter#on(options) ⇒ <code>function</code>
+Enables more complex on capabilities including providing multiple listeners/event names, timeout the listener and more.<br>
+To remove the listener/s, the returned function must be called instead of doing emitter.removeListener(...)
+
+**Returns**: <code>function</code> - The remove listener function  
+**Access:** public  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| options | <code>Object</code> |  | All options needed to setup the listeners |
+| options.event | <code>Array.&lt;String&gt;</code> &#124; <code>String</code> |  | The event name or an array of event names |
+| options.listener | <code>Array.&lt;function()&gt;</code> &#124; <code>function</code> |  | The callback function or an array of callback functions |
+| [options.async] | <code>Boolean</code> | <code>false</code> | If true, the callback functions will be called after next tick |
+| [options.timeout] | <code>Number</code> |  | If provided, the returned remove listener function will be called after the provided timeout value in millies (unless called manually before the timeout was triggered) |
+
+**Example**  
+```js
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
+
+var removeListener = emitter.on({
+  event: ['error', 'connection-error', 'write-error', 'read-error'], //The event names (can be string for a single event)
+  listener: [ //The listener callback functions (can be a function instead of an array for a single listener callback)
+    function firstListener(arg1, arg2) {
+      //do something
+    },
+    function secondListener(arg1, arg2) {
+      //do something
+    }
+  ],
+  async: true, //The callback functions will be called after next tick
+  timeout: 1500 //All listeners will be removed after the provided timeout (if not provided, listeners can only be removed manually via returned function)
+});
+
+//emit any event
+emitter.emit('write-error', 1, 2, 3);
+
+//once done, remove all listeners from all events
+removeListener();
+```
 <a name="EnhancedEventEmitter+suspend"></a>
 
 ### EnhancedEventEmitter#suspend(event)
