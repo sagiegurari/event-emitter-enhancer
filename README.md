@@ -17,6 +17,7 @@
   * [onAsync](#usage-on-async)
   * [onAny](#usage-on-any)
   * [filter](#usage-filter)
+  * [proxyEvents](#usage-proxyEvents)
 * [Installation](#installation)
 * [API Documentation](docs/api.md)
 * [Contributing](.github/CONTRIBUTING.md)
@@ -295,6 +296,27 @@ removeGlobalArg2Filter();
 ```
 <!-- markdownlint-enable MD009 MD031 MD036 -->
 
+<a name="usage-proxyEvents"></a>
+<!-- markdownlint-disable MD009 MD031 MD036 -->
+### 'emitter.proxyEvents(emitters, events) ⇒ function'
+Will setup an event proxy so if any of the requested event/s are fired from the provided emitter/s, they will be triggered by this emitter.
+
+**Example**  
+```js
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
+
+//proxy the 'data' and 'end' events from all sockets
+var stop = emitter.proxyEvents(sockets, ['data', 'end']);
+
+//listen to events via emitter
+emitter.on('data', onData);
+
+//stop events proxy
+stop();
+```
+<!-- markdownlint-enable MD009 MD031 MD036 -->
+
 <a name="installation"></a>
 ## Installation
 In order to use this library, just run the following npm install command:
@@ -314,6 +336,7 @@ See [contributing guide](.github/CONTRIBUTING.md)
 
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
+| 2017-01-07  | v1.0.25 | New 'proxyEvents' function |
 | 2017-01-06  | v1.0.24 | New extended 'on' function |
 | 2016-12-31  | v1.0.23 | Maintenance |
 | 2016-11-11  | v1.0.15 | 'emitAsync' callback is now optional |

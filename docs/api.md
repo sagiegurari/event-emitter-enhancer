@@ -58,6 +58,7 @@
     * [#addEventFilter(event, filter)](#EnhancedEventEmitter+addEventFilter) ⇒ <code>function</code>
     * [#addGlobalFilter(filter)](#EnhancedEventEmitter+addGlobalFilter) ⇒ <code>function</code>
     * [#filter([event], filter)](#EnhancedEventEmitter+filter) ⇒ <code>function</code>
+    * [#proxyEvents(emitters, events)](#EnhancedEventEmitter+proxyEvents) ⇒ <code>function</code>
 
 <a name="new_EnhancedEventEmitter_new"></a>
 
@@ -473,6 +474,33 @@ See 'addFilter' documentation.
 | [event] | <code>String</code> | The event name. If not provided, the filter is relevant for all events. |
 | filter | <code>[FilterCallback](#FilterCallback)</code> | The filter function |
 
+<a name="EnhancedEventEmitter+proxyEvents"></a>
+
+### EnhancedEventEmitter#proxyEvents(emitters, events) ⇒ <code>function</code>
+Will setup an event proxy so if any of the requested event/s are fired from the provided emitter/s, they will be triggered by this emitter.
+
+**Returns**: <code>function</code> - Once invoked, will stop proxying of events  
+**Access:** public  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| emitters | <code>Array.&lt;Object&gt;</code> &#124; <code>Object</code> | An event emitter or array of event emitters to proxy the events from |
+| events | <code>Array.&lt;String&gt;</code> &#124; <code>String</code> | A single event name or an array of event names to proxy from the provided emitter/s |
+
+**Example**  
+```js
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
+
+//proxy the 'data' and 'end' events from all sockets
+var stop = emitter.proxyEvents(sockets, ['data', 'end']);
+
+//listen to events via emitter
+emitter.on('data', onData);
+
+//stop events proxy
+stop();
+```
 <a name="EventEmitterEnhancer"></a>
 
 ## EventEmitterEnhancer

@@ -1496,6 +1496,240 @@ describe('event-emitter-enhancer', function () {
         });
     });
 
+    describe('proxyEvents', function () {
+        it('missing emitters', function () {
+            var emitter = createEventEmitter();
+
+            var errorFound = false;
+
+            try {
+                emitter.proxyEvents(undefined, 'test');
+            } catch (error) {
+                assert.isDefined(error);
+                errorFound = true;
+            }
+
+            assert.isTrue(errorFound);
+        });
+
+        it('missing events', function () {
+            var emitter = createEventEmitter();
+
+            var errorFound = false;
+
+            try {
+                emitter.proxyEvents(new EventEmitter());
+            } catch (error) {
+                assert.isDefined(error);
+                errorFound = true;
+            }
+
+            assert.isTrue(errorFound);
+        });
+
+        it('single emitter, single event', function () {
+            var emitter = createEventEmitter();
+
+            var source = new EventEmitter();
+
+            var counter = 0;
+            emitter.on('test', function (arg1, arg2) {
+                counter++;
+
+                assert.strictEqual(arg1, counter);
+                assert.strictEqual(arg2, 'b');
+            });
+
+            emitter.on('bad', function () {
+                assert.fail();
+            });
+
+            emitter.proxyEvents(source, 'test');
+
+            source.emit('bad');
+
+            var index;
+            var loops = 5;
+            for (index = 0; index < loops; index++) {
+                source.emit('test', index + 1, 'b');
+            }
+
+            assert.strictEqual(counter, 5);
+        });
+
+        it('multiple emitters, single event', function () {
+            var emitter = createEventEmitter();
+
+            var source1 = new EventEmitter();
+            var source2 = new EventEmitter();
+
+            var counter = 0;
+            emitter.on('test', function (arg1) {
+                if (counter % 2) {
+                    assert.strictEqual(arg1, 'source2');
+                } else {
+                    assert.strictEqual(arg1, 'source1');
+                }
+
+                counter++;
+            });
+
+            emitter.onAny([
+                'bad1',
+                'bad2'
+            ], function () {
+                assert.fail();
+            });
+
+            emitter.proxyEvents([
+                source1,
+                source2
+            ], 'test');
+
+            source1.emit('bad1');
+            source2.emit('bad2');
+
+            var index;
+            var loops = 5;
+            for (index = 0; index < loops; index++) {
+                source1.emit('test', 'source1');
+                source2.emit('test', 'source2');
+            }
+
+            assert.strictEqual(counter, 10);
+        });
+
+        it('single emitter, multiple events', function () {
+            var emitter = createEventEmitter();
+
+            var source = new EventEmitter();
+
+            var counter = 0;
+            emitter.onAny([
+                'test1',
+                'test2'
+            ], function (arg1) {
+                if (counter % 2) {
+                    assert.strictEqual(arg1, 'second');
+                } else {
+                    assert.strictEqual(arg1, 'first');
+                }
+
+                counter++;
+            });
+
+            emitter.on('bad', function () {
+                assert.fail();
+            });
+
+            emitter.proxyEvents(source, [
+                'test1',
+                'test2'
+            ]);
+
+            source.emit('bad');
+
+            var index;
+            var loops = 5;
+            for (index = 0; index < loops; index++) {
+                source.emit('test1', 'first');
+                source.emit('test2', 'second');
+            }
+
+            assert.strictEqual(counter, 10);
+        });
+
+        it('multiple emitter, multiple events', function () {
+            var emitter = createEventEmitter();
+
+            var source1 = new EventEmitter();
+            var source2 = new EventEmitter();
+
+            var counter = 0;
+            var test1Counter = 0;
+            var test2Counter = 0;
+            emitter.on('test1', function () {
+                test1Counter++;
+            });
+            emitter.on('test2', function () {
+                test2Counter++;
+            });
+            emitter.onAny([
+                'test1',
+                'test2'
+            ], function (arg1) {
+                switch (counter % 4) {
+                case 0:
+                    assert.strictEqual(arg1, '1a');
+                    break;
+                case 1:
+                    assert.strictEqual(arg1, '1b');
+                    break;
+                case 2:
+                    assert.strictEqual(arg1, '2a');
+                    break;
+                case 3:
+                    assert.strictEqual(arg1, '2b');
+                    break;
+                }
+
+                counter++;
+            });
+
+            emitter.onAny([
+                'bad1',
+                'bad2'
+            ], function () {
+                assert.fail();
+            });
+
+            var stop = emitter.proxyEvents([
+                source1,
+                source2
+            ], [
+                'test1',
+                'test2'
+            ]);
+
+            source1.emit('bad1');
+            source2.emit('bad2');
+
+            var index;
+            var loops = 5;
+            for (index = 0; index < loops; index++) {
+                source1.emit('test1', '1a');
+                source1.emit('test2', '1b');
+                source2.emit('test1', '2a');
+                source2.emit('test2', '2b');
+            }
+
+            assert.strictEqual(test1Counter, 10);
+            assert.strictEqual(test2Counter, 10);
+            assert.strictEqual(counter, 20);
+
+            emitter.onAny([
+                'test1',
+                'test2'
+            ], function () {
+                assert.fail();
+            });
+
+            stop();
+
+            source1.emit('test1', 'bad');
+            source1.emit('test2', 'bad');
+            source2.emit('test1', 'bad');
+            source2.emit('test2', 'bad');
+
+            stop(); //check if invoked again, nothing should change
+
+            source1.emit('test1', 'bad');
+            source1.emit('test2', 'bad');
+            source2.emit('test1', 'bad');
+            source2.emit('test2', 'bad');
+        });
+    });
+
     describe('enhance', function () {
         it('enhance EventEmitter2', function (done) {
             var EventEmitter2 = require('eventemitter2').EventEmitter2;

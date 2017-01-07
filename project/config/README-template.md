@@ -17,6 +17,7 @@
   * [onAsync](#usage-on-async)
   * [onAny](#usage-on-any)
   * [filter](#usage-filter)
+  * [proxyEvents](#usage-proxyEvents)
 * [Installation](#installation)
 * [API Documentation](docs/api.md)
 * [Contributing](.github/CONTRIBUTING.md)
@@ -75,6 +76,8 @@ EventEmitterEnhancer.modifyInstance(emitter);   //modify the specific instance a
 <a name="usage-on-any"></a>
 
 <a name="usage-filter"></a>
+
+<a name="usage-proxyEvents"></a>
 
 <a name="installation"></a>
 ## Installation

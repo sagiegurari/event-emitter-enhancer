@@ -27,7 +27,8 @@ module.exports = function (grunt) {
                         'usage-emit-async': 'EnhancedEventEmitter+emitAsync',
                         'usage-on-async': 'EnhancedEventEmitter+onAsync',
                         'usage-on-any': 'EnhancedEventEmitter+onAny',
-                        'usage-filter': 'EnhancedEventEmitter+addFilter'
+                        'usage-filter': 'EnhancedEventEmitter+addFilter',
+                        'usage-proxyEvents': 'EnhancedEventEmitter+proxyEvents'
                     },
                     modifySignature: function (line) {
                         return line.split('### \'EnhancedEventEmitter.').join('### \'emitter.').split('emitter.addFilter(').join('emitter.filter(').split('emitAsync(event, [params]').join('emitAsync(event, [...params]');
