@@ -1,5 +1,6 @@
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
+| 2017-01-13  | v1.0.26 | Maintenance |
 | 2017-01-07  | v1.0.25 | New 'proxyEvents' function |
 | 2017-01-06  | v1.0.24 | New extended 'on' function |
 | 2016-12-31  | v1.0.23 | Maintenance |
