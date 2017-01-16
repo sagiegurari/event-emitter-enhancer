@@ -10,6 +10,7 @@
 * [Usage](#usage)
   * [on(event, listener)](#usage-on1)
   * [on(options)](#usage-on2)
+  * [once(event, listener)](#usage-once)
   * [else](#usage-else)
   * [suspend](#usage-suspend)
   * [elseError](#usage-else-error)
@@ -109,6 +110,26 @@ emitter.emit('write-error', 1, 2, 3);
 
 //once done, remove all listeners from all events
 removeListener();
+```
+<!-- markdownlint-enable MD009 MD031 MD036 -->
+
+<a name="usage-once"></a>
+<!-- markdownlint-disable MD009 MD031 MD036 -->
+### 'emitter.once(event, listener) ⇒ function'
+See node.js events.EventEmitter.once.<br>
+This function also returns a removeListener function to easily remove the provided listener.
+
+**Example**  
+```js
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
+
+var remove = emitter.once('error', function (error) {
+   console.error(error);
+});
+
+//remove listener (no longer need to keep a reference to the listener function)
+remove();
 ```
 <!-- markdownlint-enable MD009 MD031 MD036 -->
 
@@ -336,6 +357,7 @@ See [contributing guide](.github/CONTRIBUTING.md)
 
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
+| 2017-01-16  | v1.0.27 | New extended 'once' function |
 | 2017-01-13  | v1.0.26 | Maintenance |
 | 2017-01-07  | v1.0.25 | New 'proxyEvents' function |
 | 2017-01-06  | v1.0.24 | New extended 'on' function |

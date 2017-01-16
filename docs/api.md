@@ -41,6 +41,7 @@
     * [.suspended](#EnhancedEventEmitter.suspended) : <code>Boolean</code>
     * [#on(event, listener)](#EnhancedEventEmitter+on) ⇒ <code>function</code>
     * [#on(options)](#EnhancedEventEmitter+on) ⇒ <code>function</code>
+    * [#once(event, listener)](#EnhancedEventEmitter+once) ⇒ <code>function</code>
     * [#suspend(event)](#EnhancedEventEmitter+suspend)
     * [#unsuspend(event)](#EnhancedEventEmitter+unsuspend)
     * [#else(listener)](#EnhancedEventEmitter+else)
@@ -139,6 +140,32 @@ emitter.emit('write-error', 1, 2, 3);
 
 //once done, remove all listeners from all events
 removeListener();
+```
+<a name="EnhancedEventEmitter+once"></a>
+
+### EnhancedEventEmitter#once(event, listener) ⇒ <code>function</code>
+See node.js events.EventEmitter.once.<br>
+This function also returns a removeListener function to easily remove the provided listener.
+
+**Returns**: <code>function</code> - The remove listener function  
+**Access:** public  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| event | <code>String</code> | The name of the event |
+| listener | <code>function</code> | The callback function |
+
+**Example**  
+```js
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
+
+var remove = emitter.once('error', function (error) {
+   console.error(error);
+});
+
+//remove listener (no longer need to keep a reference to the listener function)
+remove();
 ```
 <a name="EnhancedEventEmitter+suspend"></a>
 

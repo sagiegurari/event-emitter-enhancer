@@ -32,6 +32,7 @@ describe('event-emitter-enhancer', function () {
             var emitter = new EnhancedEventEmitter();
 
             assert.isFunction(emitter.baseOn);
+            assert.isFunction(emitter.baseOnce);
             assert.isFunction(emitter.baseEmit);
 
             assert.isFunction(emitter.onAsync);
@@ -52,6 +53,7 @@ describe('event-emitter-enhancer', function () {
             var emitter = new EnhancedEventEmitter();
 
             assert.isFunction(emitter.baseOn);
+            assert.isFunction(emitter.baseOnce);
             assert.isFunction(emitter.baseEmit);
 
             assert.isFunction(emitter.onAsync);
@@ -97,6 +99,7 @@ describe('event-emitter-enhancer', function () {
             var emitter = new CustomEventEmitter();
 
             assert.isFunction(emitter.baseOn);
+            assert.isFunction(emitter.baseOnce);
             assert.isFunction(emitter.baseEmit);
 
             assert.isFunction(emitter.onAsync);
@@ -142,6 +145,7 @@ describe('event-emitter-enhancer', function () {
             EventEmitterEnhancer.modifyInstance(emitter);
 
             assert.isFunction(emitter.baseOn);
+            assert.isFunction(emitter.baseOnce);
             assert.isFunction(emitter.baseEmit);
 
             assert.isFunction(emitter.onAsync);
@@ -162,6 +166,7 @@ describe('event-emitter-enhancer', function () {
             EventEmitterEnhancer.modifyInstance(emitter);
 
             assert.isFunction(emitter.baseOn);
+            assert.isFunction(emitter.baseOnce);
             assert.isFunction(emitter.baseEmit);
 
             assert.isUndefined(EventEmitter.prototype.enhancedEmitterType);
@@ -176,6 +181,43 @@ describe('event-emitter-enhancer', function () {
             }
 
             assert.isTrue(errorFound);
+        });
+    });
+
+    describe('once', function () {
+        it('nodejs with remove, called', function () {
+            var emitter = createEventEmitter();
+
+            var invoked = false;
+            var remove = emitter.once('test', function (arg1, arg2, arg3) {
+                if (invoked) {
+                    assert.fail();
+                }
+
+                assert.strictEqual(arg1, 1);
+                assert.strictEqual(arg2, 2);
+                assert.strictEqual(arg3, 3);
+
+                invoked = true;
+            });
+
+            emitter.emit('test', 1, 2, 3);
+
+            remove();
+
+            emitter.emit('test', 'bad');
+        });
+
+        it('nodejs with remove, removed', function () {
+            var emitter = createEventEmitter();
+
+            var remove = emitter.once('test', function () {
+                assert.fail();
+            });
+
+            remove();
+
+            emitter.emit('test', 'bad');
         });
     });
 

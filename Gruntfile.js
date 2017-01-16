@@ -21,6 +21,7 @@ module.exports = function (grunt) {
                             tag: 'EnhancedEventEmitter+on',
                             occurrence: 2
                         },
+                        'usage-once': 'EnhancedEventEmitter+once',
                         'usage-else': 'EnhancedEventEmitter+else',
                         'usage-suspend': 'EnhancedEventEmitter+suspend',
                         'usage-else-error': 'EnhancedEventEmitter+elseError',
