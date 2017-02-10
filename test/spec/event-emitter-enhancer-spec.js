@@ -1538,6 +1538,64 @@ describe('event-emitter-enhancer', function () {
         });
     });
 
+    describe('asAsyncListener', function () {
+        it('undefined', function () {
+            var emitter = createEventEmitter();
+
+            var errorFound = false;
+
+            try {
+                emitter.asAsyncListener();
+            } catch (error) {
+                assert.isDefined(error);
+                errorFound = true;
+            }
+
+            assert.isTrue(errorFound);
+        });
+
+        it('null', function () {
+            var emitter = createEventEmitter();
+
+            var errorFound = false;
+
+            try {
+                emitter.asAsyncListener(null);
+            } catch (error) {
+                assert.isDefined(error);
+                errorFound = true;
+            }
+
+            assert.isTrue(errorFound);
+        });
+
+        it('not a function', function () {
+            var emitter = createEventEmitter();
+
+            var errorFound = false;
+
+            try {
+                emitter.asAsyncListener('test');
+            } catch (error) {
+                assert.isDefined(error);
+                errorFound = true;
+            }
+
+            assert.isTrue(errorFound);
+        });
+
+        it('valid', function (done) {
+            var emitter = createEventEmitter();
+
+            var asyncDone = emitter.asAsyncListener(done);
+
+            assert.isFunction(asyncDone);
+            assert.isFalse(asyncDone === done);
+
+            asyncDone();
+        });
+    });
+
     describe('proxyEvents', function () {
         it('missing emitters', function () {
             var emitter = createEventEmitter();
