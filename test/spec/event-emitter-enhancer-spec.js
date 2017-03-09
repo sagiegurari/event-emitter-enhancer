@@ -206,6 +206,10 @@ describe('event-emitter-enhancer', function () {
             remove();
 
             emitter.emit('test', 'bad');
+
+            remove();
+
+            emitter.emit('test', 'bad');
         });
 
         it('nodejs with remove, removed', function () {
@@ -239,6 +243,10 @@ describe('event-emitter-enhancer', function () {
             });
 
             emitter.emit('test', 1, 2, 3);
+
+            remove();
+
+            emitter.emit('test', 'bad');
 
             remove();
 
@@ -383,6 +391,11 @@ describe('event-emitter-enhancer', function () {
             assert.isTrue(invoked1b);
             assert.isTrue(invoked2a);
             assert.isTrue(invoked2b);
+
+            remove();
+
+            emitter.emit('test-event1', 'abc', 123);
+            emitter.emit('test-event2', 'test', 2);
 
             remove();
 
@@ -685,6 +698,35 @@ describe('event-emitter-enhancer', function () {
             emitter2.emit('test');
             emitter1.emit('test');
         });
+
+        it('unsuspend no input', function (done) {
+            var emitter1 = createEventEmitter();
+            var emitter2 = createEventEmitter();
+
+            var unsuspendCalled = false;
+            emitter1.on('test', function () {
+                emitter2.unsuspend('test');
+                unsuspendCalled = true;
+
+                emitter2.emit('test');
+            });
+            emitter2.suspend('test');
+            emitter2.on('test', function () {
+                if (unsuspendCalled) {
+                    done();
+                } else {
+                    assert.fail();
+                }
+            });
+
+            assert.isFalse(emitter1.suspended);
+            assert.isFalse(emitter2.suspended);
+
+            emitter2.unsuspend();
+
+            emitter2.emit('test');
+            emitter1.emit('test');
+        });
     });
 
     describe('else', function () {
@@ -755,6 +797,11 @@ describe('event-emitter-enhancer', function () {
             emitter.removeAllElseListeners();
 
             emitter.emit('test');
+        });
+
+        it('no input', function () {
+            var emitter = createEventEmitter();
+            emitter.removeElseListener();
         });
 
         it('remove single else', function (done) {
@@ -873,6 +920,11 @@ describe('event-emitter-enhancer', function () {
     });
 
     describe('elseError', function () {
+        it('remove no input', function () {
+            var emitter = createEventEmitter();
+            emitter.removeElseError();
+        });
+
         it('single event else error', function (done) {
             var emitter = createEventEmitter();
             emitter.else(function () {
@@ -1088,6 +1140,10 @@ describe('event-emitter-enhancer', function () {
             remove();
 
             assert.equal(1, emitter.listeners('test').length);
+
+            remove();
+
+            assert.equal(1, emitter.listeners('test').length);
         });
     });
 
@@ -1166,6 +1222,13 @@ describe('event-emitter-enhancer', function () {
                 something: [1, 2, 3]
             });
             assert.equal(triggerCount, 1);
+
+            remove();
+
+            emitter.emit('test-single', 1, 'a', {
+                something: [1, 2, 3]
+            });
+            assert.equal(triggerCount, 1);
         });
 
         it('onAny single array event', function () {
@@ -1227,6 +1290,15 @@ describe('event-emitter-enhancer', function () {
             assert.equal(triggerCount, 3);
 
             emitter.emit('fake1', 'wrong');
+            assert.equal(triggerCount, 3);
+
+            remove();
+
+            events.forEach(function (eventName) {
+                emitter.emit(eventName, 1, 'a', {
+                    something: [1, 2, 3]
+                });
+            });
             assert.equal(triggerCount, 3);
 
             remove();
@@ -1466,9 +1538,22 @@ describe('event-emitter-enhancer', function () {
                     remove1();
                     remove2();
 
-                    emitter.filter(function () {
+                    var remove3 = emitter.filter(function () {
                         filtersCalled++;
                         assert.equal(filtersCalled, 12);
+
+                        return true;
+                    });
+
+                    emitter.emit('test2', false);
+
+                    remove1();
+                    remove2();
+                    remove3();
+
+                    emitter.filter(function () {
+                        filtersCalled++;
+                        assert.equal(filtersCalled, 18);
 
                         return true;
                     });
@@ -1535,6 +1620,96 @@ describe('event-emitter-enhancer', function () {
                 }
             });
             emitter.emit('test', 1, 2);
+        });
+
+        it('remove specific multiple times', function () {
+            var emitter = createEventEmitter();
+
+            var remove = emitter.filter('test', function () {
+                assert.fail();
+            });
+
+            remove();
+            remove();
+
+            emitter.emit('test', 10, 20);
+        });
+
+        it('remove specific missing event', function () {
+            var emitter = createEventEmitter();
+
+            var remove = emitter.filter('test', function () {
+                assert.fail();
+            });
+
+            emitter.filters.event = {};
+
+            remove();
+
+            emitter.emit('test', 10, 20);
+        });
+
+        it('remove specific missing listener', function () {
+            var emitter = createEventEmitter();
+
+            var remove = emitter.filter('test', function () {
+                assert.fail();
+            });
+
+            emitter.filters.event.test = [
+                function fake() {
+                    return true;
+                }
+            ];
+
+            remove();
+
+            emitter.emit('test', 10, 20);
+        });
+
+        it('remove global multiple times', function () {
+            var emitter = createEventEmitter();
+
+            var remove = emitter.filter(function () {
+                assert.fail();
+            });
+
+            remove();
+            remove();
+
+            emitter.emit('test', 10, 20);
+        });
+
+        it('remove global empty', function () {
+            var emitter = createEventEmitter();
+
+            var remove = emitter.filter(function () {
+                assert.fail();
+            });
+
+            emitter.filters.global = [];
+
+            remove();
+
+            emitter.emit('test', 10, 20);
+        });
+
+        it('remove global missing listener', function () {
+            var emitter = createEventEmitter();
+
+            var remove = emitter.filter(function () {
+                assert.fail();
+            });
+
+            emitter.filters.global = [
+                function fake() {
+                    return true;
+                }
+            ];
+
+            remove();
+
+            emitter.emit('test', 10, 20);
         });
     });
 
@@ -1827,6 +2002,14 @@ describe('event-emitter-enhancer', function () {
             source1.emit('test2', 'bad');
             source2.emit('test1', 'bad');
             source2.emit('test2', 'bad');
+        });
+    });
+
+    describe('markEvent', function () {
+        it('no input', function () {
+            var emitter = createEventEmitter();
+
+            emitter.markEvent();
         });
     });
 
