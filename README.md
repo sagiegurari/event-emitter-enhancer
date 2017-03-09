@@ -357,7 +357,7 @@ See [contributing guide](.github/CONTRIBUTING.md)
 
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
-| 2017-02-10  | v1.0.29 | Maintenance |
+| 2017-03-09  | v1.0.30 | Maintenance |
 | 2017-01-16  | v1.0.27 | New extended 'once' function |
 | 2017-01-13  | v1.0.26 | Maintenance |
 | 2017-01-07  | v1.0.25 | New 'proxyEvents' function |

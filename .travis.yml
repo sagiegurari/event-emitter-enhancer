@@ -9,4 +9,4 @@ node_js:
   - "0.10"
   - "iojs"
 before_install:
-  - npm install -g npm
+  - npm install -g npm@^3

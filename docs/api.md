@@ -33,8 +33,8 @@
 
 ## EnhancedEventEmitter
 **Kind**: global class  
-**Access:** public  
-**Author:** Sagie Gur-Ari  
+**Access**: public  
+**Author**: Sagie Gur-Ari  
 
 * [EnhancedEventEmitter](#EnhancedEventEmitter)
     * [new EnhancedEventEmitter()](#new_EnhancedEventEmitter_new)
@@ -72,7 +72,7 @@ This class holds all the extended capabilities added to any emitter.
 If true, all events will not trigger any listener (or 'else' listener).<br>
 The emit function will simply do nothing.
 
-**Access:** public  
+**Access**: public  
 <a name="EnhancedEventEmitter+on"></a>
 
 ### EnhancedEventEmitter#on(event, listener) ⇒ <code>function</code>
@@ -80,7 +80,7 @@ See node.js events.EventEmitter.on.<br>
 This function also returns a removeListener function to easily remove the provided listener.
 
 **Returns**: <code>function</code> - The remove listener function  
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -106,7 +106,7 @@ Enables more complex on capabilities including providing multiple listeners/even
 To remove the listener/s, the returned function must be called instead of doing emitter.removeListener(...)
 
 **Returns**: <code>function</code> - The remove listener function  
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -148,7 +148,7 @@ See node.js events.EventEmitter.once.<br>
 This function also returns a removeListener function to easily remove the provided listener.
 
 **Returns**: <code>function</code> - The remove listener function  
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -173,7 +173,7 @@ remove();
 Suspends all emit calls for the provided event name (including 'else' listeners).<br>
 For suspended events, the emit function will simply do nothing ('else' listeners won't be invoked either).
 
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -198,7 +198,7 @@ emitter.emit('test');
 ### EnhancedEventEmitter#unsuspend(event)
 Unsuspends the emit calls for the provided event name.
 
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -209,7 +209,7 @@ Unsuspends the emit calls for the provided event name.
 ### EnhancedEventEmitter#else(listener)
 Adds an 'else' listener which will be triggered by all events that do not have a listener currently for them (apart of the special 'error' event).
 
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -234,7 +234,7 @@ emitter.emit('test', 1, 2);
 Removes the provided 'else' listener.<br>
 Same as 'unelse' function.
 
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -245,7 +245,7 @@ Same as 'unelse' function.
 ### EnhancedEventEmitter#unelse(listener)
 See 'removeElseListener' documentation.
 
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -256,13 +256,13 @@ See 'removeElseListener' documentation.
 ### EnhancedEventEmitter#removeAllElseListeners()
 Removes all 'else' listeners.
 
-**Access:** public  
+**Access**: public  
 <a name="EnhancedEventEmitter+elseError"></a>
 
 ### EnhancedEventEmitter#elseError(event)
 In case an event with the provided name is emitted but no listener is attached to it, an error event will emitted by this emitter instance instead.
 
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -289,7 +289,7 @@ emitter.emit('test');
 Removes the else-error handler for the provided event.<br>
 Same as 'unelseError' function.
 
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -300,7 +300,7 @@ Same as 'unelseError' function.
 ### EnhancedEventEmitter#unelseError(event)
 See 'removeElseError' documentation.
 
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -312,7 +312,7 @@ See 'removeElseError' documentation.
 See Node.js events.EventEmitter documentation.
 
 **Returns**: <code>Boolean</code> - True if a listener or an 'else' listener handled the event  
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -324,7 +324,7 @@ See Node.js events.EventEmitter documentation.
 ### EnhancedEventEmitter#emitAsync(event, [params], [callback])
 Invokes the emit after a timeout to enable calling flow to continue and not block due to event listeners.
 
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -352,7 +352,7 @@ This ensures that the provided listener is invoked after all other listeners and
 To remove the listener, the returned function must be called instead of doing emitter.removeListener(...)
 
 **Returns**: <code>function</code> - The remove listener function  
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -382,7 +382,7 @@ Adds a listener to all provided event names.<br>
 To remove the listener, the returned function must be called instead of doing emitter.removeListener(...)
 
 **Returns**: <code>function</code> - The remove listener function  
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -409,7 +409,7 @@ Adds a filter that will be triggered before every emit for the provided event ty
 The filter enables to prevent events from reaching the listeners in case some criteria is met.
 
 **Returns**: <code>function</code> - The remove filter function  
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -469,7 +469,7 @@ removeGlobalArg2Filter();
 Adds an event filter (See addFilter)
 
 **Returns**: <code>function</code> - The remove filter function  
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -482,7 +482,7 @@ Adds an event filter (See addFilter)
 Adds a global filter (See addFilter)
 
 **Returns**: <code>function</code> - The remove filter function  
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -494,7 +494,7 @@ Adds a global filter (See addFilter)
 See 'addFilter' documentation.
 
 **Returns**: <code>function</code> - The remove filter function  
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -507,7 +507,7 @@ See 'addFilter' documentation.
 Will setup an event proxy so if any of the requested event/s are fired from the provided emitter/s, they will be triggered by this emitter.
 
 **Returns**: <code>function</code> - Once invoked, will stop proxying of events  
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -532,8 +532,8 @@ stop();
 
 ## EventEmitterEnhancer
 **Kind**: global class  
-**Access:** public  
-**Author:** Sagie Gur-Ari  
+**Access**: public  
+**Author**: Sagie Gur-Ari  
 
 * [EventEmitterEnhancer](#EventEmitterEnhancer)
     * [new EventEmitterEnhancer()](#new_EventEmitterEnhancer_new)
@@ -552,7 +552,7 @@ This class enables to enhance event emitter prototypes and instances with extra 
 ### EventEmitterEnhancer.EnhancedEventEmitter : <code>EventEmitter</code>
 The node.js event emitter prototype extended with the extra capabilities.
 
-**Access:** public  
+**Access**: public  
 <a name="EventEmitterEnhancer+extend"></a>
 
 ### EventEmitterEnhancer#extend(EmitterType) ⇒ <code>Object</code>
@@ -560,7 +560,7 @@ Extends the provided object prototype with the extended emitter capabilities.<br
 The provided object type must have an Node.js events.EventEmitter compatible interface.
 
 **Returns**: <code>Object</code> - The modified object type  
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -579,7 +579,7 @@ var emitter = new EnhancedEventEmitter();   //create a new instance using the ne
 Modified the provided object prototype with the extended emitter capabilities.<br>
 The provided object type must have an Node.js events.EventEmitter compatible interface.
 
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -598,7 +598,7 @@ var emitter = new EventEmitter();   //create an instance of the original class a
 Modified the specific object instance with the extended emitter capabilities.<br>
 The provided object type must have an Node.js events.EventEmitter compatible interface.
 
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -616,7 +616,7 @@ EventEmitterEnhancer.modifyInstance(emitter);   //modify the specific instance a
 Extends the Node.js events.EventEmitter with extra capabilities.
 
 **Kind**: global namespace  
-**Author:** Sagie Gur-Ari  
+**Author**: Sagie Gur-Ari  
 
 * [EventEmitterEnhancer](#EventEmitterEnhancer) : <code>object</code>
     * [new EventEmitterEnhancer()](#new_EventEmitterEnhancer_new)
@@ -635,7 +635,7 @@ This class enables to enhance event emitter prototypes and instances with extra 
 ### EventEmitterEnhancer.EnhancedEventEmitter : <code>EventEmitter</code>
 The node.js event emitter prototype extended with the extra capabilities.
 
-**Access:** public  
+**Access**: public  
 <a name="EventEmitterEnhancer+extend"></a>
 
 ### EventEmitterEnhancer#extend(EmitterType) ⇒ <code>Object</code>
@@ -643,7 +643,7 @@ Extends the provided object prototype with the extended emitter capabilities.<br
 The provided object type must have an Node.js events.EventEmitter compatible interface.
 
 **Returns**: <code>Object</code> - The modified object type  
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -662,7 +662,7 @@ var emitter = new EnhancedEventEmitter();   //create a new instance using the ne
 Modified the provided object prototype with the extended emitter capabilities.<br>
 The provided object type must have an Node.js events.EventEmitter compatible interface.
 
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -681,7 +681,7 @@ var emitter = new EventEmitter();   //create an instance of the original class a
 Modified the specific object instance with the extended emitter capabilities.<br>
 The provided object type must have an Node.js events.EventEmitter compatible interface.
 
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
