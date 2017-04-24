@@ -213,7 +213,7 @@ Adds an 'else' listener which will be triggered by all events that do not have a
 
 | Param | Type | Description |
 | --- | --- | --- |
-| listener | <code>[ElseCallback](#ElseCallback)</code> | The listener that will catch all 'else' events |
+| listener | [<code>ElseCallback</code>](#ElseCallback) | The listener that will catch all 'else' events |
 
 **Example**  
 ```js
@@ -238,7 +238,7 @@ Same as 'unelse' function.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| listener | <code>[ElseCallback](#ElseCallback)</code> | The listener to remove |
+| listener | [<code>ElseCallback</code>](#ElseCallback) | The listener to remove |
 
 <a name="EnhancedEventEmitter+unelse"></a>
 
@@ -249,7 +249,7 @@ See 'removeElseListener' documentation.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| listener | <code>[ElseCallback](#ElseCallback)</code> | The listener to remove |
+| listener | [<code>ElseCallback</code>](#ElseCallback) | The listener to remove |
 
 <a name="EnhancedEventEmitter+removeAllElseListeners"></a>
 
@@ -330,7 +330,7 @@ Invokes the emit after a timeout to enable calling flow to continue and not bloc
 | --- | --- | --- |
 | event | <code>String</code> | The event name |
 | [params] | <code>\*</code> | The event parameters (if last param is a function, it is considered as the callback of the emitAsync) |
-| [callback] | <code>[AsyncEmitCallback](#AsyncEmitCallback)</code> | The async callback |
+| [callback] | [<code>AsyncEmitCallback</code>](#AsyncEmitCallback) | The async callback |
 
 **Example**  
 ```js
@@ -414,7 +414,7 @@ The filter enables to prevent events from reaching the listeners in case some cr
 | Param | Type | Description |
 | --- | --- | --- |
 | [event] | <code>String</code> | The event name. If not provided, the filter is relevant for all events. |
-| filter | <code>[FilterCallback](#FilterCallback)</code> | The filter function |
+| filter | [<code>FilterCallback</code>](#FilterCallback) | The filter function |
 
 **Example**  
 ```js
@@ -474,7 +474,7 @@ Adds an event filter (See addFilter)
 | Param | Type | Description |
 | --- | --- | --- |
 | event | <code>String</code> | The event name. |
-| filter | <code>[FilterCallback](#FilterCallback)</code> | The filter function |
+| filter | [<code>FilterCallback</code>](#FilterCallback) | The filter function |
 
 <a name="EnhancedEventEmitter+addGlobalFilter"></a>
 
@@ -486,7 +486,7 @@ Adds a global filter (See addFilter)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| filter | <code>[FilterCallback](#FilterCallback)</code> | The filter function |
+| filter | [<code>FilterCallback</code>](#FilterCallback) | The filter function |
 
 <a name="EnhancedEventEmitter+filter"></a>
 
@@ -499,7 +499,7 @@ See 'addFilter' documentation.
 | Param | Type | Description |
 | --- | --- | --- |
 | [event] | <code>String</code> | The event name. If not provided, the filter is relevant for all events. |
-| filter | <code>[FilterCallback](#FilterCallback)</code> | The filter function |
+| filter | [<code>FilterCallback</code>](#FilterCallback) | The filter function |
 
 <a name="EnhancedEventEmitter+proxyEvents"></a>
 
