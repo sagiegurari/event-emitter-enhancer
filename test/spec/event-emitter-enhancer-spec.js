@@ -473,9 +473,9 @@ describe('event-emitter-enhancer', function () {
                         assert.isTrue(invoked2b);
 
                         done();
-                    }, 1);
-                }, 1);
-            }, 1);
+                    }, 5);
+                }, 5);
+            }, 5);
         });
 
         it('timeout and multiple listeners, multiple event', function (done) {
