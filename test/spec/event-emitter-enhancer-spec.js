@@ -551,7 +551,7 @@ describe('event-emitter-enhancer', function () {
                     emitter.emit('test-event2', 'test', 2);
 
                     done();
-                }, 500);
+                }, 600);
             }, 100);
         });
 
@@ -600,7 +600,7 @@ describe('event-emitter-enhancer', function () {
                     }
                 ],
                 async: true,
-                timeout: 500
+                timeout: 300
             });
 
             emitter.emit('test-event3', 'bad');
@@ -629,10 +629,10 @@ describe('event-emitter-enhancer', function () {
                             emitter.emit('test-event1', 'bad');
 
                             setTimeout(done, 100);
-                        }, 600);
-                    }, 1);
-                }, 1);
-            }, 1);
+                        }, 400);
+                    }, 5);
+                }, 5);
+            }, 5);
         });
     });
 
