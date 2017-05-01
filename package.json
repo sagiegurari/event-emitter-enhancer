@@ -1,6 +1,6 @@
 {
   "name": "event-emitter-enhancer",
-  "version": "1.0.40",
+  "version": "1.0.41",
   "description": "Enhances the Node.js EventEmitter with extra capabilities.",
   "author": {
     "name": "Sagie Gur-Ari",
@@ -37,7 +37,10 @@
     "postpublish": "grunt post-publish",
     "grunt": "grunt"
   },
-  "dependencies": {},
+  "dependencies": {
+    "funcs-js": "latest",
+    "node-later": "latest"
+  },
   "devDependencies": {
     "chai": "latest",
     "eventemitter2": "latest",
