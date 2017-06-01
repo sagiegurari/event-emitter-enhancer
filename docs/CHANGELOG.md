@@ -1,6 +1,6 @@
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
-| 2017-05-01  | v1.0.44 | Maintenance |
+| 2017-06-01  | v1.0.45 | Maintenance |
 | 2017-01-16  | v1.0.27 | New extended 'once' function |
 | 2017-01-13  | v1.0.26 | Maintenance |
 | 2017-01-07  | v1.0.25 | New 'proxyEvents' function |
