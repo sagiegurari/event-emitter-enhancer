@@ -11,6 +11,7 @@
   * [on(event, listener)](#usage-on1)
   * [on(options)](#usage-on2)
   * [once(event, listener)](#usage-once)
+  * [removeAllListeners](#usage-removeAllListeners)
   * [else](#usage-else)
   * [suspend](#usage-suspend)
   * [elseError](#usage-else-error)
@@ -130,6 +131,25 @@ var remove = emitter.once('error', function (error) {
 
 //remove listener (no longer need to keep a reference to the listener function)
 remove();
+```
+<!-- markdownlint-enable MD009 MD031 MD036 -->
+
+<a name="usage-removeAllListeners"></a>
+<!-- markdownlint-disable MD009 MD031 MD036 -->
+### 'emitter.removeAllListeners([event])'
+See node.js events.EventEmitter.removeAllListeners.<br>
+This function is modified to also accept an array of event names.
+
+**Example**  
+```js
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
+
+//same as the basic removeAllListeners
+emitter.removeAllListeners('my-event');
+
+//also supports array of event names
+emitter.removeAllListeners(['my-event', 'another-event']);
 ```
 <!-- markdownlint-enable MD009 MD031 MD036 -->
 
@@ -357,26 +377,15 @@ See [contributing guide](.github/CONTRIBUTING.md)
 
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
-| 2017-06-26  | v1.0.47 | Maintenance |
+| 2017-10-30  | v1.0.48 | New extended 'removeAllListeners' function |
 | 2017-01-16  | v1.0.27 | New extended 'once' function |
-| 2017-01-13  | v1.0.26 | Maintenance |
 | 2017-01-07  | v1.0.25 | New 'proxyEvents' function |
 | 2017-01-06  | v1.0.24 | New extended 'on' function |
-| 2016-12-31  | v1.0.23 | Maintenance |
 | 2016-11-11  | v1.0.15 | 'emitAsync' callback is now optional |
-| 2016-11-05  | v1.0.14 | Maintenance |
 | 2015-09-23  | v0.0.44 | Added 'onAny' |
-| 2015-09-08  | v0.0.43 | Maintenance |
 | 2015-04-22  | v0.0.31 | Prevent from multiple enhance of same prototype/instance |
-| 2015-04-05  | v0.0.30 | Maintenance |
-| 2015-02-09  | v0.0.19 | Doc fix. |
-| 2015-02-09  | v0.0.18 | Grunt cleanups |
-| 2015-02-06  | v0.0.14 | Internal quality changes. |
-| 2014-12-31  | v0.0.11 | Doc fix. |
 | 2014-12-31  | v0.0.10 | EventEmitter is no longer automatically modified,<br>instead there are 2 ways to extend/modify prototype/modify instance<br>functions exposed by this library. |
 | 2014-12-30  | v0.0.9  | Added ability to enhance compatible EventEmitter types |
-| 2014-12-30  | v0.0.8  | Doc changes |
-| 2014-12-29  | v0.0.7  | Added additional tests |
 | 2014-12-29  | v0.0.6  | Added 'filter' |
 | 2014-12-28  | v0.0.5  | Added 'onAsync' |
 | 2014-12-28  | v0.0.4  | Added 'emitAsync' |

@@ -11,6 +11,7 @@
   * [on(event, listener)](#usage-on1)
   * [on(options)](#usage-on2)
   * [once(event, listener)](#usage-once)
+  * [removeAllListeners](#usage-removeAllListeners)
   * [else](#usage-else)
   * [suspend](#usage-suspend)
   * [elseError](#usage-else-error)
@@ -65,6 +66,8 @@ EventEmitterEnhancer.modifyInstance(emitter);   //modify the specific instance a
 <a name="usage-on2"></a>
 
 <a name="usage-once"></a>
+
+<a name="usage-removeAllListeners"></a>
 
 <a name="usage-else"></a>
 

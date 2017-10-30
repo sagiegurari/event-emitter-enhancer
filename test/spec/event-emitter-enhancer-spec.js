@@ -6,6 +6,7 @@ var chai = require('chai');
 var assert = chai.assert;
 var EventEmitter = require('events').EventEmitter;
 var EventEmitterEnhancer = require('../../lib/event-emitter-enhancer');
+var funcs = require('funcs-js');
 
 function createEventEmitter() {
     var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
@@ -33,6 +34,7 @@ describe('event-emitter-enhancer', function () {
 
             assert.isFunction(emitter.baseOn);
             assert.isFunction(emitter.baseOnce);
+            assert.isFunction(emitter.baseRemoveAllListeners);
             assert.isFunction(emitter.baseEmit);
 
             assert.isFunction(emitter.onAsync);
@@ -54,6 +56,7 @@ describe('event-emitter-enhancer', function () {
 
             assert.isFunction(emitter.baseOn);
             assert.isFunction(emitter.baseOnce);
+            assert.isFunction(emitter.baseRemoveAllListeners);
             assert.isFunction(emitter.baseEmit);
 
             assert.isFunction(emitter.onAsync);
@@ -100,6 +103,7 @@ describe('event-emitter-enhancer', function () {
 
             assert.isFunction(emitter.baseOn);
             assert.isFunction(emitter.baseOnce);
+            assert.isFunction(emitter.baseRemoveAllListeners);
             assert.isFunction(emitter.baseEmit);
 
             assert.isFunction(emitter.onAsync);
@@ -146,6 +150,7 @@ describe('event-emitter-enhancer', function () {
 
             assert.isFunction(emitter.baseOn);
             assert.isFunction(emitter.baseOnce);
+            assert.isFunction(emitter.baseRemoveAllListeners);
             assert.isFunction(emitter.baseEmit);
 
             assert.isFunction(emitter.onAsync);
@@ -167,6 +172,7 @@ describe('event-emitter-enhancer', function () {
 
             assert.isFunction(emitter.baseOn);
             assert.isFunction(emitter.baseOnce);
+            assert.isFunction(emitter.baseRemoveAllListeners);
             assert.isFunction(emitter.baseEmit);
 
             assert.isUndefined(EventEmitter.prototype.enhancedEmitterType);
@@ -222,6 +228,42 @@ describe('event-emitter-enhancer', function () {
             remove();
 
             emitter.emit('test', 'bad');
+        });
+    });
+
+    describe('removeAllListeners', function () {
+        it('undefined', function () {
+            var emitter = createEventEmitter();
+
+            emitter.removeAllListeners();
+        });
+
+        it('single', function () {
+            var emitter = createEventEmitter();
+
+            emitter.on('error', funcs.noop);
+            emitter.on('error', funcs.noop);
+            assert.strictEqual(emitter.listenerCount('error'), 2);
+
+            emitter.removeAllListeners('error');
+
+            assert.strictEqual(emitter.listenerCount('error'), 0);
+        });
+
+        it('array', function () {
+            var emitter = createEventEmitter();
+
+            emitter.on('error', funcs.noop);
+            emitter.on('error', funcs.noop);
+            assert.strictEqual(emitter.listenerCount('error'), 2);
+
+            emitter.on('info', funcs.noop);
+            assert.strictEqual(emitter.listenerCount('info'), 1);
+
+            emitter.removeAllListeners(['error', 'info']);
+
+            assert.strictEqual(emitter.listenerCount('error'), 0);
+            assert.strictEqual(emitter.listenerCount('info'), 0);
         });
     });
 

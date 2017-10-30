@@ -42,6 +42,7 @@
     * [#on(event, listener)](#EnhancedEventEmitter+on) ⇒ <code>function</code>
     * [#on(options)](#EnhancedEventEmitter+on) ⇒ <code>function</code>
     * [#once(event, listener)](#EnhancedEventEmitter+once) ⇒ <code>function</code>
+    * [#removeAllListeners([event])](#EnhancedEventEmitter+removeAllListeners)
     * [#suspend(event)](#EnhancedEventEmitter+suspend)
     * [#unsuspend(event)](#EnhancedEventEmitter+unsuspend)
     * [#else(listener)](#EnhancedEventEmitter+else)
@@ -166,6 +167,29 @@ var remove = emitter.once('error', function (error) {
 
 //remove listener (no longer need to keep a reference to the listener function)
 remove();
+```
+<a name="EnhancedEventEmitter+removeAllListeners"></a>
+
+### EnhancedEventEmitter#removeAllListeners([event])
+See node.js events.EventEmitter.removeAllListeners.<br>
+This function is modified to also accept an array of event names.
+
+**Access**: public  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [event] | <code>String</code> \| <code>Array</code> | The name/s of the event |
+
+**Example**  
+```js
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
+
+//same as the basic removeAllListeners
+emitter.removeAllListeners('my-event');
+
+//also supports array of event names
+emitter.removeAllListeners(['my-event', 'another-event']);
 ```
 <a name="EnhancedEventEmitter+suspend"></a>
 

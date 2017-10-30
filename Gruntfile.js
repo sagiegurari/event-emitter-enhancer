@@ -22,6 +22,7 @@ module.exports = function (grunt) {
                             occurrence: 2
                         },
                         'usage-once': 'EnhancedEventEmitter+once',
+                        'usage-removeAllListeners': 'EnhancedEventEmitter+removeAllListeners',
                         'usage-else': 'EnhancedEventEmitter+else',
                         'usage-suspend': 'EnhancedEventEmitter+suspend',
                         'usage-else-error': 'EnhancedEventEmitter+elseError',
