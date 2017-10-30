@@ -2047,6 +2047,23 @@ describe('event-emitter-enhancer', function () {
         });
     });
 
+    describe('ignoreError', function () {
+        it('valid', function () {
+            var emitter = createEventEmitter();
+
+            assert.strictEqual(emitter.listenerCount('error'), 0);
+            emitter.ignoreError();
+            emitter.ignoreError();
+            emitter.ignoreError();
+            assert.strictEqual(emitter.listenerCount('error'), 1);
+
+            emitter.emit('error', 'test');
+
+            emitter.removeAllListeners('error');
+            assert.strictEqual(emitter.listenerCount('error'), 0);
+        });
+    });
+
     describe('markEvent', function () {
         it('no input', function () {
             var emitter = createEventEmitter();

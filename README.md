@@ -20,6 +20,7 @@
   * [onAny](#usage-on-any)
   * [filter](#usage-filter)
   * [proxyEvents](#usage-proxyEvents)
+  * [ignoreError](#usage-ignoreError)
 * [Installation](#installation)
 * [API Documentation](docs/api.md)
 * [Contributing](.github/CONTRIBUTING.md)
@@ -358,6 +359,22 @@ stop();
 ```
 <!-- markdownlint-enable MD009 MD031 MD036 -->
 
+<a name="usage-ignoreError"></a>
+<!-- markdownlint-disable MD009 MD031 MD036 -->
+### 'emitter.ignoreError()'
+Adds empty error event handler to prevent node.js from crashing in case of an error which we do not want/need to handle.<br>
+This function will only add a new empty handler in case no other handler is defined for the error event.
+
+**Example**  
+```js
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
+
+//adds empty error handler
+emitter.ignoreError();
+```
+<!-- markdownlint-enable MD009 MD031 MD036 -->
+
 <a name="installation"></a>
 ## Installation
 In order to use this library, just run the following npm install command:
@@ -377,6 +394,7 @@ See [contributing guide](.github/CONTRIBUTING.md)
 
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
+| 2017-10-30  | v1.0.49 | Added 'ignoreError' |
 | 2017-10-30  | v1.0.48 | New extended 'removeAllListeners' function |
 | 2017-01-16  | v1.0.27 | New extended 'once' function |
 | 2017-01-07  | v1.0.25 | New 'proxyEvents' function |

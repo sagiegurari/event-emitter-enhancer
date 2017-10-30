@@ -61,6 +61,7 @@
     * [#addGlobalFilter(filter)](#EnhancedEventEmitter+addGlobalFilter) ⇒ <code>function</code>
     * [#filter([event], filter)](#EnhancedEventEmitter+filter) ⇒ <code>function</code>
     * [#proxyEvents(emitters, events)](#EnhancedEventEmitter+proxyEvents) ⇒ <code>function</code>
+    * [#ignoreError()](#EnhancedEventEmitter+ignoreError)
 
 <a name="new_EnhancedEventEmitter_new"></a>
 
@@ -551,6 +552,21 @@ emitter.on('data', onData);
 
 //stop events proxy
 stop();
+```
+<a name="EnhancedEventEmitter+ignoreError"></a>
+
+### EnhancedEventEmitter#ignoreError()
+Adds empty error event handler to prevent node.js from crashing in case of an error which we do not want/need to handle.<br>
+This function will only add a new empty handler in case no other handler is defined for the error event.
+
+**Access**: public  
+**Example**  
+```js
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
+
+//adds empty error handler
+emitter.ignoreError();
 ```
 <a name="EventEmitterEnhancer"></a>
 
