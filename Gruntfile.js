@@ -31,6 +31,7 @@ module.exports = function (grunt) {
                         'usage-on-any': 'EnhancedEventEmitter+onAny',
                         'usage-filter': 'EnhancedEventEmitter+addFilter',
                         'usage-proxyEvents': 'EnhancedEventEmitter+proxyEvents',
+                        'usage-addNoop': 'EnhancedEventEmitter+addNoop',
                         'usage-ignoreError': 'EnhancedEventEmitter+ignoreError'
                     },
                     modifySignature: function (line) {

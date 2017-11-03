@@ -20,6 +20,7 @@
   * [onAny](#usage-on-any)
   * [filter](#usage-filter)
   * [proxyEvents](#usage-proxyEvents)
+  * [addNoop](#usage-addNoop)
   * [ignoreError](#usage-ignoreError)
 * [Installation](#installation)
 * [API Documentation](docs/api.md)
@@ -85,6 +86,8 @@ EventEmitterEnhancer.modifyInstance(emitter);   //modify the specific instance a
 <a name="usage-filter"></a>
 
 <a name="usage-proxyEvents"></a>
+
+<a name="usage-addNoop"></a>
 
 <a name="usage-ignoreError"></a>
 

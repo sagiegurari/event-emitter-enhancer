@@ -20,6 +20,7 @@
   * [onAny](#usage-on-any)
   * [filter](#usage-filter)
   * [proxyEvents](#usage-proxyEvents)
+  * [addNoop](#usage-addNoop)
   * [ignoreError](#usage-ignoreError)
 * [Installation](#installation)
 * [API Documentation](docs/api.md)
@@ -359,6 +360,24 @@ stop();
 ```
 <!-- markdownlint-enable MD009 MD031 MD036 -->
 
+<a name="usage-addNoop"></a>
+<!-- markdownlint-disable MD009 MD031 MD036 -->
+### 'emitter.addNoop(event) ⇒ function'
+Adds empty event handler.
+
+**Example**  
+```js
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
+
+//add noop even handler for the 'error' event
+var remove = emitter.addNoop('error');
+
+//remove listener
+remove();
+```
+<!-- markdownlint-enable MD009 MD031 MD036 -->
+
 <a name="usage-ignoreError"></a>
 <!-- markdownlint-disable MD009 MD031 MD036 -->
 ### 'emitter.ignoreError()'
@@ -372,6 +391,9 @@ var emitter = new EnhancedEventEmitter();
 
 //adds empty error handler
 emitter.ignoreError();
+
+//emit error will not crash the node.js process
+emitter.emit('error', new Error('test'));
 ```
 <!-- markdownlint-enable MD009 MD031 MD036 -->
 
@@ -394,6 +416,7 @@ See [contributing guide](.github/CONTRIBUTING.md)
 
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
+| 2017-11-03  | v1.0.50 | Added 'addNoop' |
 | 2017-10-30  | v1.0.49 | Added 'ignoreError' |
 | 2017-10-30  | v1.0.48 | New extended 'removeAllListeners' function |
 | 2017-01-16  | v1.0.27 | New extended 'once' function |

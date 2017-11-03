@@ -2047,6 +2047,48 @@ describe('event-emitter-enhancer', function () {
         });
     });
 
+    describe('addNoop', function () {
+        it('undefined', function () {
+            var emitter = createEventEmitter();
+
+            var remove = emitter.addNoop();
+            assert.isUndefined(remove);
+        });
+
+        it('null', function () {
+            var emitter = createEventEmitter();
+
+            var remove = emitter.addNoop(null);
+            assert.isUndefined(remove);
+        });
+
+        it('object', function () {
+            var emitter = createEventEmitter();
+
+            var remove = emitter.addNoop({});
+            assert.isUndefined(remove);
+        });
+
+        it('valid', function () {
+            var emitter = createEventEmitter();
+
+            assert.strictEqual(emitter.listenerCount('myevent'), 0);
+            var remove = emitter.addNoop('myevent');
+            emitter.addNoop('myevent');
+            emitter.addNoop('myevent');
+            assert.strictEqual(emitter.listenerCount('myevent'), 3);
+
+            emitter.emit('myevent', 'test');
+
+            assert.isFunction(remove);
+            remove();
+            assert.strictEqual(emitter.listenerCount('myevent'), 2);
+
+            emitter.removeAllListeners('myevent');
+            assert.strictEqual(emitter.listenerCount('myevent'), 0);
+        });
+    });
+
     describe('ignoreError', function () {
         it('valid', function () {
             var emitter = createEventEmitter();
@@ -2057,7 +2099,7 @@ describe('event-emitter-enhancer', function () {
             emitter.ignoreError();
             assert.strictEqual(emitter.listenerCount('error'), 1);
 
-            emitter.emit('error', 'test');
+            emitter.emit('error', new Error('test'));
 
             emitter.removeAllListeners('error');
             assert.strictEqual(emitter.listenerCount('error'), 0);

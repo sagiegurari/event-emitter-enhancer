@@ -61,6 +61,7 @@
     * [#addGlobalFilter(filter)](#EnhancedEventEmitter+addGlobalFilter) ⇒ <code>function</code>
     * [#filter([event], filter)](#EnhancedEventEmitter+filter) ⇒ <code>function</code>
     * [#proxyEvents(emitters, events)](#EnhancedEventEmitter+proxyEvents) ⇒ <code>function</code>
+    * [#addNoop(event)](#EnhancedEventEmitter+addNoop) ⇒ <code>function</code>
     * [#ignoreError()](#EnhancedEventEmitter+ignoreError)
 
 <a name="new_EnhancedEventEmitter_new"></a>
@@ -553,6 +554,29 @@ emitter.on('data', onData);
 //stop events proxy
 stop();
 ```
+<a name="EnhancedEventEmitter+addNoop"></a>
+
+### EnhancedEventEmitter#addNoop(event) ⇒ <code>function</code>
+Adds empty event handler.
+
+**Returns**: <code>function</code> - The remove listener function  
+**Access**: public  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| event | <code>String</code> | The name of the event |
+
+**Example**  
+```js
+var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+var emitter = new EnhancedEventEmitter();
+
+//add noop even handler for the 'error' event
+var remove = emitter.addNoop('error');
+
+//remove listener
+remove();
+```
 <a name="EnhancedEventEmitter+ignoreError"></a>
 
 ### EnhancedEventEmitter#ignoreError()
@@ -567,6 +591,9 @@ var emitter = new EnhancedEventEmitter();
 
 //adds empty error handler
 emitter.ignoreError();
+
+//emit error will not crash the node.js process
+emitter.emit('error', new Error('test'));
 ```
 <a name="EventEmitterEnhancer"></a>
 
