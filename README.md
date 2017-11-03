@@ -416,7 +416,7 @@ See [contributing guide](.github/CONTRIBUTING.md)
 
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
-| 2017-11-03  | v1.0.50 | Added 'addNoop' |
+| 2017-11-03  | v1.0.51 | Added 'addNoop' |
 | 2017-10-30  | v1.0.49 | Added 'ignoreError' |
 | 2017-10-30  | v1.0.48 | New extended 'removeAllListeners' function |
 | 2017-01-16  | v1.0.27 | New extended 'once' function |
