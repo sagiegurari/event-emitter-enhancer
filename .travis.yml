@@ -6,4 +6,4 @@ node_js:
   - "6"
   - "4"
 before_install:
-  - npm install -g npm@>4
+  - npm install -g npm@>4 || true
