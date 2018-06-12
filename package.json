@@ -20,6 +20,7 @@
     "EventEmitter"
   ],
   "main": "index.js",
+  "types": "lib/event-emitter-enhancer.d.ts",
   "directories": {
     "lib": "lib",
     "test": "test/spec"
