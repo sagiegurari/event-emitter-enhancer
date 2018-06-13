@@ -1,8 +1,7 @@
 # event-emitter-enhancer
 
-[![NPM Version](http://img.shields.io/npm/v/event-emitter-enhancer.svg?style=flat)](https://www.npmjs.org/package/event-emitter-enhancer) [![Build Status](https://travis-ci.org/sagiegurari/event-emitter-enhancer.svg)](http://travis-ci.org/sagiegurari/event-emitter-enhancer) [![Coverage Status](https://coveralls.io/repos/sagiegurari/event-emitter-enhancer/badge.svg)](https://coveralls.io/r/sagiegurari/event-emitter-enhancer) [![bitHound Code](https://www.bithound.io/github/sagiegurari/event-emitter-enhancer/badges/code.svg)](https://www.bithound.io/github/sagiegurari/event-emitter-enhancer) [![Inline docs](http://inch-ci.org/github/sagiegurari/event-emitter-enhancer.svg?branch=master)](http://inch-ci.org/github/sagiegurari/event-emitter-enhancer)<br>
-[![License](https://img.shields.io/npm/l/event-emitter-enhancer.svg?style=flat)](https://github.com/sagiegurari/event-emitter-enhancer/blob/master/LICENSE) [![Total Downloads](https://img.shields.io/npm/dt/event-emitter-enhancer.svg?style=flat)](https://www.npmjs.org/package/event-emitter-enhancer) [![Dependency Status](https://david-dm.org/sagiegurari/event-emitter-enhancer.svg)](https://david-dm.org/sagiegurari/event-emitter-enhancer) [![devDependency Status](https://david-dm.org/sagiegurari/event-emitter-enhancer/dev-status.svg)](https://david-dm.org/sagiegurari/event-emitter-enhancer?type=dev)<br>
-[![Known Vulnerabilities](https://snyk.io/test/github/sagiegurari/event-emitter-enhancer/badge.svg)](https://snyk.io/test/github/sagiegurari/event-emitter-enhancer)
+[![NPM Version](http://img.shields.io/npm/v/event-emitter-enhancer.svg?style=flat)](https://www.npmjs.org/package/event-emitter-enhancer) [![Build Status](https://travis-ci.org/sagiegurari/event-emitter-enhancer.svg)](http://travis-ci.org/sagiegurari/event-emitter-enhancer) [![Coverage Status](https://coveralls.io/repos/sagiegurari/event-emitter-enhancer/badge.svg)](https://coveralls.io/r/sagiegurari/event-emitter-enhancer) [![Known Vulnerabilities](https://snyk.io/test/github/sagiegurari/event-emitter-enhancer/badge.svg)](https://snyk.io/test/github/sagiegurari/event-emitter-enhancer) [![Inline docs](http://inch-ci.org/github/sagiegurari/event-emitter-enhancer.svg?branch=master)](http://inch-ci.org/github/sagiegurari/event-emitter-enhancer)<br>
+[![License](https://img.shields.io/npm/l/event-emitter-enhancer.svg?style=flat)](https://github.com/sagiegurari/event-emitter-enhancer/blob/master/LICENSE) [![Total Downloads](https://img.shields.io/npm/dt/event-emitter-enhancer.svg?style=flat)](https://www.npmjs.org/package/event-emitter-enhancer) [![Dependency Status](https://david-dm.org/sagiegurari/event-emitter-enhancer.svg)](https://david-dm.org/sagiegurari/event-emitter-enhancer) [![devDependency Status](https://david-dm.org/sagiegurari/event-emitter-enhancer/dev-status.svg)](https://david-dm.org/sagiegurari/event-emitter-enhancer?type=dev)
 
 > Extends the Node.js events.EventEmitter to provide additional functionality.
 
@@ -416,6 +415,7 @@ See [contributing guide](.github/CONTRIBUTING.md)
 
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
+| 2018-06-13  | v1.0.55 | Maintenance |
 | 2018-06-13  | v1.0.54 | Added typescript definition #5 |
 | 2017-11-03  | v1.0.51 | Added 'addNoop' |
 | 2017-10-30  | v1.0.49 | Added 'ignoreError' |
