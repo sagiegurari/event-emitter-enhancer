@@ -1,6 +1,6 @@
 {
   "name": "event-emitter-enhancer",
-  "version": "1.0.55",
+  "version": "1.0.56",
   "description": "Enhances the Node.js EventEmitter with extra capabilities.",
   "author": {
     "name": "Sagie Gur-Ari",
