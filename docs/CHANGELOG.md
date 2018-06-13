@@ -1,6 +1,6 @@
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
-| 2018-04-30  | v1.0.53 | Maintenance |
+| 2018-06-13  | v1.0.54 | Added typescript definition #5 |
 | 2017-11-03  | v1.0.51 | Added 'addNoop' |
 | 2017-10-30  | v1.0.49 | Added 'ignoreError' |
 | 2017-10-30  | v1.0.48 | New extended 'removeAllListeners' function |
