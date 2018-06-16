@@ -88,6 +88,12 @@ export class EnhancedEventEmitter {
    * "true" to permit dispatch, or "false" to block dispatch.
    */
   addFilter(filter: FilterCallback): RemoveFunction
+  /**
+   * Adds a filter function that will be triggered before every emit (if no
+   * event name is provided) or before every emit of a specific event (if an
+   * event name is passed as the first parameter). The filter should return
+   * "true" to permit dispatch, or "false" to block dispatch.
+   */
   addFilter(event: Event, filter: FilterCallback): RemoveFunction
 
   /**
@@ -131,10 +137,30 @@ export class EnhancedEventEmitter {
    * listeners.
    */
   emitAsync(event: Event, arg0: any, callback?: AsyncEmitCallback): void
+  /**
+   * Emits the event asynchronously, ensuring flow is not blocked by
+   * listeners.
+   */
   emitAsync(event: Event, arg0: any, arg1: any, callback?: AsyncEmitCallback): void
+  /**
+   * Emits the event asynchronously, ensuring flow is not blocked by
+   * listeners.
+   */
   emitAsync(event: Event, arg0: any, arg1: any, arg2: any, callback?: AsyncEmitCallback): void
+  /**
+   * Emits the event asynchronously, ensuring flow is not blocked by
+   * listeners.
+   */
   emitAsync(event: Event, arg0: any, arg1: any, arg2: any, arg3: any, callback?: AsyncEmitCallback): void
+  /**
+   * Emits the event asynchronously, ensuring flow is not blocked by
+   * listeners.
+   */
   emitAsync(event: Event, arg0: any, arg1: any, arg2: any, arg3: any, arg4: any, callback?: AsyncEmitCallback): void
+  /**
+   * Emits the event asynchronously, ensuring flow is not blocked by
+   * listeners.
+   */
   emitAsync(event: Event, ...args: Array<any | AsyncEmitCallback>): void
 
   /**
@@ -149,6 +175,12 @@ export class EnhancedEventEmitter {
    * "true" to permit dispatch, or "false" to block dispatch.
    */
   filter(filter: FilterCallback): RemoveFunction
+  /**
+   * Adds a filter function that will be triggered before every emit (if no
+   * event name is provided) or before every emit of a specific event (if an
+   * event name is passed as the first parameter). The filter should return
+   * "true" to permit dispatch, or "false" to block dispatch.
+   */
   filter(event: Event, filter: FilterCallback): RemoveFunction
 
   /**
@@ -230,8 +262,20 @@ export class EnhancedEventEmitter {
    * it emits them itself.
    */
   proxyEvents(emitter: EventEmitter | EnhancedEventEmitter, event: Event): RemoveFunction
+  /**
+   * Proxies events emitted by another emitter through this emitter, so that
+   * it emits them itself.
+   */
   proxyEvents(emitter: EventEmitter | EnhancedEventEmitter, events: Event[]): RemoveFunction
+  /**
+   * Proxies events emitted by another emitter through this emitter, so that
+   * it emits them itself.
+   */
   proxyEvents(emitters: Array<EventEmitter | EnhancedEventEmitter>, event: Event): RemoveFunction
+  /**
+   * Proxies events emitted by another emitter through this emitter, so that
+   * it emits them itself.
+   */
   proxyEvents(emitters: Array<EventEmitter | EnhancedEventEmitter>, events: Event[]): RemoveFunction
 
   /**
