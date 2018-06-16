@@ -415,8 +415,7 @@ See [contributing guide](.github/CONTRIBUTING.md)
 
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
-| 2018-06-13  | v1.0.56 | Maintenance |
-| 2018-06-13  | v1.0.54 | Added typescript definition #5 |
+| 2018-06-13  | v1.0.57 | Added typescript definition (#5 and #6) |
 | 2017-11-03  | v1.0.51 | Added 'addNoop' |
 | 2017-10-30  | v1.0.49 | Added 'ignoreError' |
 | 2017-10-30  | v1.0.48 | New extended 'removeAllListeners' function |
