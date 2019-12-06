@@ -39,6 +39,7 @@
 * [EnhancedEventEmitter](#EnhancedEventEmitter)
     * [new EnhancedEventEmitter()](#new_EnhancedEventEmitter_new)
     * [.suspended](#EnhancedEventEmitter.suspended) : <code>Boolean</code>
+    * [.subscriptionSeparator](#EnhancedEventEmitter.subscriptionSeparator) : <code>String</code>
     * [#on(event, listener)](#EnhancedEventEmitter+on) ⇒ <code>function</code>
     * [#on(options)](#EnhancedEventEmitter+on) ⇒ <code>function</code>
     * [#once(event, listener)](#EnhancedEventEmitter+once) ⇒ <code>function</code>
@@ -74,6 +75,13 @@ This class holds all the extended capabilities added to any emitter.
 ### EnhancedEventEmitter.suspended : <code>Boolean</code>
 If true, all events will not trigger any listener (or 'else' listener).<br>
 The emit function will simply do nothing.
+
+**Access**: public  
+<a name="EnhancedEventEmitter.subscriptionSeparator"></a>
+
+### EnhancedEventEmitter.subscriptionSeparator : <code>String</code>
+If defined, events will be splitted by this separator and emitted as partials.<br>
+For example, if the separator is ':' an event event1:event2:event3 will be emitted as 3 events: event1, event1:event2, event1:event2:event3.
 
 **Access**: public  
 <a name="EnhancedEventEmitter+on"></a>

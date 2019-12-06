@@ -2156,4 +2156,183 @@ describe('event-emitter-enhancer', function () {
             emitter.emit('test', 1, 2);
         });
     });
+
+    describe('subscriptionSeparator', function () {
+        it('listen to all', function () {
+            var emitter = createEventEmitter();
+            var events = {};
+            emitter.on('p1', function (arg1, arg2) {
+                events.p1 = true;
+
+                assert.strictEqual(arg1, 1);
+                assert.strictEqual(arg2, 2);
+            });
+            emitter.on('p1:p2', function (arg1, arg2) {
+                events['p1:p2'] = true;
+
+                assert.strictEqual(arg1, 1);
+                assert.strictEqual(arg2, 2);
+            });
+            emitter.on('p1:p2:p3', function (arg1, arg2) {
+                events['p1:p2:p3'] = true;
+
+                assert.strictEqual(arg1, 1);
+                assert.strictEqual(arg2, 2);
+            });
+
+            emitter.subscriptionSeparator = ':';
+
+            var emitHandled = emitter.emit('p1:p2:p3', 1, 2);
+
+            assert.isTrue(emitHandled);
+            assert.isTrue(events.p1);
+            assert.isTrue(events['p1:p2']);
+            assert.isTrue(events['p1:p2:p3']);
+        });
+
+        it('listen to none', function () {
+            var emitter = createEventEmitter();
+            var events = {};
+            emitter.else(function (type) {
+                events[type] = true;
+            });
+
+            emitter.subscriptionSeparator = ':';
+
+            var emitHandled = emitter.emit('p1:p2:p3');
+
+            assert.isTrue(emitHandled);
+            assert.isTrue(events.p1);
+            assert.isTrue(events['p1:p2']);
+            assert.isTrue(events['p1:p2:p3']);
+        });
+
+        it('listen to some', function () {
+            var emitter = createEventEmitter();
+            var events = {};
+            emitter.on('p1', function () {
+                events.p1 = 1;
+            });
+            emitter.on('p1:p2:p3', function () {
+                events['p1:p2:p3'] = 1;
+            });
+            emitter.else(function (type) {
+                events[type] = 2;
+            });
+
+            emitter.subscriptionSeparator = ':';
+
+            var emitHandled = emitter.emit('p1:p2:p3');
+
+            assert.isTrue(emitHandled);
+            assert.strictEqual(events.p1, 1);
+            assert.strictEqual(events['p1:p2'], 2);
+            assert.strictEqual(events['p1:p2:p3'], 1);
+        });
+
+        it('not handled', function () {
+            var emitter = createEventEmitter();
+
+            emitter.subscriptionSeparator = ':';
+
+            var emitHandled = emitter.emit('p1:p2:p3');
+
+            assert.isFalse(emitHandled);
+        });
+    });
+
+    describe('doEmitByPath', function () {
+        it('no separator', function () {
+            var emitter = createEventEmitter();
+            emitter.on('p1:p2:p3', function () {
+                assert.fail();
+            });
+
+            var emitHandled = emitter.doEmitByPath('p1:p2:p3');
+
+            assert.isFalse(emitHandled);
+        });
+
+        it('listen to all', function () {
+            var emitter = createEventEmitter();
+            var events = {};
+            emitter.on('p1', function (arg1, arg2) {
+                events.p1 = true;
+
+                assert.strictEqual(arg1, 1);
+                assert.strictEqual(arg2, 2);
+            });
+            emitter.on('p1:p2', function (arg1, arg2) {
+                events['p1:p2'] = true;
+
+                assert.strictEqual(arg1, 1);
+                assert.strictEqual(arg2, 2);
+            });
+            emitter.on('p1:p2:p3', function (arg1, arg2) {
+                events['p1:p2:p3'] = true;
+
+                assert.strictEqual(arg1, 1);
+                assert.strictEqual(arg2, 2);
+            });
+
+            emitter.subscriptionSeparator = ':';
+
+            var emitHandled = emitter.doEmitByPath('p1:p2:p3', 1, 2);
+
+            assert.isTrue(emitHandled);
+            assert.isTrue(events.p1);
+            assert.isTrue(events['p1:p2']);
+            assert.isTrue(events['p1:p2:p3']);
+        });
+
+        it('listen to none', function () {
+            var emitter = createEventEmitter();
+            var events = {};
+            emitter.else(function (type) {
+                events[type] = true;
+            });
+
+            emitter.subscriptionSeparator = ':';
+
+            var emitHandled = emitter.doEmitByPath('p1:p2:p3');
+
+            assert.isTrue(emitHandled);
+            assert.isTrue(events.p1);
+            assert.isTrue(events['p1:p2']);
+            assert.isTrue(events['p1:p2:p3']);
+        });
+
+        it('listen to some', function () {
+            var emitter = createEventEmitter();
+            var events = {};
+            emitter.on('p1', function () {
+                events.p1 = 1;
+            });
+            emitter.on('p1:p2:p3', function () {
+                events['p1:p2:p3'] = 1;
+            });
+            emitter.else(function (type) {
+                events[type] = 2;
+            });
+
+            emitter.subscriptionSeparator = ':';
+
+            var emitHandled = emitter.doEmitByPath('p1:p2:p3');
+
+            assert.isTrue(emitHandled);
+            assert.strictEqual(events.p1, 1);
+            assert.strictEqual(events['p1:p2'], 2);
+            assert.strictEqual(events['p1:p2:p3'], 1);
+        });
+
+        it('not handled', function () {
+            var emitter = createEventEmitter();
+
+            emitter.subscriptionSeparator = ':';
+
+            var emitHandled = emitter.doEmitByPath('p1:p2:p3');
+
+            assert.isFalse(emitHandled);
+        });
+    });
 });
