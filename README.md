@@ -1,7 +1,6 @@
 # event-emitter-enhancer
 
-[![NPM Version](http://img.shields.io/npm/v/event-emitter-enhancer.svg?style=flat)](https://www.npmjs.org/package/event-emitter-enhancer) [![Build Status](https://travis-ci.org/sagiegurari/event-emitter-enhancer.svg)](http://travis-ci.org/sagiegurari/event-emitter-enhancer) [![Coverage Status](https://coveralls.io/repos/sagiegurari/event-emitter-enhancer/badge.svg)](https://coveralls.io/r/sagiegurari/event-emitter-enhancer) [![Known Vulnerabilities](https://snyk.io/test/github/sagiegurari/event-emitter-enhancer/badge.svg)](https://snyk.io/test/github/sagiegurari/event-emitter-enhancer) [![Inline docs](http://inch-ci.org/github/sagiegurari/event-emitter-enhancer.svg?branch=master)](http://inch-ci.org/github/sagiegurari/event-emitter-enhancer)<br>
-[![License](https://img.shields.io/npm/l/event-emitter-enhancer.svg?style=flat)](https://github.com/sagiegurari/event-emitter-enhancer/blob/master/LICENSE) [![Total Downloads](https://img.shields.io/npm/dt/event-emitter-enhancer.svg?style=flat)](https://www.npmjs.org/package/event-emitter-enhancer) [![Dependency Status](https://david-dm.org/sagiegurari/event-emitter-enhancer.svg)](https://david-dm.org/sagiegurari/event-emitter-enhancer) [![devDependency Status](https://david-dm.org/sagiegurari/event-emitter-enhancer/dev-status.svg)](https://david-dm.org/sagiegurari/event-emitter-enhancer?type=dev)
+[![NPM Version](http://img.shields.io/npm/v/event-emitter-enhancer.svg?style=flat)](https://www.npmjs.org/package/event-emitter-enhancer) [![CI](https://github.com/sagiegurari/event-emitter-enhancer/workflows/CI/badge.svg?branch=master)](https://github.com/sagiegurari/event-emitter-enhancer/actions) [![Coverage Status](https://coveralls.io/repos/sagiegurari/event-emitter-enhancer/badge.svg)](https://coveralls.io/r/sagiegurari/event-emitter-enhancer) [![Known Vulnerabilities](https://snyk.io/test/github/sagiegurari/event-emitter-enhancer/badge.svg)](https://snyk.io/test/github/sagiegurari/event-emitter-enhancer) [![Inline docs](http://inch-ci.org/github/sagiegurari/event-emitter-enhancer.svg?branch=master)](http://inch-ci.org/github/sagiegurari/event-emitter-enhancer) [![License](https://img.shields.io/npm/l/event-emitter-enhancer.svg?style=flat)](https://github.com/sagiegurari/event-emitter-enhancer/blob/master/LICENSE) [![Total Downloads](https://img.shields.io/npm/dt/event-emitter-enhancer.svg?style=flat)](https://www.npmjs.org/package/event-emitter-enhancer)
 
 > Extends the Node.js events.EventEmitter to provide additional functionality.
 
@@ -70,10 +69,10 @@ This function also returns a removeListener function to easily remove the provid
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 
-var remove = emitter.on('error', function (error) {
+const remove = emitter.on('error', function (error) {
    console.error(error);
 });
 
@@ -90,10 +89,10 @@ To remove the listener/s, the returned function must be called instead of doing 
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 
-var removeListener = emitter.on({
+const removeListener = emitter.on({
   event: ['error', 'connection-error', 'write-error', 'read-error'], //The event names (can be string for a single event)
   listener: [ //The listener callback functions (can be a function instead of an array for a single listener callback)
     function firstListener(arg1, arg2) {
@@ -123,10 +122,10 @@ This function also returns a removeListener function to easily remove the provid
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 
-var remove = emitter.once('error', function (error) {
+const remove = emitter.once('error', function (error) {
    console.error(error);
 });
 
@@ -143,8 +142,8 @@ This function is modified to also accept an array of event names.
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 
 //same as the basic removeAllListeners
 emitter.removeAllListeners('my-event');
@@ -161,8 +160,8 @@ Adds an 'else' listener which will be triggered by all events that do not have a
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 emitter.else(function onUnhandledEvent(event, arg1, arg2) {
  //logic here....
 
@@ -182,8 +181,8 @@ For suspended events, the emit function will simply do nothing ('else' listeners
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 emitter.on('test', function () {
   //will never be called
 });
@@ -203,8 +202,8 @@ In case an event with the provided name is emitted but no listener is attached t
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 emitter.on('error', function (error) {
   //logic here...
 
@@ -225,8 +224,8 @@ Invokes the emit after a timeout to enable calling flow to continue and not bloc
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 emitter.on('test', function onTestEvent(num1, num2) {
    //event logic here
 });
@@ -246,12 +245,12 @@ To remove the listener, the returned function must be called instead of doing em
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 emitter.on('test', function onEventSync() {
   //sync handle function logic
 });
-var removeListener = emitter.onAsync('test', function onEventAsync() {
+const removeListener = emitter.onAsync('test', function onEventAsync() {
   //async handle function logic
 });
 
@@ -270,11 +269,11 @@ To remove the listener, the returned function must be called instead of doing em
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 
 //add same listener to multiple events
-var remove = emitter.onAny(['test1', 'test2', 'test3'], function (arg1, arg2, arg3) {
+const remove = emitter.onAny(['test1', 'test2', 'test3'], function (arg1, arg2, arg3) {
    console.log(arg1, arg2, arg3);
 });
 
@@ -291,11 +290,11 @@ The filter enables to prevent events from reaching the listeners in case some cr
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 
 //add filters for test event only
-var removeTestEventFilter = emitter.filter('test', function (event, arg1, arg2) {
+const removeTestEventFilter = emitter.filter('test', function (event, arg1, arg2) {
    if (arg1 && (arg1 > 3)) {
        return true;    //continue with emit
    }
@@ -318,7 +317,7 @@ emitter.filter(function (event, arg1, arg2) {
 
    return false;   //prevent emit
 });
-var removeGlobalArg2Filter = emitter.filter(function (event, arg1, arg2) {
+const removeGlobalArg2Filter = emitter.filter(function (event, arg1, arg2) {
    if (arg2 && (arg2 < 18)) {
        return true;    //continue with emit
    }
@@ -345,11 +344,11 @@ Will setup an event proxy so if any of the requested event/s are fired from the 
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 
 //proxy the 'data' and 'end' events from all sockets
-var stop = emitter.proxyEvents(sockets, ['data', 'end']);
+const stop = emitter.proxyEvents(sockets, ['data', 'end']);
 
 //listen to events via emitter
 emitter.on('data', onData);
@@ -366,11 +365,11 @@ Adds empty event handler.
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 
 //add noop even handler for the 'error' event
-var remove = emitter.addNoop('error');
+const remove = emitter.addNoop('error');
 
 //remove listener
 remove();
@@ -385,8 +384,8 @@ This function will only add a new empty handler in case no other handler is defi
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 
 //adds empty error handler
 emitter.ignoreError();
@@ -415,6 +414,7 @@ See [contributing guide](.github/CONTRIBUTING.md)
 
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
+| 2020-05-11  | v2.0.0  | Migrate to github actions and upgrade minimal node version |
 | 2019-12-06  | v1.1.0  | Support event parent parsing and emit #7 |
 | 2018-06-13  | v1.0.57 | Added typescript definition (#5 and #6) |
 | 2017-11-03  | v1.0.51 | Added 'addNoop' |

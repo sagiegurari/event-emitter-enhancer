@@ -100,10 +100,10 @@ This function also returns a removeListener function to easily remove the provid
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 
-var remove = emitter.on('error', function (error) {
+const remove = emitter.on('error', function (error) {
    console.error(error);
 });
 
@@ -129,10 +129,10 @@ To remove the listener/s, the returned function must be called instead of doing 
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 
-var removeListener = emitter.on({
+const removeListener = emitter.on({
   event: ['error', 'connection-error', 'write-error', 'read-error'], //The event names (can be string for a single event)
   listener: [ //The listener callback functions (can be a function instead of an array for a single listener callback)
     function firstListener(arg1, arg2) {
@@ -168,10 +168,10 @@ This function also returns a removeListener function to easily remove the provid
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 
-var remove = emitter.once('error', function (error) {
+const remove = emitter.once('error', function (error) {
    console.error(error);
 });
 
@@ -192,8 +192,8 @@ This function is modified to also accept an array of event names.
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 
 //same as the basic removeAllListeners
 emitter.removeAllListeners('my-event');
@@ -215,8 +215,8 @@ For suspended events, the emit function will simply do nothing ('else' listeners
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 emitter.on('test', function () {
   //will never be called
 });
@@ -251,8 +251,8 @@ Adds an 'else' listener which will be triggered by all events that do not have a
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 emitter.else(function onUnhandledEvent(event, arg1, arg2) {
  //logic here....
 
@@ -304,8 +304,8 @@ In case an event with the provided name is emitted but no listener is attached t
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 emitter.on('error', function (error) {
   //logic here...
 
@@ -368,8 +368,8 @@ Invokes the emit after a timeout to enable calling flow to continue and not bloc
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 emitter.on('test', function onTestEvent(num1, num2) {
    //event logic here
 });
@@ -395,12 +395,12 @@ To remove the listener, the returned function must be called instead of doing em
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 emitter.on('test', function onEventSync() {
   //sync handle function logic
 });
-var removeListener = emitter.onAsync('test', function onEventAsync() {
+const removeListener = emitter.onAsync('test', function onEventAsync() {
   //async handle function logic
 });
 
@@ -425,11 +425,11 @@ To remove the listener, the returned function must be called instead of doing em
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 
 //add same listener to multiple events
-var remove = emitter.onAny(['test1', 'test2', 'test3'], function (arg1, arg2, arg3) {
+const remove = emitter.onAny(['test1', 'test2', 'test3'], function (arg1, arg2, arg3) {
    console.log(arg1, arg2, arg3);
 });
 
@@ -452,11 +452,11 @@ The filter enables to prevent events from reaching the listeners in case some cr
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 
 //add filters for test event only
-var removeTestEventFilter = emitter.filter('test', function (event, arg1, arg2) {
+const removeTestEventFilter = emitter.filter('test', function (event, arg1, arg2) {
    if (arg1 && (arg1 > 3)) {
        return true;    //continue with emit
    }
@@ -479,7 +479,7 @@ emitter.filter(function (event, arg1, arg2) {
 
    return false;   //prevent emit
 });
-var removeGlobalArg2Filter = emitter.filter(function (event, arg1, arg2) {
+const removeGlobalArg2Filter = emitter.filter(function (event, arg1, arg2) {
    if (arg2 && (arg2 < 18)) {
        return true;    //continue with emit
    }
@@ -550,11 +550,11 @@ Will setup an event proxy so if any of the requested event/s are fired from the 
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 
 //proxy the 'data' and 'end' events from all sockets
-var stop = emitter.proxyEvents(sockets, ['data', 'end']);
+const stop = emitter.proxyEvents(sockets, ['data', 'end']);
 
 //listen to events via emitter
 emitter.on('data', onData);
@@ -576,11 +576,11 @@ Adds empty event handler.
 
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 
 //add noop even handler for the 'error' event
-var remove = emitter.addNoop('error');
+const remove = emitter.addNoop('error');
 
 //remove listener
 remove();
@@ -594,8 +594,8 @@ This function will only add a new empty handler in case no other handler is defi
 **Access**: public  
 **Example**  
 ```js
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-var emitter = new EnhancedEventEmitter();
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+const emitter = new EnhancedEventEmitter();
 
 //adds empty error handler
 emitter.ignoreError();
@@ -645,8 +645,8 @@ The provided object type must have an Node.js events.EventEmitter compatible int
 ```js
 //extend events.EventEmitter class (or any class that has the same interface)
 //now you can create instances of the new EnhancedEventEmitter type while events.EventEmitter is not modified/impacted in any way
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);   //extend the event emitter class (can be Node.js of some custom event emitter). original base class is not affected.
-var emitter = new EnhancedEventEmitter();   //create a new instance using the new extended class type.
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);   //extend the event emitter class (can be Node.js of some custom event emitter). original base class is not affected.
+const emitter = new EnhancedEventEmitter();   //create a new instance using the new extended class type.
 ```
 <a name="EventEmitterEnhancer+modify"></a>
 
@@ -665,7 +665,7 @@ The provided object type must have an Node.js events.EventEmitter compatible int
 //modify the proto of an events.EventEmitter class (or any class that has the same interface)
 //now all existing and future instances of the original class are modified to include the new extended capabilities.
 EventEmitterEnhancer.modify(EventEmitter); //modify the event emitter class prototype (can be Node.js of some custom event emitter). existing instances are impacted.
-var emitter = new EventEmitter();   //create an instance of the original class and automatically get the new extended capabilities.
+const emitter = new EventEmitter();   //create an instance of the original class and automatically get the new extended capabilities.
 ```
 <a name="EventEmitterEnhancer+modifyInstance"></a>
 
@@ -682,7 +682,7 @@ The provided object type must have an Node.js events.EventEmitter compatible int
 **Example**  
 ```js
 //modify specific instance to include the extended capabilities (other existing/future instances of that class type are not modified/impacted in any way).
-var emitter = new EventEmitter();   //create an instance of an event emitter (can be Node.js of some custom event emitter)
+const emitter = new EventEmitter();   //create an instance of an event emitter (can be Node.js of some custom event emitter)
 EventEmitterEnhancer.modifyInstance(emitter);   //modify the specific instance and add the extended capabilities. the original prototype is not affected.
 ```
 <a name="EventEmitterEnhancer"></a>
@@ -728,8 +728,8 @@ The provided object type must have an Node.js events.EventEmitter compatible int
 ```js
 //extend events.EventEmitter class (or any class that has the same interface)
 //now you can create instances of the new EnhancedEventEmitter type while events.EventEmitter is not modified/impacted in any way
-var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);   //extend the event emitter class (can be Node.js of some custom event emitter). original base class is not affected.
-var emitter = new EnhancedEventEmitter();   //create a new instance using the new extended class type.
+const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);   //extend the event emitter class (can be Node.js of some custom event emitter). original base class is not affected.
+const emitter = new EnhancedEventEmitter();   //create a new instance using the new extended class type.
 ```
 <a name="EventEmitterEnhancer+modify"></a>
 
@@ -748,7 +748,7 @@ The provided object type must have an Node.js events.EventEmitter compatible int
 //modify the proto of an events.EventEmitter class (or any class that has the same interface)
 //now all existing and future instances of the original class are modified to include the new extended capabilities.
 EventEmitterEnhancer.modify(EventEmitter); //modify the event emitter class prototype (can be Node.js of some custom event emitter). existing instances are impacted.
-var emitter = new EventEmitter();   //create an instance of the original class and automatically get the new extended capabilities.
+const emitter = new EventEmitter();   //create an instance of the original class and automatically get the new extended capabilities.
 ```
 <a name="EventEmitterEnhancer+modifyInstance"></a>
 
@@ -765,7 +765,7 @@ The provided object type must have an Node.js events.EventEmitter compatible int
 **Example**  
 ```js
 //modify specific instance to include the extended capabilities (other existing/future instances of that class type are not modified/impacted in any way).
-var emitter = new EventEmitter();   //create an instance of an event emitter (can be Node.js of some custom event emitter)
+const emitter = new EventEmitter();   //create an instance of an event emitter (can be Node.js of some custom event emitter)
 EventEmitterEnhancer.modifyInstance(emitter);   //modify the specific instance and add the extended capabilities. the original prototype is not affected.
 ```
 <a name="FilterCallback"></a>
