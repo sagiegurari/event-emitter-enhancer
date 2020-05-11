@@ -1,13 +1,13 @@
 'use strict';
 
-var chai = require('chai');
-var assert = chai.assert;
-var EventEmitter = require('events').EventEmitter;
-var EventEmitterEnhancer = require('../../lib/event-emitter-enhancer');
-var funcs = require('funcs-js');
+const chai = require('chai');
+const assert = chai.assert;
+const EventEmitter = require('events').EventEmitter;
+const EventEmitterEnhancer = require('../../lib/event-emitter-enhancer');
+const funcs = require('funcs-js');
 
 function createEventEmitter() {
-    var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+    const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
 
     return new EnhancedEventEmitter();
 }
@@ -27,8 +27,8 @@ function removeValidation(removed, done) {
 describe('event-emitter-enhancer', function () {
     describe('extend', function () {
         it('predefined extended events.EventEmitter', function () {
-            var EnhancedEventEmitter = EventEmitterEnhancer.EnhancedEventEmitter;
-            var emitter = new EnhancedEventEmitter();
+            const EnhancedEventEmitter = EventEmitterEnhancer.EnhancedEventEmitter;
+            let emitter = new EnhancedEventEmitter();
 
             assert.isFunction(emitter.baseOn);
             assert.isFunction(emitter.baseOnce);
@@ -49,8 +49,8 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('extend events.EventEmitter', function () {
-            var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
-            var emitter = new EnhancedEventEmitter();
+            const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+            let emitter = new EnhancedEventEmitter();
 
             assert.isFunction(emitter.baseOn);
             assert.isFunction(emitter.baseOnce);
@@ -72,14 +72,14 @@ describe('event-emitter-enhancer', function () {
 
         it('extend events.EventEmitter multi prevent', function () {
             assert.isUndefined(EventEmitter.prototype.enhancedEmitterType);
-            var EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
+            const EnhancedEventEmitter = EventEmitterEnhancer.extend(EventEmitter);
 
             assert.isUndefined(EventEmitter.prototype.enhancedEmitterType);
             assert.isTrue(EnhancedEventEmitter.prototype.enhancedEmitterType);
-            var emitter = new EnhancedEventEmitter();
+            const emitter = new EnhancedEventEmitter();
             assert.isTrue(emitter.enhancedEmitterType);
 
-            var errorFound = false;
+            let errorFound = false;
             try {
                 EventEmitterEnhancer.extend(EnhancedEventEmitter);
             } catch (error) {
@@ -91,13 +91,13 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('modify custom events.EventEmitter', function () {
-            var CustomEventEmitter = function () {
+            const CustomEventEmitter = function () {
                 EventEmitter.call(this);
             };
             CustomEventEmitter.prototype = Object.create(EventEmitter.prototype);
 
             EventEmitterEnhancer.modify(CustomEventEmitter);
-            var emitter = new CustomEventEmitter();
+            let emitter = new CustomEventEmitter();
 
             assert.isFunction(emitter.baseOn);
             assert.isFunction(emitter.baseOnce);
@@ -119,7 +119,7 @@ describe('event-emitter-enhancer', function () {
 
         it('modify custom events.EventEmitter multi prevent', function () {
             assert.isUndefined(EventEmitter.prototype.enhancedEmitterType);
-            var CustomMultiEventEmitter = function () {
+            const CustomMultiEventEmitter = function () {
                 EventEmitter.call(this);
             };
             CustomMultiEventEmitter.prototype = Object.create(EventEmitter.prototype);
@@ -128,10 +128,10 @@ describe('event-emitter-enhancer', function () {
 
             assert.isUndefined(EventEmitter.prototype.enhancedEmitterType);
             assert.isTrue(CustomMultiEventEmitter.prototype.enhancedEmitterType);
-            var emitter = new CustomMultiEventEmitter();
+            const emitter = new CustomMultiEventEmitter();
             assert.isTrue(emitter.enhancedEmitterType);
 
-            var errorFound = false;
+            let errorFound = false;
             try {
                 EventEmitterEnhancer.modify(CustomMultiEventEmitter);
             } catch (error) {
@@ -143,7 +143,7 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('modifyInstance custom events.EventEmitter', function () {
-            var emitter = new EventEmitter();
+            let emitter = new EventEmitter();
             EventEmitterEnhancer.modifyInstance(emitter);
 
             assert.isFunction(emitter.baseOn);
@@ -165,7 +165,7 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('modifyInstance custom events.EventEmitter multi prevent', function () {
-            var emitter = new EventEmitter();
+            const emitter = new EventEmitter();
             EventEmitterEnhancer.modifyInstance(emitter);
 
             assert.isFunction(emitter.baseOn);
@@ -176,7 +176,7 @@ describe('event-emitter-enhancer', function () {
             assert.isUndefined(EventEmitter.prototype.enhancedEmitterType);
             assert.isTrue(emitter.enhancedEmitterType);
 
-            var errorFound = false;
+            let errorFound = false;
             try {
                 EventEmitterEnhancer.modifyInstance(emitter);
             } catch (error) {
@@ -190,10 +190,10 @@ describe('event-emitter-enhancer', function () {
 
     describe('once', function () {
         it('nodejs with remove, called', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var invoked = false;
-            var remove = emitter.once('test', function (arg1, arg2, arg3) {
+            let invoked = false;
+            const remove = emitter.once('test', function (arg1, arg2, arg3) {
                 if (invoked) {
                     assert.fail();
                 }
@@ -217,9 +217,9 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('nodejs with remove, removed', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var remove = emitter.once('test', function () {
+            const remove = emitter.once('test', function () {
                 assert.fail();
             });
 
@@ -231,13 +231,13 @@ describe('event-emitter-enhancer', function () {
 
     describe('removeAllListeners', function () {
         it('undefined', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
             emitter.removeAllListeners();
         });
 
         it('single', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
             emitter.on('error', funcs.noop);
             emitter.on('error', funcs.noop);
@@ -249,7 +249,7 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('array', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
             emitter.on('error', funcs.noop);
             emitter.on('error', funcs.noop);
@@ -267,10 +267,10 @@ describe('event-emitter-enhancer', function () {
 
     describe('on', function () {
         it('nodejs with remove', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var invoked = false;
-            var remove = emitter.on('test', function (arg1, arg2, arg3) {
+            let invoked = false;
+            const remove = emitter.on('test', function (arg1, arg2, arg3) {
                 if (invoked) {
                     assert.fail();
                 }
@@ -294,10 +294,10 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('multiple listeners, single event', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var invoked1 = false;
-            var invoked2 = false;
+            let invoked1 = false;
+            let invoked2 = false;
 
             emitter.on({
                 event: 'test-event',
@@ -327,17 +327,17 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('single listener, multiple events', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var invoked1 = false;
-            var invoked2 = false;
+            let invoked1 = false;
+            let invoked2 = false;
 
             emitter.on({
                 event: [
                     'test-event1',
                     'test-event2'
                 ],
-                listener: function (arg1, arg2) {
+                listener(arg1, arg2) {
                     if (invoked1 && invoked2) {
                         assert.fail();
                     } else if (invoked1) {
@@ -368,14 +368,14 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('multiple listeners, multiple event', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var invoked1a = false;
-            var invoked1b = false;
-            var invoked2a = false;
-            var invoked2b = false;
+            let invoked1a = false;
+            let invoked1b = false;
+            let invoked2a = false;
+            let invoked2b = false;
 
-            var remove = emitter.on({
+            const remove = emitter.on({
                 event: [
                     'test-event1',
                     'test-event2'
@@ -444,12 +444,12 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('async and multiple listeners, multiple event', function (done) {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var invoked1a = false;
-            var invoked1b = false;
-            var invoked2a = false;
-            var invoked2b = false;
+            let invoked1a = false;
+            let invoked1b = false;
+            let invoked2a = false;
+            let invoked2b = false;
             emitter.on({
                 event: [
                     'test-event1',
@@ -519,12 +519,12 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('timeout and multiple listeners, multiple event', function (done) {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var invoked1a = false;
-            var invoked1b = false;
-            var invoked2a = false;
-            var invoked2b = false;
+            let invoked1a = false;
+            let invoked1b = false;
+            let invoked2a = false;
+            let invoked2b = false;
 
             emitter.on({
                 event: [
@@ -596,12 +596,12 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('timeout and async and multiple listeners, multiple event', function (done) {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var invoked1a = false;
-            var invoked1b = false;
-            var invoked2a = false;
-            var invoked2b = false;
+            let invoked1a = false;
+            let invoked1b = false;
+            let invoked2a = false;
+            let invoked2b = false;
             emitter.on({
                 event: [
                     'test-event1',
@@ -678,11 +678,11 @@ describe('event-emitter-enhancer', function () {
 
     describe('suspend', function () {
         it('suspend all', function (done) {
-            var emitter1 = createEventEmitter();
+            const emitter1 = createEventEmitter();
             emitter1.on('test', function () {
                 done();
             });
-            var emitter2 = createEventEmitter();
+            const emitter2 = createEventEmitter();
             emitter2.suspended = true;
             emitter2.on('test', function () {
                 assert.fail();
@@ -695,11 +695,11 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('suspend specific', function (done) {
-            var emitter1 = createEventEmitter();
+            const emitter1 = createEventEmitter();
             emitter1.on('test', function () {
                 done();
             });
-            var emitter2 = createEventEmitter();
+            const emitter2 = createEventEmitter();
             emitter2.suspend('test');
             emitter2.on('test', function () {
                 assert.fail();
@@ -713,10 +713,10 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('unsuspend specific', function (done) {
-            var emitter1 = createEventEmitter();
-            var emitter2 = createEventEmitter();
+            const emitter1 = createEventEmitter();
+            const emitter2 = createEventEmitter();
 
-            var unsuspendCalled = false;
+            let unsuspendCalled = false;
             emitter1.on('test', function () {
                 emitter2.unsuspend('test');
                 unsuspendCalled = true;
@@ -740,10 +740,10 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('unsuspend no input', function (done) {
-            var emitter1 = createEventEmitter();
-            var emitter2 = createEventEmitter();
+            const emitter1 = createEventEmitter();
+            const emitter2 = createEventEmitter();
 
-            var unsuspendCalled = false;
+            let unsuspendCalled = false;
             emitter1.on('test', function () {
                 emitter2.unsuspend('test');
                 unsuspendCalled = true;
@@ -771,7 +771,7 @@ describe('event-emitter-enhancer', function () {
 
     describe('else', function () {
         it('no else', function (done) {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
             emitter.on('test', function () {
                 done();
             });
@@ -780,7 +780,7 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('single else', function (done) {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
             emitter.else(function (type, arg1, arg2) {
                 assert.equal(type, 'test');
                 assert.equal(arg1, 1);
@@ -794,8 +794,8 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('multi else', function (done) {
-            var emitter = createEventEmitter();
-            var elseCalled = 0;
+            const emitter = createEventEmitter();
+            let elseCalled = 0;
             emitter.else(function () {
                 elseCalled++;
             });
@@ -816,7 +816,7 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('no else call', function (done) {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
             emitter.else(function () {
                 assert.fail();
             });
@@ -830,7 +830,7 @@ describe('event-emitter-enhancer', function () {
 
     describe('remove else', function () {
         it('no else', function (done) {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
             emitter.on('test', function () {
                 done();
             });
@@ -840,13 +840,13 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('no input', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
             emitter.removeElseListener();
         });
 
         it('remove single else', function (done) {
-            var emitter = createEventEmitter();
-            var removed = false;
+            const emitter = createEventEmitter();
+            let removed = false;
             emitter.else(function (type, arg1, arg2) {
                 if (removed) {
                     assert.fail();
@@ -869,9 +869,9 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('multi else remove', function (done) {
-            var emitter = createEventEmitter();
-            var elseCalled = 0;
-            var removed = false;
+            const emitter = createEventEmitter();
+            let elseCalled = 0;
+            let removed = false;
             emitter.else(function () {
                 elseCalled++;
 
@@ -904,9 +904,9 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('remove all else call', function (done) {
-            var emitter = createEventEmitter();
-            var elseCalled = 0;
-            var removed = false;
+            const emitter = createEventEmitter();
+            let elseCalled = 0;
+            let removed = false;
             emitter.else(function () {
                 if (removed) {
                     assert.fail();
@@ -935,8 +935,8 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('remove with unelse', function (done) {
-            var emitter = createEventEmitter();
-            var removed = false;
+            const emitter = createEventEmitter();
+            let removed = false;
             emitter.else(function (type, arg1, arg2) {
                 if (removed) {
                     assert.fail();
@@ -961,12 +961,12 @@ describe('event-emitter-enhancer', function () {
 
     describe('elseError', function () {
         it('remove no input', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
             emitter.removeElseError();
         });
 
         it('single event else error', function (done) {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
             emitter.else(function () {
                 assert.fail();
             });
@@ -981,8 +981,8 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('remove event else error', function (done) {
-            var emitter = createEventEmitter();
-            var removed = false;
+            const emitter = createEventEmitter();
+            let removed = false;
             emitter.else(function () {
                 removeValidation(removed, done);
             });
@@ -1000,8 +1000,8 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('remove event unelse error', function (done) {
-            var emitter = createEventEmitter();
-            var removed = false;
+            const emitter = createEventEmitter();
+            let removed = false;
             emitter.else(function () {
                 removeValidation(removed, done);
             });
@@ -1021,8 +1021,8 @@ describe('event-emitter-enhancer', function () {
 
     describe('emitAsync', function () {
         it('async emit', function (done) {
-            var eventDone = false;
-            var emitter = createEventEmitter();
+            let eventDone = false;
+            const emitter = createEventEmitter();
             emitter.on('testAsync', function (arg1, arg2) {
                 eventDone = true;
 
@@ -1045,7 +1045,7 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('async emit noemit', function (done) {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
             emitter.emitAsync('testNoEmit', 1, 2, function onEmitDone(event, arg1, arg2, emitted) {
                 assert.equal(event, 'testNoEmit');
                 assert.equal(arg1, 1);
@@ -1057,9 +1057,9 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('async emit missing event with args', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var errorFound = false;
+            let errorFound = false;
             try {
                 emitter.emitAsync(1, 2, function () {
                     return undefined;
@@ -1073,9 +1073,9 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('async emit no args', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var errorFound = false;
+            let errorFound = false;
             try {
                 emitter.emitAsync();
             } catch (error) {
@@ -1087,7 +1087,7 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('async emit missing callback with args', function (done) {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
             emitter.on('test', function (value1, value2) {
                 assert.strictEqual(value1, 1);
@@ -1100,7 +1100,7 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('async emit missing callback without args', function (done) {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
             emitter.on('test', function () {
                 assert.strictEqual(0, arguments.length);
@@ -1114,13 +1114,13 @@ describe('event-emitter-enhancer', function () {
 
     describe('onAsync', function () {
         it('async on', function (done) {
-            var eventDone = false;
-            var eventDoneValidation = function () {
+            let eventDone = false;
+            const eventDoneValidation = function () {
                 if (eventDone) {
                     assert.fail();
                 }
             };
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
             emitter.on('test', eventDoneValidation);
             emitter.onAsync('test', function (arg1, arg2) {
                 eventDone = true;
@@ -1142,9 +1142,9 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('async on missing callback', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var errorFound = false;
+            let errorFound = false;
             try {
                 emitter.onAsync('test');
             } catch (error) {
@@ -1156,11 +1156,11 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('async on not a callback', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var errorFound = false;
+            let errorFound = false;
             try {
-                var notFunction = 'something';
+                const notFunction = 'something';
                 emitter.onAsync('test', notFunction);
             } catch (error) {
                 assert.isDefined(error);
@@ -1171,8 +1171,8 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('async on remove callback', function () {
-            var emitter = createEventEmitter();
-            var remove = emitter.onAsync('test', emptyFunction);
+            const emitter = createEventEmitter();
+            const remove = emitter.onAsync('test', emptyFunction);
             emitter.on('test', emptyFunction);
 
             assert.equal(2, emitter.listeners('test').length);
@@ -1189,9 +1189,9 @@ describe('event-emitter-enhancer', function () {
 
     describe('onAny', function () {
         it('onAny null events', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var errorFound = false;
+            let errorFound = false;
             try {
                 emitter.onAny(null, function () {
                     assert.fail();
@@ -1205,9 +1205,9 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('onAny undefined events', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var errorFound = false;
+            let errorFound = false;
             try {
                 emitter.onAny(undefined, function () {
                     assert.fail();
@@ -1221,9 +1221,9 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('onAny missing callback', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var errorFound = false;
+            let errorFound = false;
             try {
                 emitter.onAny(['test']);
             } catch (error) {
@@ -1235,10 +1235,10 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('onAny single', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var triggerCount = 0;
-            var remove = emitter.onAny('test-single', function (arg1, arg2, arg3) {
+            let triggerCount = 0;
+            const remove = emitter.onAny('test-single', function (arg1, arg2, arg3) {
                 assert.equal(arg1, 1);
                 assert.equal(arg2, 'a');
                 assert.deepEqual(arg3, {
@@ -1272,10 +1272,10 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('onAny single array event', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var triggerCount = 0;
-            var remove = emitter.onAny(['test-array'], function (arg1, arg2, arg3) {
+            let triggerCount = 0;
+            const remove = emitter.onAny(['test-array'], function (arg1, arg2, arg3) {
                 assert.equal(arg1, 1);
                 assert.equal(arg2, 'a');
                 assert.deepEqual(arg3, {
@@ -1305,11 +1305,11 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('onAny multiple array event', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var triggerCount = 0;
-            var events = ['test-array-1', 'test-array-2', 'test-array-3'];
-            var remove = emitter.onAny(events, function (arg1, arg2, arg3) {
+            let triggerCount = 0;
+            const events = ['test-array-1', 'test-array-2', 'test-array-3'];
+            const remove = emitter.onAny(events, function (arg1, arg2, arg3) {
                 assert.equal(arg1, 1);
                 assert.equal(arg2, 'a');
                 assert.deepEqual(arg3, {
@@ -1354,9 +1354,9 @@ describe('event-emitter-enhancer', function () {
 
     describe('filter', function () {
         it('no filter + event', function noFilterOrEventTest() {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var errorFound = false;
+            let errorFound = false;
             try {
                 emitter.filter();
             } catch (error) {
@@ -1368,9 +1368,9 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('no filter', function noFilterFuncTest() {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var errorFound = false;
+            let errorFound = false;
             try {
                 emitter.filter('test');
             } catch (error) {
@@ -1382,9 +1382,9 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('too many args', function tooManyArgsTest() {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var errorFound = false;
+            let errorFound = false;
             try {
                 emitter.filter('test', 'test', emptyFunction);
             } catch (error) {
@@ -1396,8 +1396,8 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('single global filter', function (done) {
-            var emitter = createEventEmitter();
-            var filterAdded = false;
+            const emitter = createEventEmitter();
+            let filterAdded = false;
             emitter.on('test', function () {
                 if (filterAdded) {
                     assert.fail();
@@ -1420,8 +1420,8 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('single specific filter', function (done) {
-            var emitter = createEventEmitter();
-            var filterAdded = false;
+            const emitter = createEventEmitter();
+            let filterAdded = false;
             emitter.on('test', function () {
                 if (filterAdded) {
                     assert.fail();
@@ -1444,8 +1444,8 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('single specific different event filter', function (done) {
-            var emitter = createEventEmitter();
-            var filterAdded = false;
+            const emitter = createEventEmitter();
+            let filterAdded = false;
             emitter.on('test', function () {
                 if (filterAdded) {
                     done();
@@ -1462,15 +1462,14 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('multiple global filter', function (done) {
-            var emitter = createEventEmitter();
-            var filterAdded = false;
+            const emitter = createEventEmitter();
+            let filterAdded = false;
             emitter.on('test', function () {
                 if (filterAdded) {
                     assert.fail();
                 } else {
-                    var filtersCalled = 0;
-                    var i;
-                    var onEvent = function (event, arg1, arg2) {
+                    let filtersCalled = 0;
+                    const onEvent = function (event, arg1, arg2) {
                         filtersCalled++;
                         assert.equal(event, 'test');
                         assert.equal(arg1, 'abc');
@@ -1478,7 +1477,7 @@ describe('event-emitter-enhancer', function () {
 
                         return true;
                     };
-                    for (i = 0; i < 15; i++) {
+                    for (let i = 0; i < 15; i++) {
                         emitter.filter(onEvent);
                     }
                     emitter.filter(function () {
@@ -1501,15 +1500,14 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('multiple specific filter', function (done) {
-            var emitter = createEventEmitter();
-            var filterAdded = false;
+            const emitter = createEventEmitter();
+            let filterAdded = false;
             emitter.on('test', function () {
                 if (filterAdded) {
                     assert.fail();
                 } else {
-                    var filtersCalled = 0;
-                    var i;
-                    var onEvent = function (event, arg1, arg2, arg3) {
+                    let filtersCalled = 0;
+                    const onEvent = function (event, arg1, arg2, arg3) {
                         filtersCalled++;
                         assert.equal(event, 'test');
                         assert.equal(arg1, 'a');
@@ -1518,7 +1516,7 @@ describe('event-emitter-enhancer', function () {
 
                         return true;
                     };
-                    for (i = 0; i < 25; i++) {
+                    for (let i = 0; i < 25; i++) {
                         emitter.filter('test', onEvent);
                     }
                     emitter.filter('test', function () {
@@ -1542,16 +1540,15 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('remove global filter', function (done) {
-            var emitter = createEventEmitter();
-            var filterAdded = false;
+            const emitter = createEventEmitter();
+            let filterAdded = false;
             emitter.on('test', function () {
                 if (filterAdded) {
                     assert.fail();
                 } else {
-                    var filtersCalled = 0;
-                    var i;
+                    let filtersCalled = 0;
                     /*jslint unparam: true */
-                    var onEvent = function (event, arg1) {
+                    const onEvent = function (event, arg1) {
                         filtersCalled++;
                         assert.isFalse(arg1);
 
@@ -1559,16 +1556,16 @@ describe('event-emitter-enhancer', function () {
                     };
                     /*jslint unparam: false */
 
-                    for (i = 0; i < 5; i++) {
+                    for (let i = 0; i < 5; i++) {
                         emitter.filter(onEvent);
                     }
-                    var remove1 = emitter.filter(function () {
+                    const remove1 = emitter.filter(function () {
                         filtersCalled++;
                         assert.equal(filtersCalled, 6);
 
                         return false;
                     });
-                    var remove2 = emitter.filter(function () {
+                    const remove2 = emitter.filter(function () {
                         assert.fail();
                     });
                     filterAdded = true;
@@ -1578,7 +1575,7 @@ describe('event-emitter-enhancer', function () {
                     remove1();
                     remove2();
 
-                    var remove3 = emitter.filter(function () {
+                    const remove3 = emitter.filter(function () {
                         filtersCalled++;
                         assert.equal(filtersCalled, 12);
 
@@ -1607,15 +1604,14 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('remove specific filter', function (done) {
-            var emitter = createEventEmitter();
-            var filterAdded = false;
+            const emitter = createEventEmitter();
+            let filterAdded = false;
             emitter.on('test', function () {
                 if (filterAdded) {
                     assert.fail();
                 } else {
-                    var filtersCalled = 0;
-                    var i;
-                    var onEvent = function (event, arg1, arg2) {
+                    let filtersCalled = 0;
+                    const onEvent = function (event, arg1, arg2) {
                         filtersCalled++;
                         assert.equal(event, 'test');
                         assert.equal(arg1, 10);
@@ -1623,17 +1619,17 @@ describe('event-emitter-enhancer', function () {
 
                         return true;
                     };
-                    for (i = 0; i < 3; i++) {
+                    for (let i = 0; i < 3; i++) {
                         emitter.filter('test', onEvent);
                     }
-                    var remove1 = emitter.filter('test', function () {
+                    const remove1 = emitter.filter('test', function () {
                         filtersCalled++;
 
                         assert.equal(filtersCalled, 4);
 
                         return false;
                     });
-                    var remove2 = emitter.filter('test', function () {
+                    const remove2 = emitter.filter('test', function () {
                         assert.fail();
                     });
                     filterAdded = true;
@@ -1663,9 +1659,9 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('remove specific multiple times', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var remove = emitter.filter('test', function () {
+            const remove = emitter.filter('test', function () {
                 assert.fail();
             });
 
@@ -1676,9 +1672,9 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('remove specific missing event', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var remove = emitter.filter('test', function () {
+            const remove = emitter.filter('test', function () {
                 assert.fail();
             });
 
@@ -1690,9 +1686,9 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('remove specific missing listener', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var remove = emitter.filter('test', function () {
+            const remove = emitter.filter('test', function () {
                 assert.fail();
             });
 
@@ -1708,9 +1704,9 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('remove global multiple times', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var remove = emitter.filter(function () {
+            const remove = emitter.filter(function () {
                 assert.fail();
             });
 
@@ -1721,9 +1717,9 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('remove global empty', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var remove = emitter.filter(function () {
+            const remove = emitter.filter(function () {
                 assert.fail();
             });
 
@@ -1735,9 +1731,9 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('remove global missing listener', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var remove = emitter.filter(function () {
+            const remove = emitter.filter(function () {
                 assert.fail();
             });
 
@@ -1755,9 +1751,9 @@ describe('event-emitter-enhancer', function () {
 
     describe('asAsyncListener', function () {
         it('undefined', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var errorFound = false;
+            let errorFound = false;
 
             try {
                 emitter.asAsyncListener();
@@ -1770,9 +1766,9 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('null', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var errorFound = false;
+            let errorFound = false;
 
             try {
                 emitter.asAsyncListener(null);
@@ -1785,9 +1781,9 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('not a function', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var errorFound = false;
+            let errorFound = false;
 
             try {
                 emitter.asAsyncListener('test');
@@ -1800,9 +1796,9 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('valid', function (done) {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var asyncDone = emitter.asAsyncListener(done);
+            const asyncDone = emitter.asAsyncListener(done);
 
             assert.isFunction(asyncDone);
             assert.isFalse(asyncDone === done);
@@ -1813,9 +1809,9 @@ describe('event-emitter-enhancer', function () {
 
     describe('proxyEvents', function () {
         it('missing emitters', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var errorFound = false;
+            let errorFound = false;
 
             try {
                 emitter.proxyEvents(undefined, 'test');
@@ -1828,9 +1824,9 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('missing events', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var errorFound = false;
+            let errorFound = false;
 
             try {
                 emitter.proxyEvents(new EventEmitter());
@@ -1843,11 +1839,11 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('single emitter, single event', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var source = new EventEmitter();
+            const source = new EventEmitter();
 
-            var counter = 0;
+            let counter = 0;
             emitter.on('test', function (arg1, arg2) {
                 counter++;
 
@@ -1863,9 +1859,8 @@ describe('event-emitter-enhancer', function () {
 
             source.emit('bad');
 
-            var index;
-            var loops = 5;
-            for (index = 0; index < loops; index++) {
+            const loops = 5;
+            for (let index = 0; index < loops; index++) {
                 source.emit('test', index + 1, 'b');
             }
 
@@ -1873,12 +1868,12 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('multiple emitters, single event', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var source1 = new EventEmitter();
-            var source2 = new EventEmitter();
+            const source1 = new EventEmitter();
+            const source2 = new EventEmitter();
 
-            var counter = 0;
+            let counter = 0;
             emitter.on('test', function (arg1) {
                 if (counter % 2) {
                     assert.strictEqual(arg1, 'source2');
@@ -1904,9 +1899,8 @@ describe('event-emitter-enhancer', function () {
             source1.emit('bad1');
             source2.emit('bad2');
 
-            var index;
-            var loops = 5;
-            for (index = 0; index < loops; index++) {
+            const loops = 5;
+            for (let index = 0; index < loops; index++) {
                 source1.emit('test', 'source1');
                 source2.emit('test', 'source2');
             }
@@ -1915,11 +1909,11 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('single emitter, multiple events', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var source = new EventEmitter();
+            const source = new EventEmitter();
 
-            var counter = 0;
+            let counter = 0;
             emitter.onAny([
                 'test1',
                 'test2'
@@ -1944,9 +1938,8 @@ describe('event-emitter-enhancer', function () {
 
             source.emit('bad');
 
-            var index;
-            var loops = 5;
-            for (index = 0; index < loops; index++) {
+            const loops = 5;
+            for (let index = 0; index < loops; index++) {
                 source.emit('test1', 'first');
                 source.emit('test2', 'second');
             }
@@ -1955,14 +1948,14 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('multiple emitter, multiple events', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var source1 = new EventEmitter();
-            var source2 = new EventEmitter();
+            const source1 = new EventEmitter();
+            const source2 = new EventEmitter();
 
-            var counter = 0;
-            var test1Counter = 0;
-            var test2Counter = 0;
+            let counter = 0;
+            let test1Counter = 0;
+            let test2Counter = 0;
             emitter.on('test1', function () {
                 test1Counter++;
             });
@@ -1998,7 +1991,7 @@ describe('event-emitter-enhancer', function () {
                 assert.fail();
             });
 
-            var stop = emitter.proxyEvents([
+            const stop = emitter.proxyEvents([
                 source1,
                 source2
             ], [
@@ -2009,9 +2002,8 @@ describe('event-emitter-enhancer', function () {
             source1.emit('bad1');
             source2.emit('bad2');
 
-            var index;
-            var loops = 5;
-            for (index = 0; index < loops; index++) {
+            const loops = 5;
+            for (let index = 0; index < loops; index++) {
                 source1.emit('test1', '1a');
                 source1.emit('test2', '1b');
                 source2.emit('test1', '2a');
@@ -2047,31 +2039,31 @@ describe('event-emitter-enhancer', function () {
 
     describe('addNoop', function () {
         it('undefined', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var remove = emitter.addNoop();
+            const remove = emitter.addNoop();
             assert.isUndefined(remove);
         });
 
         it('null', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var remove = emitter.addNoop(null);
+            const remove = emitter.addNoop(null);
             assert.isUndefined(remove);
         });
 
         it('object', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
-            var remove = emitter.addNoop({});
+            const remove = emitter.addNoop({});
             assert.isUndefined(remove);
         });
 
         it('valid', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
             assert.strictEqual(emitter.listenerCount('myevent'), 0);
-            var remove = emitter.addNoop('myevent');
+            const remove = emitter.addNoop('myevent');
             emitter.addNoop('myevent');
             emitter.addNoop('myevent');
             assert.strictEqual(emitter.listenerCount('myevent'), 3);
@@ -2089,7 +2081,7 @@ describe('event-emitter-enhancer', function () {
 
     describe('ignoreError', function () {
         it('valid', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
             assert.strictEqual(emitter.listenerCount('error'), 0);
             emitter.ignoreError();
@@ -2106,7 +2098,7 @@ describe('event-emitter-enhancer', function () {
 
     describe('markEvent', function () {
         it('no input', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
             emitter.markEvent();
         });
@@ -2114,10 +2106,10 @@ describe('event-emitter-enhancer', function () {
 
     describe('enhance', function () {
         it('enhance EventEmitter2', function (done) {
-            var EventEmitter2 = require('eventemitter2').EventEmitter2;
-            var EnhancedEventEmitter2 = EventEmitterEnhancer.extend(EventEmitter2);
+            const EventEmitter2 = require('eventemitter2').EventEmitter2;
+            const EnhancedEventEmitter2 = EventEmitterEnhancer.extend(EventEmitter2);
 
-            var emitter = new EnhancedEventEmitter2({
+            const emitter = new EnhancedEventEmitter2({
                 wildcard: false,
                 newListener: false,
                 maxListeners: 20
@@ -2131,7 +2123,7 @@ describe('event-emitter-enhancer', function () {
 
                 emitter.unelse(this);
 
-                var eventDone = false;
+                let eventDone = false;
                 emitter.on('test', function (arg1, arg2) {
                     eventDone = true;
 
@@ -2159,8 +2151,8 @@ describe('event-emitter-enhancer', function () {
 
     describe('subscriptionSeparator', function () {
         it('listen to all', function () {
-            var emitter = createEventEmitter();
-            var events = {};
+            const emitter = createEventEmitter();
+            const events = {};
             emitter.on('p1', function (arg1, arg2) {
                 events.p1 = true;
 
@@ -2182,7 +2174,7 @@ describe('event-emitter-enhancer', function () {
 
             emitter.subscriptionSeparator = ':';
 
-            var emitHandled = emitter.emit('p1:p2:p3', 1, 2);
+            const emitHandled = emitter.emit('p1:p2:p3', 1, 2);
 
             assert.isTrue(emitHandled);
             assert.isTrue(events.p1);
@@ -2191,15 +2183,15 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('listen to none', function () {
-            var emitter = createEventEmitter();
-            var events = {};
+            const emitter = createEventEmitter();
+            const events = {};
             emitter.else(function (type) {
                 events[type] = true;
             });
 
             emitter.subscriptionSeparator = ':';
 
-            var emitHandled = emitter.emit('p1:p2:p3');
+            const emitHandled = emitter.emit('p1:p2:p3');
 
             assert.isTrue(emitHandled);
             assert.isTrue(events.p1);
@@ -2208,8 +2200,8 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('listen to some', function () {
-            var emitter = createEventEmitter();
-            var events = {};
+            const emitter = createEventEmitter();
+            const events = {};
             emitter.on('p1', function () {
                 events.p1 = 1;
             });
@@ -2222,7 +2214,7 @@ describe('event-emitter-enhancer', function () {
 
             emitter.subscriptionSeparator = ':';
 
-            var emitHandled = emitter.emit('p1:p2:p3');
+            const emitHandled = emitter.emit('p1:p2:p3');
 
             assert.isTrue(emitHandled);
             assert.strictEqual(events.p1, 1);
@@ -2231,11 +2223,11 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('not handled', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
             emitter.subscriptionSeparator = ':';
 
-            var emitHandled = emitter.emit('p1:p2:p3');
+            const emitHandled = emitter.emit('p1:p2:p3');
 
             assert.isFalse(emitHandled);
         });
@@ -2243,19 +2235,19 @@ describe('event-emitter-enhancer', function () {
 
     describe('doEmitByPath', function () {
         it('no separator', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
             emitter.on('p1:p2:p3', function () {
                 assert.fail();
             });
 
-            var emitHandled = emitter.doEmitByPath('p1:p2:p3');
+            const emitHandled = emitter.doEmitByPath('p1:p2:p3');
 
             assert.isFalse(emitHandled);
         });
 
         it('listen to all', function () {
-            var emitter = createEventEmitter();
-            var events = {};
+            const emitter = createEventEmitter();
+            const events = {};
             emitter.on('p1', function (arg1, arg2) {
                 events.p1 = true;
 
@@ -2277,7 +2269,7 @@ describe('event-emitter-enhancer', function () {
 
             emitter.subscriptionSeparator = ':';
 
-            var emitHandled = emitter.doEmitByPath('p1:p2:p3', 1, 2);
+            const emitHandled = emitter.doEmitByPath('p1:p2:p3', 1, 2);
 
             assert.isTrue(emitHandled);
             assert.isTrue(events.p1);
@@ -2286,15 +2278,15 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('listen to none', function () {
-            var emitter = createEventEmitter();
-            var events = {};
+            const emitter = createEventEmitter();
+            const events = {};
             emitter.else(function (type) {
                 events[type] = true;
             });
 
             emitter.subscriptionSeparator = ':';
 
-            var emitHandled = emitter.doEmitByPath('p1:p2:p3');
+            const emitHandled = emitter.doEmitByPath('p1:p2:p3');
 
             assert.isTrue(emitHandled);
             assert.isTrue(events.p1);
@@ -2303,8 +2295,8 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('listen to some', function () {
-            var emitter = createEventEmitter();
-            var events = {};
+            const emitter = createEventEmitter();
+            const events = {};
             emitter.on('p1', function () {
                 events.p1 = 1;
             });
@@ -2317,7 +2309,7 @@ describe('event-emitter-enhancer', function () {
 
             emitter.subscriptionSeparator = ':';
 
-            var emitHandled = emitter.doEmitByPath('p1:p2:p3');
+            const emitHandled = emitter.doEmitByPath('p1:p2:p3');
 
             assert.isTrue(emitHandled);
             assert.strictEqual(events.p1, 1);
@@ -2326,11 +2318,11 @@ describe('event-emitter-enhancer', function () {
         });
 
         it('not handled', function () {
-            var emitter = createEventEmitter();
+            const emitter = createEventEmitter();
 
             emitter.subscriptionSeparator = ':';
 
-            var emitHandled = emitter.doEmitByPath('p1:p2:p3');
+            const emitHandled = emitter.doEmitByPath('p1:p2:p3');
 
             assert.isFalse(emitHandled);
         });

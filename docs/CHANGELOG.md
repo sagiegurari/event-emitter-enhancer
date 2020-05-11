@@ -1,5 +1,6 @@
 | Date        | Version | Description |
 | ----------- | ------- | ----------- |
+| 2020-05-11  | v2.0.0  | Migrate to github actions and upgrade minimal node version |
 | 2019-12-06  | v1.1.0  | Support event parent parsing and emit #7 |
 | 2018-06-13  | v1.0.57 | Added typescript definition (#5 and #6) |
 | 2017-11-03  | v1.0.51 | Added 'addNoop' |

@@ -5,7 +5,7 @@
 /*eslint-disable no-underscore-dangle*/
 
 module.exports = function (grunt) {
-    var commons = require('js-project-commons');
+    const commons = require('js-project-commons');
 
     commons.grunt.config.initConfig(grunt, {
         buildConfig: {
@@ -35,7 +35,7 @@ module.exports = function (grunt) {
                         'usage-addNoop': 'EnhancedEventEmitter+addNoop',
                         'usage-ignoreError': 'EnhancedEventEmitter+ignoreError'
                     },
-                    modifySignature: function (line) {
+                    modifySignature(line) {
                         return line.split('### \'EnhancedEventEmitter.').join('### \'emitter.').split('emitter.addFilter(').join('emitter.filter(').split('emitAsync(event, [params]').join('emitAsync(event, [...params]');
                     }
                 }
